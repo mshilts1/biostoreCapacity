@@ -1,0 +1,15 @@
+kit_type,tube_size,num_per_kit
+whole_blood_maternal,1ml,10
+cord_blood,1ml,10
+whole_blood_child,1ml,10
+breastmilk,1ml,10
+whole_blood_maternal,1.9ml,6
+cord_blood,1.9ml,6
+whole_blood_child,1.9ml,6
+urine_diaper,1.9ml,3
+urine_cup_maternal,1.9ml,3
+urine_cup_current_partner,1.9ml,3
+urine_hat,1.9ml,3
+urine_cup_child,1.9ml,3
+placenta,1.9ml,16
+breastmilk,1.9ml,8
