@@ -2,6 +2,7 @@
 
 export(readKBExcel)
 import(ggplot2)
+import(tibble)
 importFrom(janitor,make_clean_names)
 importFrom(readxl,read_xlsx)
 importFrom(scales,percent)

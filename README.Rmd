@@ -31,24 +31,22 @@ You can install the development version of biostoreCapacity from [GitHub](https:
 pak::pak("mshilts1/biostoreCapacity")
 ```
 
-## Example
+## Usage
 
-This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(biostoreCapacity)
-## basic example code
 ```
 
 
 The simplest equation for calculating BioStore capacity is:    
 
-$(a + b)/788,256 + (c + d)/438,840 = 1$
+$((196,412 + x)/788,256) + ((212,692 + y)/438,840)) = 1$
 
 where:    
-* $a$ is the current number of 1.0 ml tubes already stored (or pending storage) in the BioStore.   
-* $b$ is the number of 1.0 ml tubes still to be collected for ECHO.    
-* $c$ is the current number of 1.9 ml tubes already stored (or pending storage) in the BioStore.   
-* $d$ is the number of 1.9 ml tubes still to be collected ECHO.     
+* $196,412$ is the current number of 1.0 ml tubes already stored (or pending storage) in the BioStore (as of 2025-09-02).   
+* $x$ is the number of 1.0 ml tubes still to be collected for ECHO.    
+* $212,692$ is the current number of 1.9 ml tubes already stored (or pending storage) in the BioStore (as of 2025-09-02).    
+* $y$ is the number of 1.9 ml tubes still to be collected ECHO.     
 * $788,256$ is the absolute maximum number of 1.0 ml tubes that be stored in the BioStore (assuming 0 1.9 ml tubes).     
 * $438,840$ is the absolute maximum number of 1.0 ml tubes that be stored in the BioStore (assuming 0 1.9 ml tubes).     

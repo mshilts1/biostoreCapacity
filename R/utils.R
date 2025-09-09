@@ -8,6 +8,7 @@
 #' @importFrom janitor make_clean_names
 #' @importFrom scales percent
 #' @import ggplot2
+#' @import tibble
 #'
 #' @examples
 #' readKBExcel()
@@ -22,10 +23,15 @@ readCollections <- function(x = "biospecimen_collection_for_biostore_calculation
   x <- readxl::read_xlsx(path = path, .name_repair = janitor::make_clean_names)
   x
 }
-tubesPerKit <- function(x = "tubes_per_kit.csv"){ # may be useless now as information is in readCollections
+readSuchiBAM <- function(x = "suchi_bam_submissions.csv"){ # may be useless now as information is in readCollections
   path <- system.file("extdata", x, package = "biostoreCapacity", mustWork = TRUE)
   x <- utils::read.csv(file = path, header=TRUE)
+  tibble::as_tibble(x)
 }
+#tubesPerKit <- function(x = "tubes_per_kit.csv"){ # may be useless now as information is in readCollections
+#  path <- system.file("extdata", x, package = "biostoreCapacity", mustWork = TRUE)
+#  x <- utils::read.csv(file = path, header=TRUE)
+#}
 totalCapacity <- function(){
 
   total_1.0ml <- 788256 # if at this number, can have 0 1.9 ml

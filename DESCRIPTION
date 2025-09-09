@@ -1,9 +1,9 @@
 Package: biostoreCapacity
-Title: What the Package Does (One Line, Title Case)
+Title: Estimate when BioStore II Capacity will be Reached
 Version: 0.0.0.9000
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Description: Takes historical date and incorporates changes to the protocol to estimate when BioStore II will be full.
 License: MIT + file LICENSE
 Suggests: 
     testthat (>= 3.0.0)
@@ -15,4 +15,5 @@ Imports:
     ggplot2,
     janitor,
     readxl,
-    scales
+    scales,
+    tibble
