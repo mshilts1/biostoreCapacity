@@ -34,15 +34,16 @@ library(biostoreCapacity)
 
 The simplest equation for calculating BioStore capacity is:
 
-$(a + b)/788256 + (c + d)/438840 = 1$
+$(a + b)/788,256 + (c + d)/438,840 = 1$
 
 where:  
-$a$ is the current number of 1.0 ml tubes already stored (or pending
+\* $a$ is the current number of 1.0 ml tubes already stored (or pending
 storage) in the BioStore.  
-$b$ is the number of 1.0 ml tubes still to be collected for ECHO. $c$ is
-the current number of 1.9 ml tubes already stored (or pending storage)
-in the BioStore $d$ is the number of 1.9 ml tubes still to be collected
-ECHO. $788,256$ is the absolute maximum number of 1.0 ml tubes that be
-stored in the BioStore (assuming 0 1.9 ml tubes). $438,840$ is the
-absolute maximum number of 1.0 ml tubes that be stored in the BioStore
-(assuming 0 1.9 ml tubes).
+\* $b$ is the number of 1.0 ml tubes still to be collected for ECHO.  
+\* $c$ is the current number of 1.9 ml tubes already stored (or pending
+storage) in the BioStore.  
+\* $d$ is the number of 1.9 ml tubes still to be collected ECHO.  
+\* $788,256$ is the absolute maximum number of 1.0 ml tubes that be
+stored in the BioStore (assuming 0 1.9 ml tubes).  
+\* $438,840$ is the absolute maximum number of 1.0 ml tubes that be
+stored in the BioStore (assuming 0 1.9 ml tubes).
