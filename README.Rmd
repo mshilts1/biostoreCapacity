@@ -41,3 +41,6 @@ library(biostoreCapacity)
 ```
 
 This is an inline equation: $y = mx + b$.
+
+The equation for calculating BioStore capacity is:    
+$(x + current_1.0ml)/total_1.0ml + (y + current_1.9ml)/total_1.9ml = 1$
