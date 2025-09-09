@@ -26,10 +26,19 @@ tubesPerKit <- function(x = "tubes_per_kit.csv"){ # may be useless now as inform
   path <- system.file("extdata", x, package = "biostoreCapacity", mustWork = TRUE)
   x <- utils::read.csv(file = path, header=TRUE)
 }
-capacity <- function(x, what = "both"){
-if(what == "both"){
-x
-}
+totalCapacity <- function(){
+
+  total_1.0ml <- 788256 # if at this number, can have 0 1.9 ml
+  total_1.9ml <- 438840 # if at this number, can have 0 1.0 ml
+
+  current_1.0ml <- 196412
+  current_1.9ml <- 212692
+
+  # equation is '(x + current_1.0ml)/total_1.0ml + (y + current_1.9ml)/total_1.9ml = 1'. Both a and b can move, but total capacity can't exceed 1
+
+
+
+
 }
 capacityFormula <- function(){
 # ((total 1 ml tubes)/788256 + (total 1.9 ml tubes)/438840) = 1

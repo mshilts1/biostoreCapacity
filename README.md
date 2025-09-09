@@ -31,3 +31,5 @@ This is a basic example which shows you how to solve a common problem:
 library(biostoreCapacity)
 ## basic example code
 ```
+
+This is an inline equation: $y = mx + b$.

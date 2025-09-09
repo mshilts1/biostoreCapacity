@@ -40,3 +40,4 @@ library(biostoreCapacity)
 ## basic example code
 ```
 
+This is an inline equation: $y = mx + b$.
