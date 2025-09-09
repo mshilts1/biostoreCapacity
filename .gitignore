@@ -1,1 +1,3 @@
 .Rproj.user
+.DS_store
+^\.DS_Store$

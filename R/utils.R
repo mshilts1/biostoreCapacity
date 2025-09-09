@@ -22,7 +22,7 @@ readCollections <- function(x = "biospecimen_collection_for_biostore_calculation
   x <- readxl::read_xlsx(path = path, .name_repair = janitor::make_clean_names)
   x
 }
-tubesPerKit <- function(x = "tubes_per_kit.csv"){
+tubesPerKit <- function(x = "tubes_per_kit.csv"){ # may be useless now as information is in readCollections
   path <- system.file("extdata", x, package = "biostoreCapacity", mustWork = TRUE)
   x <- utils::read.csv(file = path, header=TRUE)
 }
