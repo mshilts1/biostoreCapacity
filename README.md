@@ -53,9 +53,9 @@ pending) in the BioStore (as of 2025-09-02).
 \* $212,692$ is the number of ECHO 1.9 ml tubes already stored (or
 pending) in the BioStore (as of 2025-09-02).  
 \* $y$ is the number of 1.9 ml tubes still to be collected for ECHO.  
-\* $788,256$ is the absolute maximum number of 1.0 ml tubes that be
+\* $788,256$ is the absolute maximum number of 1.0 ml tubes that can be
 stored in the BioStore (assuming 0 1.9 ml tubes).  
-\* $438,840$ is the absolute maximum number of 1.0 ml tubes that be
+\* $438,840$ is the absolute maximum number of 1.0 ml tubes that can be
 stored in the BioStore (assuming 0 1.9 ml tubes).
 
 Both $x$ and $y$ can increase, but as one increases the capacity for the
