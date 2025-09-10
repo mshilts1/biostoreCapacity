@@ -66,8 +66,8 @@ readHistorical <- function(x = "suchi_bam_submissions.csv"){ # may be useless no
 #' @examples
 #' longifyReadHistorical()
 longifyReadHistorical <- function(x = readHistorical()){
-  x <- tidyr::pivot_longer(x, cols = c(.data$cumulative_1.0, .data$cumulative_1.9), names_to = "tube_type", values_to = "total")
-  #x <- x %>% dplyr::mutate(.data$tube_type = recode(.data$tube_type, "cumulative_1.0" = 'size 1.0mL', "cumulative_1.9" = 'size 1.9mL'))
+  x <- tidyr::pivot_longer(x, cols = c("cumulative_1.0", "cumulative_1.9"), names_to = "tube_type", values_to = "total")
+  x <- x %>% dplyr::mutate(tube_type = recode(.data$tube_type, "cumulative_1.0" = 'size 1.0mL', "cumulative_1.9" = 'size 1.9mL'))
 }
 totalBioStoreCapacity <- function(x, y){
 
