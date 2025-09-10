@@ -15,10 +15,11 @@ The goal of biostoreCapacity is to attempt to predict when VUMC’s
 institutional resource BioStore II freezer will be full and unable to
 store any additional ECHO biospecimens.
 
-To estimate this, the data in the model include:  
-\* Historical data of the rate of filling from ECHO.  
-\* Future biospecimen kit builds.  
-\* Expected enrollment numbers from ?????? (I DO NOT HAVE THIS YET).
+To estimate this, the data in the model should include:
+
+- Historical data of the rate of freezer filling from ECHO.  
+- Future biospecimen kit builds.  
+- Expected enrollment numbers from ?????? (I DO NOT HAVE THIS YET).
 
 ## Installation
 
@@ -39,6 +40,8 @@ use, but will still make the source code transparent on GitHub.
 library(biostoreCapacity)
 ```
 
+## What is the total BioStore II capacity?
+
 The simplest equation for calculating BioStore capacity is:
 
 $((196,412 + x)/788,256) + ((212,692 + y)/438,840)) = 1$
@@ -57,3 +60,18 @@ stored in the BioStore (assuming 0 1.9 ml tubes).
 
 Both $x$ and $y$ can increase, but as one increases the capacity for the
 other decreases. The total capacity cannot exceed 1, or 100%.
+
+## What should go into the forecast model of when the BioStore will be at capacity?
+
+- Historical data (time series data on number of ECHO tubes store in the
+  BioStore). ✓  
+- Expected number of kits that will be collected by kit type over time.
+  ✘  
+- Expected number of kits over time needs to include ability to handle
+  complexities introduced due to “specialized” kits, which are not
+  collected by all sites.  
+- Number of tubes in current kit builds per each kit type. ✓  
+- Proportion of tubes from each kit type expected to be sent back to the
+  biorepository. (e.g., may get only a tiny bit of urine from young
+  babies, and so won’t get all three 1.9ml tubes back.).  
+- <span style="color:blue">blue</span>.
