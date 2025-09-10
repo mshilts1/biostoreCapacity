@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{readCollections}
 \alias{readCollections}
-\title{Load in a file with current biospecimen collections}
+\title{Load in a file with current biospecimen collection protocol and timeline}
 \usage{
 readCollections(x = "biospecimen_collection_for_biostore_calculations.xlsx")
 }
@@ -13,7 +13,7 @@ readCollections(x = "biospecimen_collection_for_biostore_calculations.xlsx")
 A tibble with biospecimen collection information
 }
 \description{
-Load in a file with current biospecimen collections
+Load in a file with current biospecimen collection protocol and timeline
 }
 \examples{
 readCollections()

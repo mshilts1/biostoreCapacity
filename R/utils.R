@@ -69,12 +69,22 @@ longifyReadHistorical <- function(x = readHistorical()) {
   x <- tidyr::pivot_longer(x, cols = c("cumulative_1.0", "cumulative_1.9"), names_to = "tube_type", values_to = "total")
   x <- x %>% dplyr::mutate(tube_type = recode(.data$tube_type, "cumulative_1.0" = "size 1.0mL", "cumulative_1.9" = "size 1.9mL"))
 }
-totalBioStoreCapacity <- function(x, y) {
-  total_1.0ml <- 788256 # if at this number, can have 0 1.9 ml
-  total_1.9ml <- 438840 # if at this number, can have 0 1.0 ml
+#' Calculate total BioStore capacity
+#'
+#' @param x number of 1.0 ml tubes that could be added to storage
+#' @param y number of 1.9 ml tubes that could be added to storage
+#'
+#' @returns nothing yet
+#' @export
+#'
+#' @examples
+#' totalBioStoreCapacity(x = 100, y = 100) # function doesn't do anything yet
+totalBioStoreCapacity <- function(x = NULL, y = NULL) {
+  total_1.0ml <- 788256 # if at this number, can have 0 1.9 ml # pulled from readKBExcel()
+  total_1.9ml <- 438840 # if at this number, can have 0 1.0 ml # pulled from readKBExcel()
 
-  current_1.0ml <- 196412
-  current_1.9ml <- 212692
+  current_1.0ml <- 196412 # pulled from readKBExcel()
+  current_1.9ml <- 212692 # pulled from readKBExcel()
 
   # equation is '(x + current_1.0ml)/total_1.0ml + (y + current_1.9ml)/total_1.9ml = 1'. Both a and b can move, but total capacity can't exceed 1
 }
@@ -87,8 +97,13 @@ capacityFormula <- function() {
 
 # thinking of making this long instead of wide, but not really there yet
 # readCollections() %>% dplyr::mutate_all(as.character) %>% tidyr::pivot_longer(cols = -c(collection_id, kit_type, biospecimen_type, participant))
-
-# Function to find the date the freezer is full for a given model
+#' Function to find the date the freezer is full. Under development!
+#'
+#' @param predictions predictions
+#' @param capacity capacity
+#' @param resultslm model
+#'
+#' @returns date when freezer will be full. function in development and doesn't do much yet
 find_full_date <- function(predictions, capacity, resultslm) {
   full_index <- which(predictions > capacity)[1]
   if (!is.na(full_index)) {
@@ -99,7 +114,11 @@ find_full_date <- function(predictions, capacity, resultslm) {
     return("Freezer will not be full in the forecasted period.")
   }
 }
-
+#' Make a very simple plot to visually represent how full and empty freezer is at a given time
+#'
+#' @param used Percent of freezer currently occupied
+#'
+#' @returns A ggplot2 plot
 freezer_fullness_graph <- function(used = NULL) {
   free <- 1 - used
 
