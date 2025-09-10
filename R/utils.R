@@ -22,7 +22,7 @@ readKBExcel <- function(x = "calculator_for_Suman.xlsx"){
   x$x2d_tubes_ml <- janitor::make_clean_names(x$x2d_tubes_ml)
   x
 }
-#' Load in a file with current biospecimen collections
+#' Load in a file with current biospecimen collection protocol and timeline
 #'
 #' @param x File name
 #'
