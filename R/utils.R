@@ -26,7 +26,14 @@ readCollections <- function(x = "biospecimen_collection_for_biostore_calculation
 readSuchiBAM <- function(x = "suchi_bam_submissions.csv"){ # may be useless now as information is in readCollections
   path <- system.file("extdata", x, package = "biostoreCapacity", mustWork = TRUE)
   x <- utils::read.csv(file = path, header=TRUE)
-  tibble::as_tibble(x)
+  x <- tibble::as_tibble(x)
+  #x <- x %>% lubridate::ymd(date)
+  x$date <- lubridate::ymd(x$date)
+  x$cumulative_1.0 <- NULL
+  x$cumulative_1.9 <- NULL
+  x$cumulative_1.0 <- cumsum(x$tubes_1.0_ml)
+  x$cumulative_1.9 <- cumsum(x$tubes_1.9_ml)
+  x
 }
 #tubesPerKit <- function(x = "tubes_per_kit.csv"){ # may be useless now as information is in readCollections
 #  path <- system.file("extdata", x, package = "biostoreCapacity", mustWork = TRUE)
@@ -55,6 +62,17 @@ capacityFormula <- function(){
 
 # thinking of making this long instead of wide, but not really there yet
 #readCollections() %>% dplyr::mutate_all(as.character) %>% tidyr::pivot_longer(cols = -c(collection_id, kit_type, biospecimen_type, participant))
+
+# Function to find the date the freezer is full for a given model
+find_full_date <- function(predictions, capacity) {
+  full_index <- which(predictions > capacity)[1]
+  if (!is.na(full_index)) {
+    full_date <- results_lm$date[full_index]
+    return(as.character(full_date))
+  } else {
+    return("Freezer will not be full in the forecasted period.")
+  }
+}
 
 freezer_fullness_graph <- function(used = NULL) {
 
