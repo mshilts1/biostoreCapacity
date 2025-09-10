@@ -45,7 +45,7 @@ readCollections <- function(x = "biospecimen_collection_for_biostore_calculation
 #'
 #' @examples
 #' readHistorical()
-readHistorical <- function(x = "suchi_bam_submissions.csv") { # may be useless now as information is in readCollections
+readHistorical <- function(x = "suchi_bam_submissions.csv") {
   path <- system.file("extdata", x, package = "biostoreCapacity", mustWork = TRUE)
   x <- utils::read.csv(file = path, header = TRUE)
   x <- tibble::as_tibble(x)
