@@ -108,7 +108,7 @@ Plot rate of accessioning over time:
 
 ``` r
 library(ggplot2)
-ggplot(historical_data_long, aes(x=date, y=total, colour=tube_type)) + geom_point() + geom_smooth() + theme_bw() + ylab("Cumulative Tubes Submitted to BioStore") + ylab("") + scale_x_date(
+ggplot(historical_data_long, aes(x=date, y=total, colour=tube_type)) + geom_point() + geom_smooth() + theme_bw() + ylab("Cumulative Tubes Submitted to BioStore") + xlab("") + scale_x_date(
     date_breaks = "2 month",
     date_labels = "%b %y" # Month abbreviation and day
   )
