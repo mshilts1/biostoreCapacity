@@ -9,6 +9,8 @@
 #' @importFrom scales percent
 #' @import ggplot2
 #' @import tibble
+#' @import tidyr
+#' @import lubridate
 #'
 #' @examples
 #' readKBExcel()
@@ -18,16 +20,33 @@ readKBExcel <- function(x = "calculator_for_Suman.xlsx"){
   x$x2d_tubes_ml <- janitor::make_clean_names(x$x2d_tubes_ml)
   x
 }
+#' Load in a file with current biospecimen collections
+#'
+#' @param x File name
+#'
+#' @returns A tibble with biospecimen collection information
+#' @export
+#'
+#' @examples
+#' readCollections()
 readCollections <- function(x = "biospecimen_collection_for_biostore_calculations.xlsx"){
   path <- system.file("extdata", x, package = "biostoreCapacity", mustWork = TRUE)
   x <- readxl::read_xlsx(path = path, .name_repair = janitor::make_clean_names)
   x
 }
+#' Read in file from Suchi with historical data on ECHO submissions to the BioStore
+#'
+#' @param x File name
+#'
+#' @returns A tibble with historical data on ECHO submissions to the BioStore
+#' @export
+#'
+#' @examples
+#' readSuchiBAM()
 readSuchiBAM <- function(x = "suchi_bam_submissions.csv"){ # may be useless now as information is in readCollections
   path <- system.file("extdata", x, package = "biostoreCapacity", mustWork = TRUE)
   x <- utils::read.csv(file = path, header=TRUE)
   x <- tibble::as_tibble(x)
-  #x <- x %>% lubridate::ymd(date)
   x$date <- lubridate::ymd(x$date)
   x$cumulative_1.0 <- NULL
   x$cumulative_1.9 <- NULL
@@ -35,11 +54,19 @@ readSuchiBAM <- function(x = "suchi_bam_submissions.csv"){ # may be useless now 
   x$cumulative_1.9 <- cumsum(x$tubes_1.9_ml)
   x
 }
-#tubesPerKit <- function(x = "tubes_per_kit.csv"){ # may be useless now as information is in readCollections
-#  path <- system.file("extdata", x, package = "biostoreCapacity", mustWork = TRUE)
-#  x <- utils::read.csv(file = path, header=TRUE)
-#}
-totalCapacity <- function(){
+#' Make Suchi's historical data "long" instead of "wide"
+#'
+#' @param x "Wide" version of historical data of ECHO submissions to BioStore
+#'
+#' @returns "Long" version of historical data of ECHO submissions to BioStore
+#' @export
+#'
+#' @examples
+#' longifySuchiBAM()
+longifySuchiBAM <- function(x = readSuchiBAM()){
+  tidyr::pivot_longer(x, cols = c(.data$cumulative_1.0, .data$cumulative_1.9), names_to = "cumulative_tube_type", values_to = "total")
+}
+totalBioStoreCapacity <- function(x, y){
 
   total_1.0ml <- 788256 # if at this number, can have 0 1.9 ml
   total_1.9ml <- 438840 # if at this number, can have 0 1.0 ml
@@ -48,9 +75,6 @@ totalCapacity <- function(){
   current_1.9ml <- 212692
 
   # equation is '(x + current_1.0ml)/total_1.0ml + (y + current_1.9ml)/total_1.9ml = 1'. Both a and b can move, but total capacity can't exceed 1
-
-
-
 
 }
 capacityFormula <- function(){
@@ -64,10 +88,11 @@ capacityFormula <- function(){
 #readCollections() %>% dplyr::mutate_all(as.character) %>% tidyr::pivot_longer(cols = -c(collection_id, kit_type, biospecimen_type, participant))
 
 # Function to find the date the freezer is full for a given model
-find_full_date <- function(predictions, capacity) {
+find_full_date <- function(predictions, capacity, resultslm) {
   full_index <- which(predictions > capacity)[1]
   if (!is.na(full_index)) {
-    full_date <- results_lm$date[full_index]
+    full_date <- resultslm
+    #full_date <- results_lm$date[full_index]
     return(as.character(full_date))
   } else {
     return("Freezer will not be full in the forecasted period.")
