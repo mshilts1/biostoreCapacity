@@ -44,7 +44,10 @@ library(biostoreCapacity)
 
 The simplest equation for calculating BioStore capacity is:
 
+<center>
+
 $((196,412 + x)/788,256) + ((212,692 + y)/438,840)) = 1$
+</center>
 
 where:  
 \* $196,412$ is the number of ECHO 1.0 ml tubes already stored (or
@@ -69,9 +72,9 @@ other decreases. The total capacity cannot exceed 1, or 100%.
   ✘  
 - Expected number of kits over time needs to include ability to handle
   complexities introduced due to “specialized” kits, which are not
-  collected by all sites.  
+  collected by all sites. ✘
 - Number of tubes in current kit builds per each kit type. ✓  
 - Proportion of tubes from each kit type expected to be sent back to the
   biorepository. (e.g., may get only a tiny bit of urine from young
-  babies, and so won’t get all three 1.9ml tubes back.).  
-- <span style="color:blue">blue</span>.
+  babies, and so won’t get all three 1.9ml tubes back.). ✘  
+- Roses are $\color{red}{\text{beautiful red}}$,
