@@ -11,6 +11,8 @@
 #' @import tibble
 #' @import tidyr
 #' @import lubridate
+#' @import forecast
+#' @import dplyr
 #'
 #' @examples
 #' readKBExcel()
@@ -42,8 +44,8 @@ readCollections <- function(x = "biospecimen_collection_for_biostore_calculation
 #' @export
 #'
 #' @examples
-#' readSuchiBAM()
-readSuchiBAM <- function(x = "suchi_bam_submissions.csv"){ # may be useless now as information is in readCollections
+#' readHistorical()
+readHistorical <- function(x = "suchi_bam_submissions.csv"){ # may be useless now as information is in readCollections
   path <- system.file("extdata", x, package = "biostoreCapacity", mustWork = TRUE)
   x <- utils::read.csv(file = path, header=TRUE)
   x <- tibble::as_tibble(x)
@@ -62,9 +64,10 @@ readSuchiBAM <- function(x = "suchi_bam_submissions.csv"){ # may be useless now 
 #' @export
 #'
 #' @examples
-#' longifySuchiBAM()
-longifySuchiBAM <- function(x = readSuchiBAM()){
-  tidyr::pivot_longer(x, cols = c(.data$cumulative_1.0, .data$cumulative_1.9), names_to = "cumulative_tube_type", values_to = "total")
+#' longifyReadHistorical()
+longifyReadHistorical <- function(x = readHistorical()){
+  x <- tidyr::pivot_longer(x, cols = c(.data$cumulative_1.0, .data$cumulative_1.9), names_to = "tube_type", values_to = "total")
+  #x <- x %>% dplyr::mutate(.data$tube_type = recode(.data$tube_type, "cumulative_1.0" = 'size 1.0mL', "cumulative_1.9" = 'size 1.9mL'))
 }
 totalBioStoreCapacity <- function(x, y){
 
@@ -135,4 +138,6 @@ ggplot2::ggplot(freezer_data, ggplot2::aes(x = "Freezer", y = .data$percentage, 
     legend.position = "bottom"
   )
 }
-
+forecastBioStoreCapacity <- function() {
+  forecast::forecast()
+}

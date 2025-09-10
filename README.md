@@ -83,8 +83,33 @@ will be full:**
   babies, and so won’t get all three 1.9ml tubes back.).
   $\color{red}{\text{✘}}$
 
+Green checkmark ($\color{green}{\text{✓}}$ ) means we have that data,
+while a red x ($\color{red}{\text{✘}}$ ) means we don’t yet have it.
+
 ## Usage
 
 ``` r
 library(biostoreCapacity)
+#> Registered S3 method overwritten by 'quantmod':
+#>   method            from
+#>   as.zoo.data.frame zoo
 ```
+
+## Load in data above that we do have
+
+``` r
+historical_data <- readHistorical()
+historical_data_long <- longifyReadHistorical() # same thing as above, but in "long" format for easier plotting
+
+number_tubes_in_kits <- readCollections()
+```
+
+Plot rate of accessioning over time:
+
+``` r
+library(ggplot2)
+ggplot(historical_data_long, aes(x=date, y=total, colour=tube_type)) + geom_point() + geom_smooth() + theme_bw()
+#> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+```
+
+<img src="man/figures/README-plot_history-1.png" width="100%" />
