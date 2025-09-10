@@ -79,19 +79,23 @@ library(biostoreCapacity)
 
 ## Load in data above that we do have
 
-```{r data_we_have}
+### Historical data
+
+```{r historical_data}
 historical_data <- readHistorical()
 historical_data_long <- longifyReadHistorical() # same thing as above, but in "long" format for easier plotting
-
-number_tubes_in_kits <- readCollections()
 ```
 
 Plot rate of accessioning over time:
 
 ```{r plot_history}
 library(ggplot2)
-ggplot(historical_data_long, aes(x=date, y=total, colour=tube_type)) + geom_point() + geom_smooth() + theme_bw() + ylab("Cumulative Tubes Submitted to BioStore") + xlab("") + scale_x_date(
-    date_breaks = "2 month",
-    date_labels = "%b %y" # Month abbreviation and day
-  )
+ggplot(historical_data_long, aes(x=date, y=total, colour=tube_type)) + geom_point() + geom_smooth() + theme_bw() + ylab("Cumulative Tubes Submitted to BioStore") + xlab("") + scale_x_date(date_breaks = "2 month", date_labels = "%b %y")
+```
+
+### Future kit builds and biospecimen collection protocol
+
+```{r biospec_protocold}
+biospecimen_collections <- readCollections()
+biospecimen_collections
 ```

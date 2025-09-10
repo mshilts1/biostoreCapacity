@@ -97,22 +97,46 @@ library(biostoreCapacity)
 
 ## Load in data above that we do have
 
+### Historical data
+
 ``` r
 historical_data <- readHistorical()
 historical_data_long <- longifyReadHistorical() # same thing as above, but in "long" format for easier plotting
-
-number_tubes_in_kits <- readCollections()
 ```
 
 Plot rate of accessioning over time:
 
 ``` r
 library(ggplot2)
-ggplot(historical_data_long, aes(x=date, y=total, colour=tube_type)) + geom_point() + geom_smooth() + theme_bw() + ylab("Cumulative Tubes Submitted to BioStore") + xlab("") + scale_x_date(
-    date_breaks = "2 month",
-    date_labels = "%b %y" # Month abbreviation and day
-  )
+ggplot(historical_data_long, aes(x=date, y=total, colour=tube_type)) + geom_point() + geom_smooth() + theme_bw() + ylab("Cumulative Tubes Submitted to BioStore") + xlab("") + scale_x_date(date_breaks = "2 month", date_labels = "%b %y")
 #> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 ```
 
 <img src="man/figures/README-plot_history-1.png" width="100%" />
+
+### Future kit builds and biospecimen collection protocol
+
+``` r
+biospecimen_collections <- readCollections()
+biospecimen_collections
+#> # A tibble: 27 × 29
+#>    collection_id   kit_type biospecimen_type participant tube_size tubes_per_kit
+#>    <chr>           <chr>    <chr>            <chr>       <chr>             <dbl>
+#>  1 breastmilk_1.9… breastm… breastmilk       maternal    1.9ml                 8
+#>  2 breastmilk_1ml… breastm… breastmilk       maternal    1ml                  10
+#>  3 cord_blood_1.9… cord_bl… cord_blood       child       1.9ml                 6
+#>  4 cord_blood_1ml… cord_bl… cord_blood       child       1ml                  10
+#>  5 placenta_1.9ml… placenta placenta         maternal    1.9ml                16
+#>  6 urine_cup_mate… urine_c… urine            maternal    1.9ml                 3
+#>  7 urine_cup_mate… urine_c… urine            maternal    1.9ml                 3
+#>  8 urine_diaper_1… urine_d… urine            child       1.9ml                 3
+#>  9 urine_cup_curr… urine_c… urine            partner     1.9ml                 3
+#> 10 urine_cup_mate… urine_c… urine            maternal    1.9ml                 3
+#> # ℹ 17 more rows
+#> # ℹ 23 more variables: proportion_from_kit_collected <dbl>, visit <chr>,
+#> #   visit_logical_order <dbl>, specimen_type <chr>, y_2025 <dbl>, y_2026 <dbl>,
+#> #   y_2027 <dbl>, y_2028 <dbl>, y_2029 <dbl>, y_2030 <dbl>,
+#> #   y_2025_multiplier <dbl>, y_2026_multiplier <dbl>, y_2027_multiplier <dbl>,
+#> #   y_2028_multiplier <dbl>, y_2029_multiplier <dbl>, y_2030_multiplier <dbl>,
+#> #   specialized_obesity <chr>, specialized_obesity_multiplier <chr>, …
+```
