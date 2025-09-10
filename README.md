@@ -9,6 +9,7 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/biostoreCapacity)](https://CRAN.R-project.org/package=biostoreCapacity)
+[![R-CMD-check](https://github.com/mshilts1/biostoreCapacity/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mshilts1/biostoreCapacity/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of `biostoreCapacity` is to attempt to predict when VUMC’s
@@ -108,7 +109,13 @@ Plot rate of accessioning over time:
 
 ``` r
 library(ggplot2)
-ggplot(historical_data_long, aes(x=date, y=total, colour=tube_type)) + geom_point() + geom_smooth() + theme_bw() + ylab("Cumulative Tubes Submitted to BioStore") + xlab("") + scale_x_date(date_breaks = "2 month", date_labels = "%b %y")
+ggplot(historical_data_long, aes(x = date, y = total, colour = tube_type)) +
+  geom_point() +
+  geom_smooth() +
+  theme_bw() +
+  ylab("Cumulative Tubes Submitted to BioStore") +
+  xlab("") +
+  scale_x_date(date_breaks = "2 month", date_labels = "%b %y")
 #> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 ```
 
