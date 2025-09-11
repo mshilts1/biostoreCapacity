@@ -25,10 +25,9 @@ To estimate this, the data in the model should include, at least:
 - Expected number of biospecimens to be collected over time.
   $\color{red}{\text{✘}}$
 
-<font size="1">Green checkmark ($\color{green}{\text{✓}}$ ) means we
-have that data while a red x ($\color{red}{\text{✘}}$ ) means **WE AS
-THE LAB CORE** are missing (some of) that specific information but it
-does exist.</font size>
+($\color{green}{\text{✓}}$ ) means we have that data
+($\color{red}{\text{✘}}$ ) means **WE AS THE LAB CORE** are missing
+(some of) that specific information but it does exist.
 
 ## Installation
 
