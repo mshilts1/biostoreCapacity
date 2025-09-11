@@ -77,16 +77,21 @@ will be full:**
   $\color{red}{\text{✘}}$  
 - Expected number of kits over time needs to include ability to handle
   complexities introduced due to “specialized” kits, which are not
-  collected by all sites. $\color{red}{\text{✘}}$
+  collected by all sites. $\color{yellow}{\text{◎}}$
 - Number of tubes in current kit builds per each kit type.
   $\color{green}{\text{✓}}$  
 - Proportion of tubes from each kit type expected to be sent back to the
   biorepository. (e.g., may get only a tiny bit of urine from young
   babies, and so won’t get all three 1.9ml tubes back.).
-  $\color{red}{\text{✘}}$
+  $\color{yellow}{\text{◎}}$
 
-Green checkmark ($\color{green}{\text{✓}}$ ) means we have that data,
-while a red x ($\color{red}{\text{✘}}$ ) means we don’t yet have it.
+Green checkmark ($\color{green}{\text{✓}}$ ) means we have that data, a
+yellow dot ($\color{yellow}{\text{◎}}$) means it’s speculative estimated
+data that we can kind of guess at, while a red x
+($\color{red}{\text{✘}}$ ) means WE’RE missing that specific information
+but it does exist.
+
+◎
 
 ## Usage
 
