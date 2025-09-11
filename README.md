@@ -97,9 +97,10 @@ submissions to the BioStore:
 $$FF_{t+1} = f(FF_{t} + FF_{t-1} + FF_{t-2} + \cdots + error)$$
 
 Second, we know there were changes to the ECHO protocol that will mean
-the historical rate of data:
+the historical rate of data can’t be relied on alone, as we need to
+consider other predictor variables:
 
-$$FF = f(enrollment, collection, tubes, loss, error)$$
+$$FF_{pv} = f(enrollment, collection, tubes, loss, error)$$
 
 where:  
 $enrollment$ is the expected number of participants from whom specimens
@@ -109,7 +110,11 @@ $tubes$ is the number of tubes per each biospecimen collection kit.
 $loss$ is some sort of drop-out rate; participant drop-out, not all
 tubes from a kit being returned to the biorepository, etc.
 
-$error$ in both models isn’t mean to indicate error in the colloquial
+The final model might be something mixing the two above models:
+
+$$FF_{mixed} = f(FF_{t+1},FF_{pv, error})$$
+
+$error$ in all models isn’t mean to indicate error in the colloquial
 sense, but to allow for random variation and the effects of variables
 not captured in the model.
 
