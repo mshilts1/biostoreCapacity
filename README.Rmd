@@ -23,12 +23,12 @@ knitr::opts_chunk$set(
 
 The goal of `biostoreCapacity` is to attempt to predict when VUMC's institutional resource [BioStore II freezer](https://www.vumc.org/oor/index.php/vumc-biospecimen-storage) will be full and unable to store any additional ECHO biospecimens.    
 
-To estimate this, the data in the model should include:    
+To estimate this, the data in the model should include, at least:    
 
 * Historical data of the rate of freezer filling from ECHO.   
-* Future biospecimen kit builds.
-* 
-* Expected participant enrollment numbers from ?????? (I DO NOT HAVE THIS YET).   
+* Current and future biospecimen kit builds.
+* Expected number of biospecimens to be collected over time.    
+  
 
 ## Installation
 
