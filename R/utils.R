@@ -69,6 +69,22 @@ longifyReadHistorical <- function(x = readHistorical()) {
   x <- tidyr::pivot_longer(x, cols = c("cumulative_1.0", "cumulative_1.9"), names_to = "tube_type", values_to = "total")
   x <- x %>% dplyr::mutate(tube_type = recode(.data$tube_type, "cumulative_1.0" = "size 1.0mL", "cumulative_1.9" = "size 1.9mL"))
 }
+#' Create a zoo ts object from historical data
+#' https://cran.r-project.org/web/packages/zoo/index.html
+#'
+#' @param x Historical data
+#' @param tube tube size, and whether cumulative or not. Options are "tubes_1.0_ml", "tubes_1.9_ml", "cumulative_1.0" or "cumulative_1.9"
+#'
+#' @returns zoo ts object
+#' @export
+#' @import zoo
+#'
+#' @examples
+#' zoo_ts()
+zoo_ts <- function(x = readHistorical(), tube = "cumulative_1.0"){
+  zoo(x[[tube]], x$date)
+  # explore as.ts option to coerce to ts object
+}
 #' Calculate total BioStore capacity
 #'
 #' @param x number of 1.0 ml tubes that could be added to storage
