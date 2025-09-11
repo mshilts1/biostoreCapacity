@@ -147,3 +147,25 @@ biospecimen_collections
 #> #   y_2028_multiplier <dbl>, y_2029_multiplier <dbl>, y_2030_multiplier <dbl>,
 #> #   specialized_obesity <chr>, specialized_obesity_multiplier <chr>, …
 ```
+
+There’s currently some information in `readCollections()` that’s
+speculative and outright intended to be tunable by an end user.
+
+Information in `readCollections()` that can be assumed to be true and
+constant for the sake of building the model:
+
+- All columns with information about the kit builds:
+  - `collection_id`, `kit_type`, `biospecimen_type`, `participant`,
+    `tube_size`, `tubes_per_kit`.  
+- All columns about the biospecimen collection timeline:
+  - `visit`, `specimen_type`, `y_2025`, `y_2026`, `y_2027`, `y_2028`,
+    `y_2029`, `y_2030`, `specialized_obesity`, `specialized_chemphys`,
+    `specialized_lifestyle`.
+
+Speculative columns all contain the word “proportion” or “multiplier” in
+the name:  
+\* `proportion_from_kit_collected`, `y_2025_multiplier`,
+`y_2026_multiplier`, `y_2027_multiplier`, `y_2028_multiplier`,
+`y_2029_multiplier`, `y_2030_multiplier`,
+`specialized_obesity_multiplier`, `specialized_chemphys_multiplier`,
+`specialized_lifestyle_multiplier`.
