@@ -22,6 +22,20 @@ readKBExcel <- function(x = "calculator_for_Suman.xlsx") {
   x$x2d_tubes_ml <- janitor::make_clean_names(x$x2d_tubes_ml)
   x
 }
+#' Get max capacity for 1.0 and 1.9 ml tubes
+#'
+#' @param x input data from Karen Beeri
+#'
+#' @returns a list of MAXIMUM possible tubes of each size that can go in the BioStore
+#' @export
+#'
+#' @examples
+#' capacityNumbers()
+capacityNumbers <- function(x = readKBExcel()){
+  tubes_1.0ml <- x %>% filter(.data$x2d_tubes_ml == "fluid_x_1_0m_l_tube") %>% pull(.data$tube_capacity_one_bank)
+  tubes_1.9ml <- x %>% filter(.data$x2d_tubes_ml == "x1_9m_l_capped_vial") %>% pull(.data$tube_capacity_one_bank)
+  return(list("tubes_1.0ml_max_capacity" = tubes_1.0ml, "tubes_1.9ml_max_capacity" = tubes_1.9ml))
+}
 #' Load in a file with current biospecimen collection protocol and timeline
 #'
 #' @param x File name
