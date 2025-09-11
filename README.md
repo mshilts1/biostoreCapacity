@@ -19,9 +19,16 @@ will be full and unable to store any additional ECHO biospecimens.
 
 To estimate this, the data in the model should include, at least:
 
-- Historical data of the rate of freezer filling from ECHO.  
-- Current and future biospecimen kit builds.
+- Historical data of the rate of freezer filling from ECHO.
+  $\color{green}{\text{✓}}$  
+- Current and future biospecimen kit builds. $\color{green}{\text{✓}}$
 - Expected number of biospecimens to be collected over time.
+  $\color{red}{\text{✘}}$
+
+<font size="1">Green checkmark ($\color{green}{\text{✓}}$ ) means we
+have that data while a red x ($\color{red}{\text{✘}}$ ) means **WE AS
+THE LAB CORE** are missing (some of) that specific information but it
+does exist.</font size>
 
 ## Installation
 
