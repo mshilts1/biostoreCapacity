@@ -132,6 +132,7 @@ library(biostoreCapacity)
 ``` r
 historical_data <- readHistorical()
 historical_data_long <- longifyReadHistorical() # same thing as above, but in "long" format for easier plotting
+historical_data_long_proportions <- longifyReadHistorical(total_or_prop = "prop") # same as directly above, but proportions of freezer capacity instead of raw numbers
 ```
 
 Plot rate of accessioning over time:
@@ -149,6 +150,23 @@ ggplot(historical_data_long, aes(x = date, y = total, colour = tube_type)) +
 ```
 
 <img src="man/figures/README-plot_history-1.png" width="100%" />
+
+Plot overall proportion of BioStore filled over time:
+
+``` r
+library(ggplot2)
+ggplot(historical_data_long_proportions, aes(x = date, y = total, colour = tube_type)) +
+  geom_point() +
+  geom_smooth() +
+  theme_bw() +
+  ylab("Cumulative Proportion of BioStore Capacity Filled") +
+  xlab("") +
+  scale_x_date(date_breaks = "2 month", date_labels = "%b %y") + 
+  geom_hline(yintercept = 1)
+#> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+```
+
+<img src="man/figures/README-plot_history_prop-1.png" width="100%" />
 
 ### Future kit builds and biospecimen collection protocol
 

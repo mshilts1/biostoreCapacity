@@ -4,10 +4,12 @@
 \alias{longifyReadHistorical}
 \title{Make Suchi's historical data "long" instead of "wide"}
 \usage{
-longifyReadHistorical(x = readHistorical())
+longifyReadHistorical(x = readHistorical(), total_or_prop = "total")
 }
 \arguments{
 \item{x}{"Wide" version of historical data of ECHO submissions to BioStore}
+
+\item{total_or_prop}{"total" for raw numbers or "prop" for proportion of BioStore}
 }
 \value{
 "Long" version of historical data of ECHO submissions to BioStore

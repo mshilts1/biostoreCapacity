@@ -7,7 +7,7 @@
 capacityNumbers(x = readKBExcel())
 }
 \arguments{
-\item{x}{input data from Karen Beeri}
+\item{x}{input data from Karen Beeri about BioStore capacity and fullness}
 }
 \value{
 a list of MAXIMUM possible tubes of each size that can go in the BioStore

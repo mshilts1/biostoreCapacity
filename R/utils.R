@@ -24,7 +24,7 @@ readKBExcel <- function(x = "calculator_for_Suman.xlsx") {
 }
 #' Get max capacity for 1.0 and 1.9 ml tubes
 #'
-#' @param x input data from Karen Beeri
+#' @param x input data from Karen Beeri about BioStore capacity and fullness
 #'
 #' @returns a list of MAXIMUM possible tubes of each size that can go in the BioStore
 #' @export
@@ -64,24 +64,44 @@ readHistorical <- function(x = "suchi_bam_submissions.csv") {
   x <- utils::read.csv(file = path, header = TRUE)
   x <- tibble::as_tibble(x)
   x$date <- lubridate::ymd(x$date)
+
   x$cumulative_1.0 <- NULL
   x$cumulative_1.9 <- NULL
+  x$cumulative_total <- NULL
+  x$proportion_1.0 <- NULL
+  x$proportion_1.9 <- NULL
+  x$proportion_total <- NULL
+
   x$cumulative_1.0 <- cumsum(x$tubes_1.0_ml)
   x$cumulative_1.9 <- cumsum(x$tubes_1.9_ml)
+  x$cumulative_total <- x$cumulative_1.0 + x$cumulative_1.9
+  x$proportion_1.0 <- x$cumulative_1.0/capacityNumbers()$tubes_1.0ml_max_capacity
+  x$proportion_1.9 <- x$cumulative_1.9/capacityNumbers()$tubes_1.9ml_max_capacity
+  x$proportion_total <- x$proportion_1.0 + x$proportion_1.9
   x
 }
 #' Make Suchi's historical data "long" instead of "wide"
 #'
 #' @param x "Wide" version of historical data of ECHO submissions to BioStore
+#' @param total_or_prop "total" for raw numbers or "prop" for proportion of BioStore
 #'
 #' @returns "Long" version of historical data of ECHO submissions to BioStore
 #' @export
 #'
 #' @examples
-#' longifyReadHistorical()
-longifyReadHistorical <- function(x = readHistorical()) {
-  x <- tidyr::pivot_longer(x, cols = c("cumulative_1.0", "cumulative_1.9"), names_to = "tube_type", values_to = "total")
-  x <- x %>% dplyr::mutate(tube_type = recode(.data$tube_type, "cumulative_1.0" = "size 1.0mL", "cumulative_1.9" = "size 1.9mL"))
+#' longifyReadHistorical() # cumulative totals as raw numbers
+#' longifyReadHistorical(total_or_prop = "prop") # cumulative total as a proportion of freezer capacity
+longifyReadHistorical <- function(x = readHistorical(), total_or_prop = "total") {
+  if(total_or_prop == "total"){
+  x <- tidyr::pivot_longer(x, cols = c("cumulative_1.0", "cumulative_1.9", "cumulative_total"), names_to = "tube_type", values_to = "total")
+  x <- x %>% dplyr::mutate(tube_type = recode(.data$tube_type, "cumulative_1.0" = "size 1.0mL", "cumulative_1.9" = "size 1.9mL", "cumulative_total" = "all sizes"))
+  return(x)
+  }
+  if(total_or_prop == "prop"){
+    x <- tidyr::pivot_longer(x, cols = c("proportion_1.0", "proportion_1.9", "proportion_total"), names_to = "tube_type", values_to = "total")
+    x <- x %>% dplyr::mutate(tube_type = recode(.data$tube_type, "proportion_1.0" = "size 1.0mL", "proportion_1.9" = "size 1.9mL", "proportion_total" = "all sizes"))
+    return(x)
+  }
 }
 #' Create a zoo ts object from historical data
 #' https://cran.r-project.org/web/packages/zoo/index.html
