@@ -138,6 +138,11 @@ ggplot(longifyReadHistorical(total_or_prop = "prop", add_pending = TRUE), aes(x 
   scale_x_date(date_breaks = "2 month", date_labels = "%b %y") + 
   geom_hline(yintercept = 1)
 ```
+## Eric Koplin's ARIMA model
+
+```{r arima}
+single_arima()
+```
 
 ### Future kit builds and biospecimen collection protocol
 

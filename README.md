@@ -166,6 +166,18 @@ ggplot(longifyReadHistorical(total_or_prop = "prop", add_pending = TRUE), aes(x 
 ```
 
 <img src="man/figures/README-plot_history_prop-1.png" width="100%" />
+\## Eric Koplin’s ARIMA model
+
+``` r
+single_arima()
+#> $mean_cross
+#> [1] "2025-12-20"
+#> 
+#> $upper_cross
+#> [1] "2025-10-18"
+```
+
+<img src="man/figures/README-arima-1.png" width="100%" />
 
 ### Future kit builds and biospecimen collection protocol
 
