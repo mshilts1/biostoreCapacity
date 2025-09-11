@@ -87,11 +87,7 @@ will be full:**
   babies, and so may not receive all three 1.9ml tubes for storage).
   $\color{yellow}{\text{◎}}$
 
-Green checkmark ($\color{green}{\text{✓}}$ ) means we have that data, a
-yellow dot ($\color{yellow}{\text{◎}}$) means it’s speculative estimated
-data that we can kind of guess at, while a red x
-($\color{red}{\text{✘}}$ ) means **WE AS THE LAB CORE** are missing that
-specific information but it does exist.
+### General formula structure
 
 Here’s an idea of the kind of formula I’m thinking of, where $FF$ is
 “Freezer Filling”:
@@ -286,3 +282,9 @@ A more thorough description of every column in `readCollections()`:
 27. specialized_lifestyle.  
 28. specialized_lifestyle_proportion.  
 29. notes.
+
+Green checkmark ($\color{green}{\text{✓}}$ ) means we have that data, a
+yellow dot ($\color{yellow}{\text{◎}}$) means it’s speculative estimated
+data that we can kind of guess at, while a red x
+($\color{red}{\text{✘}}$ ) means **WE AS THE LAB CORE** are missing that
+specific information but it does exist.
