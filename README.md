@@ -98,14 +98,15 @@ First, we can attempt to make a model using the historical data of ECHO
 submissions to the BioStore:  
 <center>
 
-$FF = f(FF_{t} + FF_{t-1} + FF_{t-2} + \cdots + error)$
+$FF_{t+1} = f(FF_{t} + FF_{t-1} + FF_{t-2} + \cdots + error)$
 </center>
 
-Second, predictor variables:  
+Second, we know there were changes to the ECHO protocol that will mean
+the historical rate of data:  
 <center>
 
 $FF = f($ future enrollment, biospecimen collection schedule, number of
-tubes in each kit, time of day, day of week, error $)$
+tubes in each kit, rate of loss, $error)$
 </center>
 
 ## Usage
