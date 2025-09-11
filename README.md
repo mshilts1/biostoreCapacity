@@ -104,8 +104,8 @@ $FF = f(FF_{t} + FF_{t-1} + FF_{t-2} + \cdots + error)$
 Second, predictor variables:  
 <center>
 
-$FF = f($future enrollment, biospecimen collection schedule, number of
-tubes in each kit, time of day, day of week, error$)$
+$FF = f($ future enrollment, biospecimen collection schedule, number of
+tubes in each kit, time of day, day of week, error $)$
 </center>
 
 ## Usage
