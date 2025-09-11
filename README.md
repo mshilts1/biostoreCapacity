@@ -17,7 +17,7 @@ institutional resource [BioStore II
 freezer](https://www.vumc.org/oor/index.php/vumc-biospecimen-storage)
 will be full and unable to store any additional ECHO biospecimens.
 
-To estimate this, the data in the model should include, at least:
+To estimate this, the data in the model should try to include:
 
 - Historical data of the rate of freezer filling from ECHO.
   $\color{green}{\text{✓}}$  
@@ -29,20 +29,6 @@ To estimate this, the data in the model should include, at least:
 that data.  
 ($\color{red}{\text{✘}}$) means **WE AS THE LAB CORE** are missing (some
 of) that specific information, but it does exist!</span>.
-
-## Installation
-
-You can install the development version of biostoreCapacity from
-[GitHub](https://github.com/) with:
-
-``` r
-# install.packages("pak")
-pak::pak("mshilts1/biostoreCapacity")
-```
-
-Eventually, I’m going to *attempt* to put this on Shiny so it’s easy for
-anyone to use, but I will still keep the source code transparent on
-GitHub.
 
 ## What is the total BioStore II capacity?
 
@@ -87,7 +73,7 @@ will be full:**
   babies, and so may not receive all three 1.9ml tubes for storage).
   $\color{yellow}{\text{◎}}$
 
-### General formula structure
+### General proposed model structure
 
 Here’s an idea of the kind of formula I’m thinking of, where $FF$ is
 “Freezer Filling”:
@@ -105,13 +91,13 @@ $$FF_{pv} = f(enrollment, collection, tubes, loss, error)$$
 
 where:  
 $enrollment$ is the expected number of participants from whom specimens
-will be collected from.  
+will be collected from. WE DO NOT HAVE THIS DATA.  
 $collection$ is the biospecimen collection schedule over time.  
 $tubes$ is the number of tubes per each biospecimen collection kit.  
 $loss$ is some sort of drop-out rate; participant drop-out, not all
 tubes from a kit being returned to the biorepository, etc.
 
-The final model might be something mixing the two above models:
+The final model would be something mixing the two above models:
 
 $$FF_{mixed} = f(FF_{t+1},FF_{pv, error})$$
 
@@ -120,6 +106,18 @@ sense, but to allow for random variation and the effects of variables
 not captured in the model.
 
 ## Usage
+
+You can install the development version of biostoreCapacity from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("pak")
+pak::pak("mshilts1/biostoreCapacity")
+```
+
+Eventually, I’m going to *attempt* to put this on Shiny so it’s easy for
+anyone to use, but I will still keep the source code transparent on
+GitHub.
 
 ``` r
 library(biostoreCapacity)
@@ -156,6 +154,10 @@ ggplot(historical_data_long, aes(x = date, y = total, colour = tube_type)) +
 
 #### Plot overall proportion of BioStore filled over time:
 
+This includes “pending” tubes, which are tubes that are still at the
+sites but will be shipped here eventually and should be counted towards
+the BioStore’s total inventory.
+
 ``` r
 ggplot(longifyReadHistorical(total_or_prop = "prop", add_pending = TRUE), aes(x = date, y = total, colour = tube_type)) +
   geom_point() +
@@ -182,7 +184,10 @@ single_arima()
 
 <img src="man/figures/README-arima-1.png" width="100%" />
 
-### Future kit builds and biospecimen collection protocol
+## Future kit builds and biospecimen collection protocol
+
+We can’t really use this information yet, because we do not have a clear
+estimate of the number of participants.
 
 ``` r
 biospecimen_collections <- readCollections()
@@ -209,11 +214,8 @@ biospecimen_collections
 #> #   specialized_obesity <chr>, specialized_obesity_proportion <chr>, …
 ```
 
-There’s currently some information in `readCollections()` that’s
-speculative and outright intended to be tunable by an end user.
-
-**Information in `readCollections()` that can be assumed to be true and
-constant for the sake of building the model:**
+**Information in `readCollections()` that can be assumed to be “true”
+and constant for the sake of building the model:**
 
 - All columns with information about the kit builds:
   - `collection_id`, `kit_type`, `biospecimen_type`, `participant`,
@@ -226,6 +228,8 @@ constant for the sake of building the model:**
 **Speculative columns all contain the word “proportion” in the name:**
 
     * `proportion_from_kit_collected`, `y_2025_proportion`, `y_2026_proportion`, `y_2027_proportion`, `y_2028_proportion`, `y_2029_proportion`, `y_2030_proportion`, `specialized_obesity_proportion`, `specialized_chemphys_proportion`, `specialized_lifestyle_proportion`.   
+
+# Only read below if you want more details
 
 A more thorough description of every column in `readCollections()`:
 
@@ -276,12 +280,19 @@ A more thorough description of every column in `readCollections()`:
     specimens won’t be collected for all of 2030.  
 23. specialized_obesity: is that biospecimen being collected by sites
     where the PI selected “obesity” as an outcome of interest?  
-24. specialized_obesity_proportion. proportion of sites  
-25. specialized_chemphys.  
-26. specialized_chemphys_proportion.  
-27. specialized_lifestyle.  
-28. specialized_lifestyle_proportion.  
-29. notes.
+24. specialized_obesity_proportion: proportion of participants from
+    sites where PI selected “obesity” as outcome of interest.  
+25. specialized_chemphys: is that biospecimen being collected by sites
+    where the PI selected “Chemical/Phyical” as an exposure of
+    interest?  
+26. specialized_chemphys_proportion: proportion of participants from
+    sites where PI selected “Chemical/Physical” as exposure of
+    interest.  
+27. specialized_lifestyle is that biospecimen being collected by sites
+    where the PI selected “Lifestyle” as an exposure of interest?  
+28. specialized_lifestyle_proportion: proportion of participants from
+    sites where PI selected “Lifestyle” as exposure of interest.  
+29. notes: general notes about the data for your reference.
 
 Green checkmark ($\color{green}{\text{✓}}$ ) means we have that data, a
 yellow dot ($\color{yellow}{\text{◎}}$) means it’s speculative estimated
