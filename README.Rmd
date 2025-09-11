@@ -28,9 +28,10 @@ To estimate this, the data in the model should include, at least:
 * Historical data of the rate of freezer filling from ECHO. $\color{green}{\text{✓}}$    
 * Current and future biospecimen kit builds. $\color{green}{\text{✓}}$ 
 * Expected number of biospecimens to be collected over time. $\color{red}{\text{✘}}$    
-  
-($\color{green}{\text{✓}}$) means we have that data.   
-($\color{red}{\text{✘}}$) means **WE AS THE LAB CORE** are missing (some of) that specific information but it does exist.
+
+
+<span style="font-size: 8pt;">($\color{green}{\text{✓}}$) means we have that data.   
+($\color{red}{\text{✘}}$) means **WE AS THE LAB CORE** are missing (some of) that specific information, but it does exist!</span>.
 
 ## Installation
 
