@@ -68,8 +68,8 @@ BioStore will be full?
 **This is the data that I think we need to predict when the BioStore
 will be full:**
 
-- Historical data (time series data on number of ECHO tubes store in the
-  BioStore). $\color{green}{\text{✓}}$  
+- Historical data (time series data on number of ECHO tubes added to the
+  BioStore over time). $\color{green}{\text{✓}}$  
 - Expected number of kits that will be collected by kit type over time.
   $\color{red}{\text{✘}}$
   - Expected number of kits over time needs to include ability to handle
@@ -101,12 +101,17 @@ the historical rate of data:
 
 $$FF = f(enrollment, collection, tubes, loss, error)$$
 
-where: $enrollment$ is the expected number of participants from whom
-specimens will be collected from.  
-$collection$ is the biospecimen collection schedule.  
-$tubes$ is the number of tubes per each biopseicmen collection kit.  
+where:  
+$enrollment$ is the expected number of participants from whom specimens
+will be collected from.  
+$collection$ is the biospecimen collection schedule over time.  
+$tubes$ is the number of tubes per each biospecimen collection kit.  
 $loss$ is some sort of drop-out rate; participant drop-out, not all
 tubes from a kit being returned to the biorepository, etc.
+
+$error$ in both models isn’t mean to indicate error in the colloquial
+sense, but to allow for random variation and the effects of variables
+not captured in the model.
 
 ## Usage
 
