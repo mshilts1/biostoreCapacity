@@ -2,7 +2,8 @@ Package: biostoreCapacity
 Title: Estimate when BioStore II Capacity will be Reached
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
+    person("Eric", "Koplin", , "eric.koplin@vumc.org", role = c("aut"))
+    person("Meghan", "Shilts", , "meghanshilts@gmail.com", role = c("aut", "cre"))
 Description: Takes historical date and incorporates changes to the protocol to estimate when BioStore II will be full.
 License: MIT + file LICENSE
 Suggests: 

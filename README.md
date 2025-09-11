@@ -25,9 +25,9 @@ To estimate this, the data in the model should include, at least:
 - Expected number of biospecimens to be collected over time.
   $\color{red}{\text{✘}}$
 
-($\color{green}{\text{✓}}$ ) means we have that data
-($\color{red}{\text{✘}}$ ) means **WE AS THE LAB CORE** are missing
-(some of) that specific information but it does exist.
+($\color{green}{\text{✓}}$) means we have that data.  
+($\color{red}{\text{✘}}$) means **WE AS THE LAB CORE** are missing (some
+of) that specific information but it does exist.
 
 ## Installation
 
