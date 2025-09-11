@@ -71,15 +71,15 @@ will be full:**
 - Historical data (time series data on number of ECHO tubes store in the
   BioStore). $\color{green}{\text{✓}}$  
 - Expected number of kits that will be collected by kit type over time.
-  $\color{red}{\text{✘}}$  
-- Expected number of kits over time needs to include ability to handle
-  complexities introduced due to “specialized” kits, which are not
-  collected by all sites. $\color{yellow}{\text{◎}}$
+  $\color{red}{\text{✘}}$
+  - Expected number of kits over time needs to include ability to handle
+    complexities introduced due to “specialized” kits, which are not
+    collected by all sites. $\color{yellow}{\text{◎}}$
 - Number of tubes in current kit builds per each kit type.
   $\color{green}{\text{✓}}$  
 - Proportion of tubes from each kit type expected to be sent back to the
   biorepository. (e.g., may get only a tiny bit of urine from young
-  babies, and so won’t get all three 1.9ml tubes back.).
+  babies, and so may not receive all three 1.9ml tubes for storage).
   $\color{yellow}{\text{◎}}$
 
 Green checkmark ($\color{green}{\text{✓}}$ ) means we have that data, a
@@ -92,11 +92,13 @@ Here’s an idea of the kind of formula I’m thinking of, where $FF$ is
 “Freezer Filling”:
 
 First, we can attempt to make a model using the historical data of ECHO
-submissions to the BioStore:  
+submissions to the BioStore:
+
 $$FF_{t+1} = f(FF_{t} + FF_{t-1} + FF_{t-2} + \cdots + error)$$
 
 Second, we know there were changes to the ECHO protocol that will mean
-the historical rate of data:  
+the historical rate of data:
+
 $$FF = f(enrollment, collection, tubes, loss, error)$$  
 where: $enrollment$ is the expected number of participants from whom
 specimens will be collected from $collection$ is the biospecimen
