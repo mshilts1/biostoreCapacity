@@ -81,7 +81,7 @@ longifyReadHistorical <- function(x = readHistorical()) {
 #'
 #' @examples
 #' zoo_ts()
-zoo_ts <- function(x = readHistorical(), tube = "cumulative_1.0"){
+zoo_ts <- function(x = readHistorical(), tube = "cumulative_1.0") {
   zoo(x[[tube]], x$date)
   # explore as.ts option to coerce to ts object
 }

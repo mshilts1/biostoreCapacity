@@ -20,7 +20,8 @@ will be full and unable to store any additional ECHO biospecimens.
 To estimate this, the data in the model should include:
 
 - Historical data of the rate of freezer filling from ECHO.  
-- Future biospecimen kit builds.  
+- Future biospecimen kit builds.
+- 
 - Expected participant enrollment numbers from ?????? (I DO NOT HAVE
   THIS YET).
 
@@ -143,16 +144,16 @@ biospecimen_collections
 #> # ℹ 23 more variables: proportion_from_kit_collected <dbl>, visit <chr>,
 #> #   visit_logical_order <dbl>, specimen_type <chr>, y_2025 <dbl>, y_2026 <dbl>,
 #> #   y_2027 <dbl>, y_2028 <dbl>, y_2029 <dbl>, y_2030 <dbl>,
-#> #   y_2025_multiplier <dbl>, y_2026_multiplier <dbl>, y_2027_multiplier <dbl>,
-#> #   y_2028_multiplier <dbl>, y_2029_multiplier <dbl>, y_2030_multiplier <dbl>,
-#> #   specialized_obesity <chr>, specialized_obesity_multiplier <chr>, …
+#> #   y_2025_proportion <dbl>, y_2026_proportion <dbl>, y_2027_proportion <dbl>,
+#> #   y_2028_proportion <dbl>, y_2029_proportion <dbl>, y_2030_proportion <dbl>,
+#> #   specialized_obesity <chr>, specialized_obesity_proportion <chr>, …
 ```
 
 There’s currently some information in `readCollections()` that’s
 speculative and outright intended to be tunable by an end user.
 
-Information in `readCollections()` that can be assumed to be true and
-constant for the sake of building the model:
+**Information in `readCollections()` that can be assumed to be true and
+constant for the sake of building the model:**
 
 - All columns with information about the kit builds:
   - `collection_id`, `kit_type`, `biospecimen_type`, `participant`,
@@ -162,10 +163,62 @@ constant for the sake of building the model:
     `y_2029`, `y_2030`, `specialized_obesity`, `specialized_chemphys`,
     `specialized_lifestyle`.
 
-Speculative columns all contain the word “proportion” or “multiplier” in
-the name:  
-\* `proportion_from_kit_collected`, `y_2025_multiplier`,
-`y_2026_multiplier`, `y_2027_multiplier`, `y_2028_multiplier`,
-`y_2029_multiplier`, `y_2030_multiplier`,
-`specialized_obesity_multiplier`, `specialized_chemphys_multiplier`,
-`specialized_lifestyle_multiplier`.
+**Speculative columns all contain the word “proportion” in the name:**
+
+    * `proportion_from_kit_collected`, `y_2025_proportion`, `y_2026_proportion`, `y_2027_proportion`, `y_2028_proportion`, `y_2029_proportion`, `y_2030_proportion`, `specialized_obesity_proportion`, `specialized_chemphys_proportion`, `specialized_lifestyle_proportion`.   
+
+A more thorough description of every column in `readCollections()`:
+
+1.  collection_id: a unique ID. a concatenation of kit_type, tube_size,
+    visit, and specimen_type.  
+2.  kit_type: concatenation of biospecimen_type and participant.  
+3.  biospecimen_type: type of biospecimen being collected (e.g., urine
+    or blood, etc…).  
+4.  participant: specimen to be collected from an ECHO child, child’s
+    mother, or child’s mother’s current partner.  
+5.  tube_size: whether tube is 1.0mL or 1.9mL (1.9mL tubes take up more
+    space in the BioStore.).  
+6.  tubes_per_kit: number of tubes of specified size in that specific
+    kit.  
+7.  proportion_from_kit_collected. what proportion of tubes in that kit
+    are we expecting to be returned to be stored in the BioStore? for
+    example, newborn babies may not produce enough urine for all three
+    1.9mL tubes to be filled and returned. maybe only two will be
+    returned.  
+8.  visit. time point in child’s or child’s mother’s life when specimen
+    is collected.  
+9.  visit_logical_order. not really that useful here, but orders the
+    visit column by the logical order of an ECHO child’s life (sort of;
+    due to preconception protocol, that gets complicated).  
+10. specimen_type. is specimen considered by ECHO a core, preconception,
+    or specialized specimen? this is important because sites are
+    expected to at least try to collect every core specimen, while sites
+    are only allowed to collected specific specialized specimens. the
+    preconception specimens are somewhere in the middle.  
+11. y_2025. 1 (yes)/ 0 (no) column. is this specific specimen to be
+    collected in calendar year 2025?  
+12. y_2026. same as for y_2025, but calendar year 2026.  
+13. y_2027. same as for y_2025, but calendar year 2027.  
+14. y_2028. same as for y_2025, but calendar year 2028.  
+15. y_2029. same as for y_2025, but calendar year 2029.  
+16. y_2030. same as for y_2025, but calendar year 2030.  
+17. y_2025_proportion: this is set to 0.25 because there’s only about
+    25% of calendar year 2025 left.
+18. y_2026_proportion: leave at 1 unless there’s some reason to think
+    specimens won’t be collected for all of 2026.  
+19. y_2027_proportion: leave at 1 unless there’s some reason to think
+    specimens won’t be collected for all of 2027.  
+20. y_2028_proportion: leave at 1 unless there’s some reason to think
+    specimens won’t be collected for all of 2028.  
+21. y_2029_proportion: leave at 1 unless there’s some reason to think
+    specimens won’t be collected for all of 2029.  
+22. y_2030_proportion: leave at 1 unless there’s some reason to think
+    specimens won’t be collected for all of 2030.  
+23. specialized_obesity: is that biospecimen being collected by sites
+    where the PI selected “obesity” as an outcome of interest?  
+24. specialized_obesity_proportion. proportion of sites  
+25. specialized_chemphys.  
+26. specialized_chemphys_proportion.  
+27. specialized_lifestyle.  
+28. specialized_lifestyle_proportion.  
+29. notes.
