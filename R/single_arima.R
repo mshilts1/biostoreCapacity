@@ -142,7 +142,7 @@ upper_idx <- which(fine_upper >= 1)[1]
 mean_cross_date  <- if (length(mean_idx))  fine_grid[mean_idx]  else NA
 upper_cross_date <- if (length(upper_idx)) fine_grid[upper_idx] else NA
 
-print(list(mean_cross = mean_cross_date, upper_cross = upper_cross_date))
+#print(list(mean_cross = mean_cross_date, upper_cross = upper_cross_date))
 
 # Build annotation label
 annot_lbl <- paste0("Mean crosses: ", ifelse(is.na(mean_cross_date), "NA", format(mean_cross_date, "%Y-%m-%d")),

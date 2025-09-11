@@ -112,7 +112,7 @@ historical_data_long <- longifyReadHistorical() # same thing as above, but in "l
 historical_data_long_proportions <- longifyReadHistorical(total_or_prop = "prop") # same as directly above, but proportions of freezer capacity instead of raw numbers
 ```
 
-Plot rate of accessioning over time:
+#### Plot rate of accessioning over time:
 
 ```{r plot_history}
 library(ggplot2)
@@ -126,7 +126,7 @@ ggplot(historical_data_long, aes(x = date, y = total, colour = tube_type)) +
 ```
 
 
-Plot overall proportion of BioStore filled over time:
+#### Plot overall proportion of BioStore filled over time:
 
 ```{r plot_history_prop}
 ggplot(longifyReadHistorical(total_or_prop = "prop", add_pending = TRUE), aes(x = date, y = total, colour = tube_type)) +
@@ -138,7 +138,10 @@ ggplot(longifyReadHistorical(total_or_prop = "prop", add_pending = TRUE), aes(x 
   scale_x_date(date_breaks = "2 month", date_labels = "%b %y") + 
   geom_hline(yintercept = 1)
 ```
-## Eric Koplin's ARIMA model
+
+### Eric Koplin's ARIMA model
+
+Eric Koplin has built an ARIMA model using the forecast package to predict when the BioStore would be full based on the historical rate of filling:
 
 ```{r arima}
 single_arima()
