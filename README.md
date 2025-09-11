@@ -99,13 +99,14 @@ $$FF_{t+1} = f(FF_{t} + FF_{t-1} + FF_{t-2} + \cdots + error)$$
 Second, we know there were changes to the ECHO protocol that will mean
 the historical rate of data:
 
-$$FF = f(enrollment, collection, tubes, loss, error)$$  
+$$FF = f(enrollment, collection, tubes, loss, error)$$
+
 where: $enrollment$ is the expected number of participants from whom
-specimens will be collected from $collection$ is the biospecimen
-collection schedule $tubes$ is the number of tubes per each biopseicmen
-collection kit $loss$ is some sort of drop-out rate; participant
-drop-out, not all tubes from a kit being returned to the biorepository,
-etc.
+specimens will be collected from.  
+$collection$ is the biospecimen collection schedule.  
+$tubes$ is the number of tubes per each biopseicmen collection kit.  
+$loss$ is some sort of drop-out rate; participant drop-out, not all
+tubes from a kit being returned to the biorepository, etc.
 
 ## Usage
 
