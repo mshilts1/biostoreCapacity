@@ -2,6 +2,7 @@
 
 export(capacityNumbers)
 export(longifyReadHistorical)
+export(pendingNumbers)
 export(readCollections)
 export(readHistorical)
 export(readKBExcel)

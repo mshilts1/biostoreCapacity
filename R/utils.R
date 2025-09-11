@@ -36,6 +36,20 @@ capacityNumbers <- function(x = readKBExcel()){
   tubes_1.9ml <- x %>% filter(.data$x2d_tubes_ml == "x1_9m_l_capped_vial") %>% pull(.data$tube_capacity_one_bank)
   return(list("tubes_1.0ml_max_capacity" = tubes_1.0ml, "tubes_1.9ml_max_capacity" = tubes_1.9ml))
 }
+#' Pending numbers
+#'
+#' @param x input data from Suchi and Karen Beeri about tubes pending storage
+#'
+#' @returns a list of pending tubes of each size slated to go in the BioStore
+#' @export
+#'
+#' @examples
+#' pendingNumbers()
+pendingNumbers <- function(x = readKBExcel()){
+  tubes_1.0ml <- x %>% filter(.data$x2d_tubes_ml == "fluid_x_1_0m_l_tube") %>% pull(.data$pending_per_suchi)
+  tubes_1.9ml <- x %>% filter(.data$x2d_tubes_ml == "x1_9m_l_capped_vial") %>% pull(.data$pending_per_suchi)
+  return(list("tubes_1.0ml_pending" = tubes_1.0ml, "tubes_1.9ml_pending" = tubes_1.9ml))
+}
 #' Load in a file with current biospecimen collection protocol and timeline
 #'
 #' @param x File name
@@ -80,10 +94,21 @@ readHistorical <- function(x = "suchi_bam_submissions.csv") {
   x$proportion_total <- x$proportion_1.0 + x$proportion_1.9
   x
 }
+addPending <- function(x = readHistorical(), y = pendingNumbers()){
+  x <- x %>% add_row(date = ymd("2025-09-11"), total_submitted = y$tubes_1.9ml_pending + y$tubes_1.0ml_pending,  tubes_1.9_ml = y$tubes_1.9ml_pending, tubes_1.0_ml = y$tubes_1.0ml_pending)
+  x$cumulative_1.0 <- cumsum(x$tubes_1.0_ml)
+  x$cumulative_1.9 <- cumsum(x$tubes_1.9_ml)
+  x$cumulative_total <- x$cumulative_1.0 + x$cumulative_1.9
+  x$proportion_1.0 <- x$cumulative_1.0/capacityNumbers()$tubes_1.0ml_max_capacity
+  x$proportion_1.9 <- x$cumulative_1.9/capacityNumbers()$tubes_1.9ml_max_capacity
+  x$proportion_total <- x$proportion_1.0 + x$proportion_1.9
+  x
+}
 #' Make Suchi's historical data "long" instead of "wide"
 #'
 #' @param x "Wide" version of historical data of ECHO submissions to BioStore
 #' @param total_or_prop "total" for raw numbers or "prop" for proportion of BioStore
+#' @param add_pending Add in "pending" tubes that are at sites but not here yet?
 #'
 #' @returns "Long" version of historical data of ECHO submissions to BioStore
 #' @export
@@ -91,7 +116,11 @@ readHistorical <- function(x = "suchi_bam_submissions.csv") {
 #' @examples
 #' longifyReadHistorical() # cumulative totals as raw numbers
 #' longifyReadHistorical(total_or_prop = "prop") # cumulative total as a proportion of freezer capacity
-longifyReadHistorical <- function(x = readHistorical(), total_or_prop = "total") {
+longifyReadHistorical <- function(x = readHistorical(), total_or_prop = "total", add_pending = FALSE) {
+  if(add_pending == TRUE){
+    x <- addPending()
+  }
+
   if(total_or_prop == "total"){
   x <- tidyr::pivot_longer(x, cols = c("cumulative_1.0", "cumulative_1.9", "cumulative_total"), names_to = "tube_type", values_to = "total")
   x <- x %>% dplyr::mutate(tube_type = recode(.data$tube_type, "cumulative_1.0" = "size 1.0mL", "cumulative_1.9" = "size 1.9mL", "cumulative_total" = "all sizes"))
@@ -117,7 +146,7 @@ longifyReadHistorical <- function(x = readHistorical(), total_or_prop = "total")
 #' zoo_ts()
 zoo_ts <- function(x = readHistorical(), tube = "cumulative_1.0") {
   zoo(x[[tube]], x$date)
-  # explore as.ts option to coerce to ts object
+  # may need to explore as.ts option to coerce to ts object
 }
 #' Calculate total BioStore capacity
 #'

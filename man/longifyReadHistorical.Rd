@@ -4,12 +4,18 @@
 \alias{longifyReadHistorical}
 \title{Make Suchi's historical data "long" instead of "wide"}
 \usage{
-longifyReadHistorical(x = readHistorical(), total_or_prop = "total")
+longifyReadHistorical(
+  x = readHistorical(),
+  total_or_prop = "total",
+  add_pending = FALSE
+)
 }
 \arguments{
 \item{x}{"Wide" version of historical data of ECHO submissions to BioStore}
 
 \item{total_or_prop}{"total" for raw numbers or "prop" for proportion of BioStore}
+
+\item{add_pending}{Add in "pending" tubes that are at sites but not here yet?}
 }
 \value{
 "Long" version of historical data of ECHO submissions to BioStore
@@ -18,5 +24,6 @@ longifyReadHistorical(x = readHistorical(), total_or_prop = "total")
 Make Suchi's historical data "long" instead of "wide"
 }
 \examples{
-longifyReadHistorical()
+longifyReadHistorical() # cumulative totals as raw numbers
+longifyReadHistorical(total_or_prop = "prop") # cumulative total as a proportion of freezer capacity
 }

@@ -154,8 +154,7 @@ ggplot(historical_data_long, aes(x = date, y = total, colour = tube_type)) +
 Plot overall proportion of BioStore filled over time:
 
 ``` r
-library(ggplot2)
-ggplot(historical_data_long_proportions, aes(x = date, y = total, colour = tube_type)) +
+ggplot(longifyReadHistorical(total_or_prop = "prop", add_pending = TRUE), aes(x = date, y = total, colour = tube_type)) +
   geom_point() +
   geom_smooth() +
   theme_bw() +
