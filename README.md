@@ -45,7 +45,7 @@ The simplest equation for calculating BioStore capacity is:
 
 <center>
 
-$((196,412 + x)/788,256) + ((212,692 + y)/438,840)) = 1$
+$\frac{(196,412 + x)}{788,256} + \frac{(212,692 + y)}{438,840} = 1$
 </center>
 
 where:  
@@ -88,10 +88,25 @@ will be full:**
 Green checkmark ($\color{green}{\text{✓}}$ ) means we have that data, a
 yellow dot ($\color{yellow}{\text{◎}}$) means it’s speculative estimated
 data that we can kind of guess at, while a red x
-($\color{red}{\text{✘}}$ ) means WE’RE missing that specific information
-but it does exist.
+($\color{red}{\text{✘}}$ ) means **WE AS THE LAB CORE** are missing that
+specific information but it does exist.
 
-◎
+Here’s an idea of the kind of formula I’m thinking of, where $FF$ is
+“Freezer Filling”:
+
+First, we can attempt to make a model using the historical data of ECHO
+submissions to the BioStore:  
+<center>
+
+$FF = f(FF_{t} + FF_{t-1} + FF_{t-2} + \cdots + error)$
+</center>
+
+Second, predictor variables:  
+<center>
+
+$FF = f($future enrollment, biospecimen collection schedule, number of
+tubes in each kit, time of day, day of week, error$)$
+</center>
 
 ## Usage
 
