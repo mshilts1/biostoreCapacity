@@ -43,10 +43,7 @@ GitHub.
 
 The simplest equation for calculating BioStore capacity is:
 
-<center>
-
-$\frac{(196,412 + x)}{788,256} + \frac{(212,692 + y)}{438,840} = 1$
-</center>
+$$\frac{(196,412 + x)}{788,256} + \frac{(212,692 + y)}{438,840} = 1$$
 
 where:  
 \* $196,412$ is the number of ECHO 1.0 ml tubes already stored (or
@@ -96,18 +93,17 @@ Here’s an idea of the kind of formula I’m thinking of, where $FF$ is
 
 First, we can attempt to make a model using the historical data of ECHO
 submissions to the BioStore:  
-<center>
-
-$FF_{t+1} = f(FF_{t} + FF_{t-1} + FF_{t-2} + \cdots + error)$
-</center>
+$$FF_{t+1} = f(FF_{t} + FF_{t-1} + FF_{t-2} + \cdots + error)$$
 
 Second, we know there were changes to the ECHO protocol that will mean
 the historical rate of data:  
-<center>
-
-$FF = f($ future enrollment, biospecimen collection schedule, number of
-tubes in each kit, rate of loss, $error)$
-</center>
+$$FF = f(enrollment, collection, tubes, loss, error)$$  
+where: $enrollment$ is the expected number of participants from whom
+specimens will be collected from $collection$ is the biospecimen
+collection schedule $tubes$ is the number of tubes per each biopseicmen
+collection kit $loss$ is some sort of drop-out rate; participant
+drop-out, not all tubes from a kit being returned to the biorepository,
+etc.
 
 ## Usage
 
