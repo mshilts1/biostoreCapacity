@@ -176,13 +176,34 @@
 <h3 id="site-collection-info-pushed-to-elvislims-from-bio-track">Site collection info pushed to elvislims from Bio-Track<a class="anchor" aria-label="anchor" href="#site-collection-info-pushed-to-elvislims-from-bio-track"></a>
 </h3>
 <p>Just created this function and testing if it’s working</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/site_collections.html">site_collections</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 204,017 × 16</span></span>
+<span><span class="co">#&gt;    site_id_randomized               number_of_containers container_type capacity</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;                                           &lt;int&gt; &lt;chr&gt;             &lt;int&gt;</span></span>
+<span><span class="co">#&gt;  1 2f65c9a05b770edb650f839c06514908                  119 [FH prefixed]…       48</span></span>
+<span><span class="co">#&gt;  2 2f65c9a05b770edb650f839c06514908                  119 [FH prefixed]…       48</span></span>
+<span><span class="co">#&gt;  3 2f65c9a05b770edb650f839c06514908                  119 [FH prefixed]…       48</span></span>
+<span><span class="co">#&gt;  4 2f65c9a05b770edb650f839c06514908                  119 [FH prefixed]…       48</span></span>
+<span><span class="co">#&gt;  5 2f65c9a05b770edb650f839c06514908                  119 [FH prefixed]…       48</span></span>
+<span><span class="co">#&gt;  6 2f65c9a05b770edb650f839c06514908                  119 [FH prefixed]…       48</span></span>
+<span><span class="co">#&gt;  7 2f65c9a05b770edb650f839c06514908                  119 [FH prefixed]…       48</span></span>
+<span><span class="co">#&gt;  8 2f65c9a05b770edb650f839c06514908                  119 [FH prefixed]…       48</span></span>
+<span><span class="co">#&gt;  9 2f65c9a05b770edb650f839c06514908                  119 [FH prefixed]…       48</span></span>
+<span><span class="co">#&gt; 10 2f65c9a05b770edb650f839c06514908                  119 [FH prefixed]…       48</span></span>
+<span><span class="co">#&gt; # ℹ 204,007 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 12 more variables: number_of_specimen &lt;int&gt;, specimen_type &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   sample_type &lt;chr&gt;, storage_date &lt;chr&gt;, nominal_volume &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   partial_aliquot &lt;lgl&gt;, partial_volume &lt;dbl&gt;, tube_size &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   specialized_whole_blood &lt;int&gt;, specialized_breast_milk &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   specialized_urine &lt;int&gt;, shipped &lt;int&gt;</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="future-kit-builds-and-biospecimen-collection-protocol">Future kit builds and biospecimen collection protocol<a class="anchor" aria-label="anchor" href="#future-kit-builds-and-biospecimen-collection-protocol"></a>
 </h2>
 <p>We can’t really use this information yet, because we do not have a clear estimate of the number of participants.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">biospecimen_collections</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/readCollections.html">readCollections</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">biospecimen_collections</span></span>
 <span><span class="co">#&gt; # A tibble: 27 × 29</span></span>
@@ -222,7 +243,7 @@
 </li>
 </ul>
 <p><strong>Speculative columns all contain the word “proportion” in the name:</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="sc">*</span> <span class="st">`</span><span class="at">proportion_from_kit_collected</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2025_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2026_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2027_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2028_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2029_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2030_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_obesity_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_chemphys_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_lifestyle_proportion</span><span class="st">`</span>.   </span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="sc">*</span> <span class="st">`</span><span class="at">proportion_from_kit_collected</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2025_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2026_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2027_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2028_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2029_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2030_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_obesity_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_chemphys_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_lifestyle_proportion</span><span class="st">`</span>.   </span></code></pre></div>
 </div>
 </div>
 <div class="section level1">
