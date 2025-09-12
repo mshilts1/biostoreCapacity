@@ -236,4 +236,19 @@ freezer_fullness_graph <- function(used = NULL) {
 forecastBioStoreCapacity <- function() {
   forecast::forecast()
 }
-# some cleaning functions
+#' Load in de-identified information about site biospecimen collections
+#'
+#' @param x file name of deidentified biospecimen collections file
+#'
+#' @returns a tibble with this information
+#' @export
+#'
+#' @examples
+#' site_collections()
+site_collections <- function(x = "deidentified_specimen_collection.csv"){
+  path <- system.file("extdata", x, package = "biostoreCapacity", mustWork = TRUE)
+  x <- utils::read.csv(file = path, header = TRUE)
+  x <- tibble::as_tibble(x)
+  #x$date <- lubridate::ymd(x$date)
+  x
+}

@@ -188,6 +188,29 @@ single_arima()
 
 Just created this function and testing if it’s working
 
+``` r
+site_collections()
+#> # A tibble: 204,017 × 16
+#>    site_id_randomized               number_of_containers container_type capacity
+#>    <chr>                                           <int> <chr>             <int>
+#>  1 2f65c9a05b770edb650f839c06514908                  119 [FH prefixed]…       48
+#>  2 2f65c9a05b770edb650f839c06514908                  119 [FH prefixed]…       48
+#>  3 2f65c9a05b770edb650f839c06514908                  119 [FH prefixed]…       48
+#>  4 2f65c9a05b770edb650f839c06514908                  119 [FH prefixed]…       48
+#>  5 2f65c9a05b770edb650f839c06514908                  119 [FH prefixed]…       48
+#>  6 2f65c9a05b770edb650f839c06514908                  119 [FH prefixed]…       48
+#>  7 2f65c9a05b770edb650f839c06514908                  119 [FH prefixed]…       48
+#>  8 2f65c9a05b770edb650f839c06514908                  119 [FH prefixed]…       48
+#>  9 2f65c9a05b770edb650f839c06514908                  119 [FH prefixed]…       48
+#> 10 2f65c9a05b770edb650f839c06514908                  119 [FH prefixed]…       48
+#> # ℹ 204,007 more rows
+#> # ℹ 12 more variables: number_of_specimen <int>, specimen_type <chr>,
+#> #   sample_type <chr>, storage_date <chr>, nominal_volume <chr>,
+#> #   partial_aliquot <lgl>, partial_volume <dbl>, tube_size <chr>,
+#> #   specialized_whole_blood <int>, specialized_breast_milk <int>,
+#> #   specialized_urine <int>, shipped <int>
+```
+
 ## Future kit builds and biospecimen collection protocol
 
 We can’t really use this information yet, because we do not have a clear

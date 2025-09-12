@@ -16,6 +16,7 @@ Imports:
     dplyr,
     forecast,
     ggplot2,
+    ids,
     janitor,
     jsonlite,
     lubridate,
