@@ -29,6 +29,7 @@ To estimate this, the data in the model should try to include:
 * Current and future biospecimen kit builds. $\color{green}{\text{✓}}$ 
 * Expected number of biospecimens to be collected over time. $\color{red}{\text{✘}}$    
 
+<span style="color: red;">text</span>
 
 <span style="font-size: 8pt;">($\color{green}{\text{✓}}$) means we have that data.   
 ($\color{red}{\text{✘}}$) means **WE AS THE LAB CORE** are missing (some of) that specific information, but it does exist!</span>.
