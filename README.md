@@ -188,14 +188,6 @@ single_arima()
 
 Just created this function and testing if it’s working
 
-``` r
-siteCollections()
-#> Warning: There was 1 warning in `dplyr::mutate()`.
-#> ℹ In argument: `storage_date = as.Date(ymd_hms(.data$storage_date))`.
-#> Caused by warning:
-#> !  2374 failed to parse.
-```
-
 ## Future kit builds and biospecimen collection protocol
 
 We can’t really use this information yet, because we do not have a clear

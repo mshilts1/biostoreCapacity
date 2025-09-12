@@ -236,3 +236,4 @@ freezer_fullness_graph <- function(used = NULL) {
 forecastBioStoreCapacity <- function() {
   forecast::forecast()
 }
+# some cleaning functions

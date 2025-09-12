@@ -155,7 +155,7 @@ single_arima()
 Just created this function and testing if it's working
 
 ```{r siteCollections}
-siteCollections()
+
 ```
 
 

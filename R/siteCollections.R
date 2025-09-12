@@ -2,15 +2,12 @@
 #'
 #' @param x JSON file from Bio-Track
 #'
-#' @returns
-#' @export
+#' @returns tibble with collections from sites that will go into biostore
 #' @importFrom jsonlite fromJSON
 #' @import stringr
 #'
-#' @examples
-#' siteCollections()
-siteCollections <- function(x = "site_report_2025_09_11_07_43_04.json"){
-  x <- system.file("extdata", x, package = "biostoreCapacity", mustWork = TRUE)
+siteCollectionsPre <- function(x = "site_report_2025_09_12_07_43_04.json"){ # json file must be pulled from elvislims with your credentials
+  x <- normalizePath(file.path("/Users/meghanshilts/Downloads", x), mustWork = TRUE)
   collections <- jsonlite::fromJSON(txt = x, flatten= TRUE, simplifyDataFrame = TRUE)
   collections <- collections %>% tidyr::unnest("containers") %>% tidyr::unnest("specimen") %>% janitor::clean_names() %>% dplyr::mutate("storage_date" = as.Date(ymd_hms(.data$storage_date)))
 
