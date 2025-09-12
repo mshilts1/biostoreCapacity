@@ -17,6 +17,8 @@
 #' @return A list with fitted models, a forecast data.frame, crossing dates, and a
 #'   ggplot object.
 #' @export
+#' @import brms
+#' @importFrom stats gaussian
 #' @examples
 #' # res <- single_brms_growth()
 #' # res$mean_cross_date; res$upper_cross_date; res$plot
