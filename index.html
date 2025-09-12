@@ -52,15 +52,14 @@
 <p>The goal of <code>biostoreCapacity</code> is to attempt to predict when VUMC’s institutional resource <a href="https://www.vumc.org/oor/index.php/vumc-biospecimen-storage" class="external-link">BioStore II freezer</a> will be full and unable to store any additional ECHO biospecimens.</p>
 <p>To estimate this, the data in the model should try to include:</p>
 <ul>
-<li>Historical data of the rate of freezer filling from ECHO. <span class="math inline">$\color{green}{\text{✓}}$</span><br>
+<li>Historical data of the rate of freezer filling from ECHO. ✅<br>
 </li>
-<li>Current and future biospecimen kit builds. <span class="math inline">$\color{green}{\text{✓}}$</span>
+<li>Current and future biospecimen kit builds. ✅<br>
 </li>
-<li>Expected number of biospecimens to be collected over time. <span class="math inline">$\color{red}{\text{✘}}$</span>
-</li>
+<li>Expected number of biospecimens to be collected over time. ❌</li>
 </ul>
-<p><span style="font-size: 8pt;">(<span class="math inline">$\color{green}{\text{✓}}$</span>) means we have that data.<br>
-(<span class="math inline">$\color{red}{\text{✘}}$</span>) means <strong>WE AS THE LAB CORE</strong> are missing (some of) that specific information, but it does exist!</span>.</p>
+<p>✅ means we have that data.<br>
+❌ means <strong>WE AS THE LAB CORE</strong> are missing (some of) that specific information, but it does exist!.</p>
 <div class="section level2">
 <h2 id="what-is-the-total-biostore-ii-capacity">What is the total BioStore II capacity?<a class="anchor" aria-label="anchor" href="#what-is-the-total-biostore-ii-capacity"></a>
 </h2>
@@ -81,18 +80,17 @@
 <p>How can we estimate both <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math> above, and when the capacity of the BioStore will be full?</p>
 <p><strong>This is the data that I think we need to predict when the BioStore will be full:</strong></p>
 <ul>
-<li>Historical data (time series data on number of ECHO tubes added to the BioStore over time). <span class="math inline">$\color{green}{\text{✓}}$</span><br>
+<li>Historical data (time series data on number of ECHO tubes added to the BioStore over time). ✅<br>
 </li>
-<li>Expected number of kits that will be collected by kit type over time. <span class="math inline">$\color{red}{\text{✘}}$</span>
+<li>Expected number of kits that will be collected by kit type over time. ❌
 <ul>
-<li>Expected number of kits over time needs to include ability to handle complexities introduced due to “specialized” kits, which are not collected by all sites. <span class="math inline">$\color{yellow}{\text{◎}}$</span>
+<li>Expected number of kits over time needs to include ability to handle complexities introduced due to “specialized” kits, which are not collected by all sites. 🟡<br>
 </li>
 </ul>
 </li>
-<li>Number of tubes in current kit builds per each kit type. <span class="math inline">$\color{green}{\text{✓}}$</span><br>
+<li>Number of tubes in current kit builds per each kit type. ✅<br>
 </li>
-<li>Proportion of tubes from each kit type expected to be sent back to the biorepository. (e.g., may get only a tiny bit of urine from young babies, and so may not receive all three 1.9ml tubes for storage). <span class="math inline">$\color{yellow}{\text{◎}}$</span>
-</li>
+<li>Proportion of tubes from each kit type expected to be sent back to the biorepository. (e.g., may get only a tiny bit of urine from young babies, and so may not receive all three 1.9ml tubes for storage). 🟡</li>
 </ul>
 <div class="section level3">
 <h3 id="general-proposed-model-structure">General proposed model structure<a class="anchor" aria-label="anchor" href="#general-proposed-model-structure"></a>
@@ -308,7 +306,7 @@
 </li>
 <li>notes: general notes about the data for your reference.</li>
 </ol>
-<p>Green checkmark (<span class="math inline">$\color{green}{\text{✓}}$</span> ) means we have that data, a yellow dot (<span class="math inline">$\color{yellow}{\text{◎}}$</span>) means it’s speculative estimated data that we can kind of guess at, while a red x (<span class="math inline">$\color{red}{\text{✘}}$</span> ) means <strong>WE AS THE LAB CORE</strong> are missing that specific information but it does exist.</p>
+<p>Green checkmark (✅ ) means we have that data, a yellow dot (🟡) means it’s speculative estimated data that we can kind of guess at, while a red x (❌ ) means <strong>WE AS THE LAB CORE</strong> are missing that specific information but it does exist.</p>
 </div>
 
   </main><aside class="col-md-3"><div class="license">
