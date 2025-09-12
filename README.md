@@ -19,16 +19,13 @@ will be full and unable to store any additional ECHO biospecimens.
 
 To estimate this, the data in the model should try to include:
 
-- Historical data of the rate of freezer filling from ECHO.
-  $\color{green}{\text{✓}}$  
-- Current and future biospecimen kit builds. $\color{green}{\text{✓}}$
-- Expected number of biospecimens to be collected over time.
-  $\color{red}{\text{✘}}$
+- Historical data of the rate of freezer filling from ECHO. ✅  
+- Current and future biospecimen kit builds. ✅  
+- Expected number of biospecimens to be collected over time. ❌
 
-<span style="font-size: 8pt;">($\color{green}{\text{✓}}$) means we have
-that data.  
-($\color{red}{\text{✘}}$) means **WE AS THE LAB CORE** are missing (some
-of) that specific information, but it does exist!</span>.
+✅ means we have that data.  
+❌ means **WE AS THE LAB CORE** are missing (some of) that specific
+information, but it does exist!.
 
 ## What is the total BioStore II capacity?
 
@@ -60,18 +57,16 @@ BioStore will be full?
 will be full:**
 
 - Historical data (time series data on number of ECHO tubes added to the
-  BioStore over time). $\color{green}{\text{✓}}$  
+  BioStore over time). ✅  
 - Expected number of kits that will be collected by kit type over time.
-  $\color{red}{\text{✘}}$
+  ❌
   - Expected number of kits over time needs to include ability to handle
     complexities introduced due to “specialized” kits, which are not
-    collected by all sites. $\color{yellow}{\text{◎}}$
-- Number of tubes in current kit builds per each kit type.
-  $\color{green}{\text{✓}}$  
+    collected by all sites. 🟡  
+- Number of tubes in current kit builds per each kit type. ✅  
 - Proportion of tubes from each kit type expected to be sent back to the
   biorepository. (e.g., may get only a tiny bit of urine from young
-  babies, and so may not receive all three 1.9ml tubes for storage).
-  $\color{yellow}{\text{◎}}$
+  babies, and so may not receive all three 1.9ml tubes for storage). 🟡
 
 ### General proposed model structure
 
@@ -321,8 +316,7 @@ A more thorough description of every column in `readCollections()`:
     sites where PI selected “Lifestyle” as exposure of interest.  
 29. notes: general notes about the data for your reference.
 
-Green checkmark ($\color{green}{\text{✓}}$ ) means we have that data, a
-yellow dot ($\color{yellow}{\text{◎}}$) means it’s speculative estimated
-data that we can kind of guess at, while a red x
-($\color{red}{\text{✘}}$ ) means **WE AS THE LAB CORE** are missing that
-specific information but it does exist.
+Green checkmark (✅ ) means we have that data, a yellow dot (🟡) means
+it’s speculative estimated data that we can kind of guess at, while a
+red x (❌ ) means **WE AS THE LAB CORE** are missing that specific
+information but it does exist.
