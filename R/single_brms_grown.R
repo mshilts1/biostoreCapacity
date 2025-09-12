@@ -17,8 +17,6 @@
 #' @return A list with fitted models, a forecast data.frame, crossing dates, and a
 #'   ggplot object.
 #' @export
-#' @import brms
-#' @importFrom stats gaussian
 #' @examples
 #' # res <- single_brms_growth()
 #' # res$mean_cross_date; res$upper_cross_date; res$plot
@@ -69,7 +67,7 @@ single_brms_growth <- function(
   fit_prop <- brms::brm(
     formula = prop_1ml ~ s(t, k = 10),
     data    = hist_init,
-    family  = gaussian(),
+    family  = stats::gaussian(),
     chains  = chains, iter = iter, seed = seed,
     refresh = 0
   )
@@ -77,7 +75,7 @@ single_brms_growth <- function(
   fit_sub <- brms::brm(
     formula = total_submitted_capacity ~ s(t, k = 10),
     data    = hist_init,
-    family  = gaussian(),
+    family  = stats::gaussian(),
     chains  = chains, iter = iter, seed = seed,
     refresh = 0
   )
@@ -123,7 +121,7 @@ single_brms_growth <- function(
   fit_total <- brms::brm(
     formula = growth_bf,
     data    = hist_init,
-    family  = gaussian(),
+    family  = stats::gaussian(),
     prior   = growth_priors,
     control = list(adapt_delta = 0.995, max_treedepth = 12),
     chains  = chains, iter = iter, seed = seed,

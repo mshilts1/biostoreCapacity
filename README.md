@@ -25,8 +25,6 @@ To estimate this, the data in the model should try to include:
 - Expected number of biospecimens to be collected over time.
   $\color{red}{\text{✘}}$
 
-<span style="color: red;">text</span>
-
 <span style="font-size: 8pt;">($\color{green}{\text{✓}}$) means we have
 that data.  
 ($\color{red}{\text{✘}}$) means **WE AS THE LAB CORE** are missing (some
