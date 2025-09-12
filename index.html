@@ -172,12 +172,23 @@
 <code class="sourceCode R"><span><span class="fu"><a href="reference/single_arima.html">single_arima</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-arima-1.png" width="100%"></p>
 </div>
+<div class="section level3">
+<h3 id="site-collection-info-pushed-to-elvislims-from-bio-track">Site collection info pushed to elvislims from Bio-Track<a class="anchor" aria-label="anchor" href="#site-collection-info-pushed-to-elvislims-from-bio-track"></a>
+</h3>
+<p>Just created this function and testing if it’s working</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/siteCollections.html">siteCollections</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: There was 1 warning in `dplyr::mutate()`.</span></span>
+<span><span class="co">#&gt; ℹ In argument: `storage_date = as.Date(ymd_hms(.data$storage_date))`.</span></span>
+<span><span class="co">#&gt; Caused by warning:</span></span>
+<span><span class="co">#&gt; !  2374 failed to parse.</span></span></code></pre></div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="future-kit-builds-and-biospecimen-collection-protocol">Future kit builds and biospecimen collection protocol<a class="anchor" aria-label="anchor" href="#future-kit-builds-and-biospecimen-collection-protocol"></a>
 </h2>
 <p>We can’t really use this information yet, because we do not have a clear estimate of the number of participants.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">biospecimen_collections</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/readCollections.html">readCollections</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">biospecimen_collections</span></span>
 <span><span class="co">#&gt; # A tibble: 27 × 29</span></span>
@@ -217,7 +228,7 @@
 </li>
 </ul>
 <p><strong>Speculative columns all contain the word “proportion” in the name:</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="sc">*</span> <span class="st">`</span><span class="at">proportion_from_kit_collected</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2025_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2026_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2027_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2028_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2029_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2030_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_obesity_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_chemphys_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_lifestyle_proportion</span><span class="st">`</span>.   </span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="sc">*</span> <span class="st">`</span><span class="at">proportion_from_kit_collected</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2025_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2026_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2027_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2028_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2029_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2030_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_obesity_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_chemphys_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_lifestyle_proportion</span><span class="st">`</span>.   </span></code></pre></div>
 </div>
 </div>
 <div class="section level1">
