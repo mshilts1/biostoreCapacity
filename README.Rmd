@@ -150,6 +150,16 @@ Eric Koplin has built an ARIMA model using the forecast package to predict when 
 single_arima()
 ```
 
+### Site collection info pushed to elvislims from Bio-Track
+
+Just created this function and testing if it's working
+
+```{r siteCollections}
+siteCollections()
+```
+
+
+
 ## Future kit builds and biospecimen collection protocol
 
 We can't really use this information yet, because we do not have a clear estimate of the number of participants.

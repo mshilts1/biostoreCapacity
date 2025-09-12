@@ -17,10 +17,12 @@ Imports:
     forecast,
     ggplot2,
     janitor,
+    jsonlite,
     lubridate,
     readxl,
     scales,
     stats,
+    stringr,
     tibble,
     tidyr,
     zoo
