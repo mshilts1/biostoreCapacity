@@ -131,6 +131,11 @@ longifyReadHistorical <- function(x = readHistorical(), total_or_prop = "total",
     x <- x %>% dplyr::mutate(tube_type = recode(.data$tube_type, "proportion_1.0" = "size 1.0mL", "proportion_1.9" = "size 1.9mL", "proportion_total" = "all sizes"))
     return(x)
   }
+  if(total_or_prop == "both"){
+    a <- tidyr::pivot_longer(x, cols = c("cumulative_1.0", "cumulative_1.9", "cumulative_total"), names_to = "tube_type", values_to = "total")
+    a <- a %>% dplyr::mutate(tube_type = recode(.data$tube_type, "cumulative_1.0" = "size 1.0mL", "cumulative_1.9" = "size 1.9mL", "cumulative_total" = "all sizes")) %>% dplyr::mutate("type" = "cumulative")
+    return(x)
+  }
 }
 #' Create a zoo ts object from historical data
 #' https://cran.r-project.org/web/packages/zoo/index.html

@@ -25,7 +25,7 @@ To estimate this, the data in the model should try to include:
 
 ✅ means we have that data.  
 ❌ means **WE AS THE LAB CORE** are missing (some of) that specific
-information, but it does exist!.
+information, but it does exist!
 
 ## What is the total BioStore II capacity?
 
@@ -38,7 +38,7 @@ where:
 | Component | Description |
 |---:|----|
 | $a$ | number of ECHO 1.0 ml tubes already collected (~200K as of September 2025) |
-| $x$ | number of 1.0 ml tubes still to be collected for ECHO. |
+| $x$ | number of 1.0 ml tubes still to be collected for ECHO |
 | $b$ | number of ECHO 1.9 ml tubes already collected (~210K as of September 2025) |
 | $y$ | number of 1.9 ml tubes still to be collected for ECHO |
 | 788,256 | absolute maximum number of 1.0 ml tubes that can be stored in the BioStore, if no 1.9 ml tubes |
@@ -125,17 +125,11 @@ library(biostoreCapacity)
 
 ### Historical data
 
-``` r
-historical_data <- readHistorical()
-historical_data_long <- longifyReadHistorical() # same thing as above, but in "long" format for easier plotting
-historical_data_long_proportions <- longifyReadHistorical(total_or_prop = "prop") # same as directly above, but proportions of freezer capacity instead of raw numbers
-```
-
 #### Plot rate of accessioning over time:
 
 ``` r
 library(ggplot2)
-ggplot(historical_data_long, aes(x = date, y = total, colour = tube_type)) +
+ggplot(longifyReadHistorical(), aes(x = date, y = total, colour = tube_type)) +
   geom_point() +
   geom_smooth() +
   theme_bw() +
@@ -166,6 +160,30 @@ ggplot(longifyReadHistorical(total_or_prop = "prop", add_pending = TRUE), aes(x 
 ```
 
 <img src="man/figures/README-plot_history_prop-1.png" width="100%" />
+
+``` r
+library(plotly)
+#> 
+#> Attaching package: 'plotly'
+#> The following object is masked from 'package:ggplot2':
+#> 
+#>     last_plot
+#> The following object is masked from 'package:stats':
+#> 
+#>     filter
+#> The following object is masked from 'package:graphics':
+#> 
+#>     layout
+p <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length)
+
+htmlwidgets::saveWidget(config(p, showLink = T), "graph.html")
+#> No trace type specified:
+#>   Based on info supplied, a 'scatter' trace seems appropriate.
+#>   Read more about this trace type -> https://plotly.com/r/reference/#scatter
+#> No scatter mode specifed:
+#>   Setting the mode to markers
+#>   Read more about this attribute -> https://plotly.com/r/reference/#scatter-mode
+```
 
 ### Eric Koplin’s ARIMA model
 
