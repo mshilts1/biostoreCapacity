@@ -148,7 +148,10 @@ a <- ggplot(longifyReadHistorical(total_or_prop = "both", add_pending = TRUE), a
   scale_color_brewer(name = "Tube Size", palette = "Set2")
 
 ggsave("my_plot.png", plot = a, dpi = 300)
+
 ```
+
+![My ggplot2 figure](my_plot.png)
 
 ### Eric Koplin's ARIMA model
 

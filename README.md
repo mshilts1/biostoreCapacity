@@ -132,6 +132,11 @@ the BioStore’s total inventory.
     #> Saving 7 x 5 in image
     #> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 
+<figure>
+<img src="my_plot.png" alt="My ggplot2 figure" />
+<figcaption aria-hidden="true">My ggplot2 figure</figcaption>
+</figure>
+
 ### Eric Koplin’s ARIMA model
 
 Eric Koplin has built an ARIMA model using the forecast package to
