@@ -65,8 +65,43 @@
 </h2>
 <p>The simplest equation for calculating BioStore capacity is:</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mn>196</mn><mo>,</mo><mn>412</mn><mo>+</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mn>788</mn><mo>,</mo><mn>256</mn></mrow></mfrac><mo>+</mo><mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mn>212</mn><mo>,</mo><mn>692</mn><mo>+</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mn>438</mn><mo>,</mo><mn>840</mn></mrow></mfrac><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\frac{(196,412 + x)}{788,256} + \frac{(212,692 + y)}{438,840} = 1</annotation></semantics></math></p>
-<p>where:<br>
-| Variable | Description| |—–:|—————| |<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>196</mn><mo>,</mo><mn>412</mn></mrow><annotation encoding="application/x-tex">196,412</annotation></semantics></math>|number of ECHO 1.0 ml tubes already stored (or pending) in the BioStore (as of 2025-09-02)|</p>
+<p>where:</p>
+<table class="table">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">Variable</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">“<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>196</mn><mo>,</mo><mn>412</mn></mrow><annotation encoding="application/x-tex">196,412</annotation></semantics></math>”</td>
+<td>number of ECHO 1.0 ml tubes already stored (or pending) in the BioStore (as of 2025-09-02)</td>
+</tr>
+<tr class="even">
+<td align="right"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math></td>
+<td>number of 1.0 ml tubes still to be collected for ECHO.</td>
+</tr>
+<tr class="odd">
+<td align="right"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>212</mn><mo>,</mo><mn>692</mn></mrow><annotation encoding="application/x-tex">212,692</annotation></semantics></math></td>
+<td>number of ECHO 1.9 ml tubes already stored (or pending) in the BioStore (as of 2025-09-02)</td>
+</tr>
+<tr class="even">
+<td align="right"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math></td>
+<td>number of 1.9 ml tubes still to be collected for ECHO</td>
+</tr>
+<tr class="odd">
+<td align="right"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>788</mn><mo>,</mo><mn>256</mn></mrow><annotation encoding="application/x-tex">788,256</annotation></semantics></math></td>
+<td>absolute maximum number of 1.0 ml tubes that can be stored in the BioStore (assuming 0 1.9 ml tubes)</td>
+</tr>
+<tr class="even">
+<td align="right"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>438</mn><mo>,</mo><mn>840</mn></mrow><annotation encoding="application/x-tex">438,840</annotation></semantics></math></td>
+<td>absolute maximum number of 1.0 ml tubes that can be stored in the BioStore (assuming 0 1.9 ml tubes)</td>
+</tr>
+</tbody>
+</table>
 <p>Both <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math> can increase, but as one increases the capacity for the other decreases. The total capacity cannot exceed 1, or 100%.</p>
 </div>
 <div class="section level2">
