@@ -133,8 +133,11 @@ longifyReadHistorical <- function(x = readHistorical(), total_or_prop = "total",
   }
   if(total_or_prop == "both"){
     a <- tidyr::pivot_longer(x, cols = c("cumulative_1.0", "cumulative_1.9", "cumulative_total"), names_to = "tube_type", values_to = "total")
-    a <- a %>% dplyr::mutate(tube_type = recode(.data$tube_type, "cumulative_1.0" = "size 1.0mL", "cumulative_1.9" = "size 1.9mL", "cumulative_total" = "all sizes")) %>% dplyr::mutate("type" = "cumulative")
-    return(x)
+    a <- a %>% dplyr::mutate(tube_type = recode(.data$tube_type, "cumulative_1.0" = "Size 1.0mL", "cumulative_1.9" = "Size 1.9mL", "cumulative_total" = "All")) %>% dplyr::mutate("type" = "Count") %>% select(-c("proportion_1.0", "proportion_1.9", "proportion_total"))
+    b <- tidyr::pivot_longer(x, cols = c("proportion_1.0", "proportion_1.9", "proportion_total"), names_to = "tube_type", values_to = "total")
+    b <- b %>% dplyr::mutate(tube_type = recode(.data$tube_type, "proportion_1.0" = "Size 1.0mL", "proportion_1.9" = "Size 1.9mL", "proportion_total" = "All")) %>% dplyr::mutate("type" = "Proportion") %>% select(-c("cumulative_1.0", "cumulative_1.9", "cumulative_total"))
+    c <- dplyr::bind_rows(a, b)
+    return(c)
   }
 }
 #' Create a zoo ts object from historical data

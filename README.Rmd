@@ -117,8 +117,9 @@ historical_data_long_proportions <- longifyReadHistorical(total_or_prop = "prop"
 
 #### Plot rate of accessioning over time:
 
-```{r plot_history}
+```{r plot_history, echo = FALSE}
 library(ggplot2)
+library(magrittr)
 ggplot(longifyReadHistorical(), aes(x = date, y = total, colour = tube_type)) +
   geom_point() +
   geom_smooth() +
@@ -133,24 +134,21 @@ ggplot(longifyReadHistorical(), aes(x = date, y = total, colour = tube_type)) +
 
 This includes "pending" tubes, which are tubes that are still at the sites but will be shipped here eventually and should be counted towards the BioStore's total inventory.    
 
-```{r plot_history_prop}
-ggplot(longifyReadHistorical(total_or_prop = "prop", add_pending = TRUE), aes(x = date, y = total, colour = tube_type)) +
+```{r plot_history_prop, echo = FALSE}
+library(ggplot2)
+library(magrittr)
+
+ggplot(longifyReadHistorical(total_or_prop = "both", add_pending = TRUE), aes(x = date, y = total, colour = tube_type)) +
   geom_point() +
   geom_smooth() +
   theme_bw() +
   ylab("Cumulative Proportion of BioStore Capacity Filled") +
   xlab("") +
   scale_x_date(date_breaks = "2 month", date_labels = "%b %y") + 
-  geom_hline(yintercept = 1)
+  facet_wrap(~type, scales = "free") + 
+  geom_hline(data = longifyReadHistorical(total_or_prop = "both", add_pending = TRUE) %>% filter("type" == "Proportion"), aes(yintercept = 1)) + 
+  scale_color_brewer(name = "Tube Size", palette = "Set2")
 ```
-
-```{r testestet}
-library(plotly)
-p <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length)
-
-htmlwidgets::saveWidget(config(p, showLink = T), "graph.html")
-```
-
 
 ### Eric Koplin's ARIMA model
 

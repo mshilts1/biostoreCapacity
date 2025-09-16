@@ -127,17 +127,7 @@ library(biostoreCapacity)
 
 #### Plot rate of accessioning over time:
 
-``` r
-library(ggplot2)
-ggplot(longifyReadHistorical(), aes(x = date, y = total, colour = tube_type)) +
-  geom_point() +
-  geom_smooth() +
-  theme_bw() +
-  ylab("Cumulative Tubes Submitted to BioStore") +
-  xlab("") +
-  scale_x_date(date_breaks = "2 month", date_labels = "%b %y")
-#> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
-```
+    #> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 
 <img src="man/figures/README-plot_history-1.png" width="100%" />
 
@@ -147,43 +137,9 @@ This includes “pending” tubes, which are tubes that are still at the
 sites but will be shipped here eventually and should be counted towards
 the BioStore’s total inventory.
 
-``` r
-ggplot(longifyReadHistorical(total_or_prop = "prop", add_pending = TRUE), aes(x = date, y = total, colour = tube_type)) +
-  geom_point() +
-  geom_smooth() +
-  theme_bw() +
-  ylab("Cumulative Proportion of BioStore Capacity Filled") +
-  xlab("") +
-  scale_x_date(date_breaks = "2 month", date_labels = "%b %y") + 
-  geom_hline(yintercept = 1)
-#> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
-```
+    #> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 
 <img src="man/figures/README-plot_history_prop-1.png" width="100%" />
-
-``` r
-library(plotly)
-#> 
-#> Attaching package: 'plotly'
-#> The following object is masked from 'package:ggplot2':
-#> 
-#>     last_plot
-#> The following object is masked from 'package:stats':
-#> 
-#>     filter
-#> The following object is masked from 'package:graphics':
-#> 
-#>     layout
-p <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length)
-
-htmlwidgets::saveWidget(config(p, showLink = T), "graph.html")
-#> No trace type specified:
-#>   Based on info supplied, a 'scatter' trace seems appropriate.
-#>   Read more about this trace type -> https://plotly.com/r/reference/#scatter
-#> No scatter mode specifed:
-#>   Setting the mode to markers
-#>   Read more about this attribute -> https://plotly.com/r/reference/#scatter-mode
-```
 
 ### Eric Koplin’s ARIMA model
 
