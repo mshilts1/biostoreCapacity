@@ -171,9 +171,11 @@
 <p><img src="reference/figures/README-arima-1.png" width="100%"></p>
 </div>
 <div class="section level3">
-<h3 id="site-collection-info-pushed-to-elvislims-from-bio-track">Site collection info pushed to elvislims from Bio-Track<a class="anchor" aria-label="anchor" href="#site-collection-info-pushed-to-elvislims-from-bio-track"></a>
+<h3 id="site-collection-information-for-model-priors-and-adjustments">Site collection information for model priors and adjustments<a class="anchor" aria-label="anchor" href="#site-collection-information-for-model-priors-and-adjustments"></a>
 </h3>
-<p>Just created this function and testing if it’s working</p>
+<p>I’ve created a function which will get the data from elvislims from Bio-Track with all site collections, and information from REDCap about which specialized collections each site’s PI signed up for.</p>
+<p>Both sets of data can only be accessed by someone with the correct credentials on both sites, and so are not publicly available here or anywhere else.</p>
+<p>The data gets merged, processed, cleaned, and all potentially identifiable data is removed. Site ID is replaced by a randomized ID, so we can get SOME idea about enrollment numbers by site, but the actual site ID can’t be pulled from this data. (Yes, someone who is already extremely knowledgable about the operations of ECHO Cycle 2 could probably figure out sites from the data, but that type of person would already have access to the full data.)</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/site_collections.html">site_collections</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 204,017 × 16</span></span>
@@ -224,7 +226,7 @@
 <span><span class="co">#&gt; #   y_2025_proportion &lt;dbl&gt;, y_2026_proportion &lt;dbl&gt;, y_2027_proportion &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   y_2028_proportion &lt;dbl&gt;, y_2029_proportion &lt;dbl&gt;, y_2030_proportion &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   specialized_obesity &lt;chr&gt;, specialized_obesity_proportion &lt;chr&gt;, …</span></span></code></pre></div>
-<p><strong>Information in <code><a href="reference/readCollections.html">readCollections()</a></code> that can be assumed to be “true” and constant for the sake of building the model:</strong></p>
+<p><strong>Information in <code><a href="reference/readCollections.html">readCollections()</a></code> that can be assumed to be “true” for the sake of building the model:</strong></p>
 <ul>
 <li>All columns with information about the kit builds:
 <ul>
@@ -242,10 +244,11 @@
 </ul>
 <p><strong>Speculative columns all contain the word “proportion” in the name:</strong></p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="sc">*</span> <span class="st">`</span><span class="at">proportion_from_kit_collected</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2025_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2026_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2027_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2028_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2029_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2030_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_obesity_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_chemphys_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_lifestyle_proportion</span><span class="st">`</span>.   </span></code></pre></div>
+<hr>
 </div>
 </div>
 <div class="section level1">
-<h1 id="only-read-below-if-you-want-more-details">Only read below if you want more details<a class="anchor" aria-label="anchor" href="#only-read-below-if-you-want-more-details"></a>
+<h1 id="only-read-below-if-you-want-more-details">Only read below if you want more details!<a class="anchor" aria-label="anchor" href="#only-read-below-if-you-want-more-details"></a>
 </h1>
 <p>A more thorough description of every column in <code><a href="reference/readCollections.html">readCollections()</a></code>:</p>
 <ol style="list-style-type: decimal">
