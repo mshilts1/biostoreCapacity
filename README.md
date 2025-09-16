@@ -37,7 +37,7 @@ where:
 
 | Variable | Description |
 |---:|----|
-| $196,412$ | number of ECHO 1.0 ml tubes already stored (or pending) in the BioStore (as of 2025-09-02) |
+| “$196,412$” | number of ECHO 1.0 ml tubes already stored (or pending) in the BioStore (as of 2025-09-02) |
 | $x$ | number of 1.0 ml tubes still to be collected for ECHO. |
 | $212,692$ | number of ECHO 1.9 ml tubes already stored (or pending) in the BioStore (as of 2025-09-02) |
 | $y$ | number of 1.9 ml tubes still to be collected for ECHO |
