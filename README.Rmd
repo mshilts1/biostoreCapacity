@@ -40,10 +40,16 @@ The simplest equation for calculating BioStore capacity is:
 $$\frac{(196,412 + x)}{788,256} + \frac{(212,692 + y)}{438,840} = 1$$
 
 
-where:        
-| Variable | Description|
-|-----:|---------------|
+where:    
 
+| Variable | Description |
+|-----:|---------------|
+|$196,412$|number of ECHO 1.0 ml tubes already stored (or pending) in the BioStore (as of 2025-09-02)|
+|$x$|number of 1.0 ml tubes still to be collected for ECHO.|
+|$212,692$|number of ECHO 1.9 ml tubes already stored (or pending) in the BioStore (as of 2025-09-02)|
+|$y$|number of 1.9 ml tubes still to be collected for ECHO|
+|$788,256$|absolute maximum number of 1.0 ml tubes that can be stored in the BioStore (assuming 0 1.9 ml tubes)|
+|$438,840$|absolute maximum number of 1.0 ml tubes that can be stored in the BioStore (assuming 0 1.9 ml tubes)|
 
 Both $x$ and $y$ can increase, but as one increases the capacity for the other decreases. The total capacity cannot exceed 1, or 100%.
 
