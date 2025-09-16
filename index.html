@@ -157,17 +157,10 @@
 <p><img src="reference/figures/plot_history.png"></p>
 </div>
 <div class="section level3">
-<h3 id="eric-koplins-arima-model">Eric Koplin’s ARIMA model<a class="anchor" aria-label="anchor" href="#eric-koplins-arima-model"></a>
-</h3>
-<p>Eric Koplin has built an ARIMA model using the forecast package to predict when the BioStore would be full based on the historical rate of filling:</p>
-<p><img src="reference/figures/single_arima.png"></p>
-</div>
-<div class="section level3">
 <h3 id="eric-koplins-brms-model-fit-bayesian-generalized-non-linear-multivariate-multilevel-models">Eric Koplin’s BRMS model (Fit Bayesian Generalized (Non-)Linear Multivariate Multilevel Models)<a class="anchor" aria-label="anchor" href="#eric-koplins-brms-model-fit-bayesian-generalized-non-linear-multivariate-multilevel-models"></a>
 </h3>
-<p>Eric Koplin has built an ARIMA model using the forecast package to predict when the BioStore would be full based on the historical rate of filling:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#single_brms_growth()</span></span></code></pre></div>
+<p>Eric Koplin has built a BRMS model using the forecast package to predict when the BioStore would be full based on the historical rate of filling and added some covariates:</p>
+<p><img src="reference/figures/single_brms_growth.png"></p>
 </div>
 <div class="section level3">
 <h3 id="site-collection-information-for-model-priors-and-adjustments">Site collection information for model priors and adjustments<a class="anchor" aria-label="anchor" href="#site-collection-information-for-model-priors-and-adjustments"></a>
@@ -175,7 +168,7 @@
 <p>I’ve created a function which will get the data from elvislims from Bio-Track with all site collections, and information from REDCap about which specialized collections each site’s PI signed up for.</p>
 <p>Both sets of data can only be accessed by someone with the correct credentials on both sites, and so are not publicly available here or anywhere else.</p>
 <p>The data gets merged, processed, cleaned, and all potentially identifiable data is removed. Site ID is replaced by a randomized ID, so we can get SOME idea about enrollment numbers by site, but the actual site ID can’t be pulled from this data. (Yes, someone who is already extremely knowledgable about the operations of ECHO Cycle 2 could probably figure out sites from the data, but that type of person would already have access to the full data.)</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/site_collections.html">site_collections</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 204,017 × 16</span></span>
 <span><span class="co">#&gt;    site_id_randomized               number_of_containers container_type capacity</span></span>
@@ -202,7 +195,7 @@
 <h2 id="future-kit-builds-and-biospecimen-collection-protocol">Future kit builds and biospecimen collection protocol<a class="anchor" aria-label="anchor" href="#future-kit-builds-and-biospecimen-collection-protocol"></a>
 </h2>
 <p>We can’t really use this information yet, because we do not have a clear estimate of the number of participants.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">biospecimen_collections</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/readCollections.html">readCollections</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">biospecimen_collections</span></span>
 <span><span class="co">#&gt; # A tibble: 27 × 29</span></span>
@@ -242,7 +235,7 @@
 </li>
 </ul>
 <p><strong>Speculative columns all contain the word “proportion” in the name:</strong></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="sc">*</span> <span class="st">`</span><span class="at">proportion_from_kit_collected</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2025_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2026_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2027_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2028_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2029_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2030_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_obesity_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_chemphys_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_lifestyle_proportion</span><span class="st">`</span>.   </span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="sc">*</span> <span class="st">`</span><span class="at">proportion_from_kit_collected</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2025_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2026_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2027_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2028_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2029_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2030_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_obesity_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_chemphys_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_lifestyle_proportion</span><span class="st">`</span>.   </span></code></pre></div>
 <hr>
 </div>
 </div>
