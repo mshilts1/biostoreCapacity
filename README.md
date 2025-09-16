@@ -132,7 +132,7 @@ the BioStore’s total inventory.
     #> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 
 <figure>
-<img src="my_plot.png" alt="My ggplot2 figure" />
+<img src="man/figures/my_plot.png" alt="My ggplot2 figure" />
 <figcaption aria-hidden="true">My ggplot2 figure</figcaption>
 </figure>
 
