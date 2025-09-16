@@ -196,9 +196,14 @@ ___
 A more thorough description of every column in `readCollections()`:
 
 ```{r readcollection}
-readcollectionsdescriptions() 
+
 ```
 
+| Variable | Description |
+|-----:|---------------|
+|collection_id|a unique ID. a concatenation of kit_type, tube_size, visit, and specimen_type|
+|kit_type|concatenation of biospecimen_type and participant|
+|     3|               |
 
 
 Green checkmark (✅ ) means we have that data, a yellow dot (🟡) means it's speculative estimated data that we can kind of guess at, while a red x (❌ ) means **WE AS THE LAB CORE** are missing that specific information but it does exist.  
