@@ -151,7 +151,7 @@ ggsave("man/figures/plot_history.png", plot = a, dpi = 300, width = 7, height = 
 
 ```
 
-
+![](man/figures/plot_history.png)
 
 ### Eric Koplin's ARIMA model
 
@@ -163,7 +163,7 @@ ggsave("man/figures/single_arima.png", plot = a, dpi = 300, width = 7, height = 
 
 ```
 
-
+![](man/figures/single_arima.png)
 
 ### Eric Koplin's BRMS model (Fit Bayesian Generalized (Non-)Linear Multivariate Multilevel Models)
 
