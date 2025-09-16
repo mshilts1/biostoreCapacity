@@ -179,9 +179,23 @@ single_arima()
 
 <img src="man/figures/README-arima-1.png" width="100%" />
 
-### Site collection info pushed to elvislims from Bio-Track
+### Site collection information for model priors and adjustments
 
-Just created this function and testing if it’s working
+I’ve created a function which will get the data from elvislims from
+Bio-Track with all site collections, and information from REDCap about
+which specialized collections each site’s PI signed up for.
+
+Both sets of data can only be accessed by someone with the correct
+credentials on both sites, and so are not publicly available here or
+anywhere else.
+
+The data gets merged, processed, cleaned, and all potentially
+identifiable data is removed. Site ID is replaced by a randomized ID, so
+we can get SOME idea about enrollment numbers by site, but the actual
+site ID can’t be pulled from this data. (Yes, someone who is already
+extremely knowledgable about the operations of ECHO Cycle 2 could
+probably figure out sites from the data, but that type of person would
+already have access to the full data.)
 
 ``` r
 site_collections()
@@ -237,7 +251,7 @@ biospecimen_collections
 ```
 
 **Information in `readCollections()` that can be assumed to be “true”
-and constant for the sake of building the model:**
+for the sake of building the model:**
 
 - All columns with information about the kit builds:
   - `collection_id`, `kit_type`, `biospecimen_type`, `participant`,
@@ -251,7 +265,9 @@ and constant for the sake of building the model:**
 
     * `proportion_from_kit_collected`, `y_2025_proportion`, `y_2026_proportion`, `y_2027_proportion`, `y_2028_proportion`, `y_2029_proportion`, `y_2030_proportion`, `specialized_obesity_proportion`, `specialized_chemphys_proportion`, `specialized_lifestyle_proportion`.   
 
-# Only read below if you want more details
+------------------------------------------------------------------------
+
+# Only read below if you want more details!
 
 A more thorough description of every column in `readCollections()`:
 
