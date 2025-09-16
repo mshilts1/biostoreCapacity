@@ -115,10 +115,7 @@ anyone to use, but I will still keep the source code transparent on
 GitHub.
 
 ``` r
-suppressWarnings(library(biostoreCapacity))
-#> Registered S3 method overwritten by 'quantmod':
-#>   method            from
-#>   as.zoo.data.frame zoo
+suppressPackageStartupMessages(library(biostoreCapacity))
 ```
 
 ## Plot Historical Data

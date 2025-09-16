@@ -102,7 +102,7 @@ pak::pak("mshilts1/biostoreCapacity")
 Eventually, I'm going to *attempt* to put this on Shiny so it's easy for anyone to use, but I will still keep the source code transparent on GitHub. 
 
 ```{r example}
-suppressWarnings(library(biostoreCapacity))
+suppressPackageStartupMessages(library(biostoreCapacity))
 ```
 
 ## Plot Historical Data
