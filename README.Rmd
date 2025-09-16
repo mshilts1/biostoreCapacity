@@ -135,7 +135,7 @@ This includes "pending" tubes, which are tubes that are still at the sites but w
 library(ggplot2)
 library(magrittr)
 
-ggplot(longifyReadHistorical(total_or_prop = "both", add_pending = TRUE), aes(x = date, y = total, colour = tube_type)) +
+a <- ggplot(longifyReadHistorical(total_or_prop = "both", add_pending = TRUE), aes(x = date, y = total, colour = tube_type)) +
   geom_point() +
   geom_smooth() +
   theme_bw() +
@@ -146,6 +146,8 @@ ggplot(longifyReadHistorical(total_or_prop = "both", add_pending = TRUE), aes(x 
   facet_wrap(~type, scales = "free") + 
   geom_hline(data = longifyReadHistorical(total_or_prop = "both", add_pending = TRUE) %>% filter("type" == "Proportion"), aes(yintercept = 1)) + 
   scale_color_brewer(name = "Tube Size", palette = "Set2")
+
+ggsave("my_plot.png", plot = a, dpi = 300)
 ```
 
 ### Eric Koplin's ARIMA model
@@ -161,7 +163,7 @@ single_arima()
 Eric Koplin has built an ARIMA model using the forecast package to predict when the BioStore would be full based on the historical rate of filling:
 
 ```{r brms}
-single_brms_growth()
+#single_brms_growth()
 ```
 
 ### Site collection information for model priors and adjustments
