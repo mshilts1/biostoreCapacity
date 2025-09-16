@@ -37,21 +37,21 @@ To estimate this, the data in the model should try to include:
 
 The simplest equation for calculating BioStore capacity is:    
 
-$$\frac{(196,412 + x)}{788,256} + \frac{(212,692 + y)}{438,840} = 1$$
+$$\frac{(a + x)}{788,256} + \frac{(b + y)}{438,840} = 1$$
 
 
 where:    
 
-| Equation Component | Description |
+|Component|Description|
 |-----:|---------------|
-|196,412|number of ECHO 1.0 ml tubes already stored (or pending) in the BioStore (as of 2025-09-02)|
+|$a$|number of ECHO 1.0 ml tubes already collected (~200K as of September 2025)|
 |$x$|number of 1.0 ml tubes still to be collected for ECHO.|
-|212,692|number of ECHO 1.9 ml tubes already stored (or pending) in the BioStore (as of 2025-09-02)|
+|$b$|number of ECHO 1.9 ml tubes already collected (~210K as of September 2025) |
 |$y$|number of 1.9 ml tubes still to be collected for ECHO|
-|788,256|absolute maximum number of 1.0 ml tubes that can be stored in the BioStore (assuming 0 1.9 ml tubes)|
-|438,840|absolute maximum number of 1.0 ml tubes that can be stored in the BioStore (assuming 0 1.9 ml tubes)|
+|788,256|absolute maximum number of 1.0 ml tubes that can be stored in the BioStore, if no 1.9 ml tubes|
+|438,840|absolute maximum number of 1.9 ml tubes that can be stored in the BioStore, if no 1.0 ml tubes|
 
-Both $x$ and $y$ can increase, but as one increases the capacity for the other decreases. The total capacity cannot exceed 1, or 100%.
+Both $x$ and $y$ will continue to increase, but as one increases, the capacity for the other decreases. The total capacity cannot exceed 1, or 100%.
 
 ## What should go into the forecast model of when the BioStore will be at capacity?
 
