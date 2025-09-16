@@ -156,6 +156,14 @@ Eric Koplin has built an ARIMA model using the forecast package to predict when 
 single_arima()
 ```
 
+### Eric Koplin's BRMS model (Fit Bayesian Generalized (Non-)Linear Multivariate Multilevel Models)
+
+Eric Koplin has built an ARIMA model using the forecast package to predict when the BioStore would be full based on the historical rate of filling:
+
+```{r brms}
+single_brms_growth()
+```
+
 ### Site collection information for model priors and adjustments
 
 I've created a function which will get the data from elvislims from Bio-Track with all site collections, and information from REDCap about which specialized collections each site's PI signed up for.    
