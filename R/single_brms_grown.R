@@ -21,15 +21,13 @@
 #' # res <- single_brms_growth()
 #' # res$mean_cross_date; res$upper_cross_date; res$plot
 single_brms_growth <- function(
-  horizon = 12,
-  chains = 2,
-  iter = 2000,
-  seed = 123
-) {
-
+    horizon = 12,
+    chains = 2,
+    iter = 2000,
+    seed = 123) {
   # ---- 1) Load history and compute the same covariates used in single_arima() ----
   hist <- readHistorical()
-  init_1ml   <- 196412 - hist$cumulative_1.0[nrow(hist)]
+  init_1ml <- 196412 - hist$cumulative_1.0[nrow(hist)]
   init_1.9ml <- 212692 - hist$cumulative_1.9[nrow(hist)]
 
   hist_init <- hist %>%
@@ -39,11 +37,11 @@ single_brms_growth <- function(
       cumulative_1.9 = .data$cumulative_1.9 + init_1.9ml,
       capacity_1.0_ml = .data$cumulative_1.0 / 788256,
       capacity_1.9_ml = .data$cumulative_1.9 / 438840,
-      total_capacity  = .data$capacity_1.0_ml + .data$capacity_1.9_ml,
+      total_capacity = .data$capacity_1.0_ml + .data$capacity_1.9_ml,
       prop_1ml = .data$tubes_1.0_ml / (.data$tubes_1.0_ml + .data$tubes_1.9_ml),
       prop_1ml = dplyr::if_else(is.na(.data$prop_1ml), 0, .data$prop_1ml),
       # prior on how many will return from each site
-      total_submitted_capacity = 0.5*.data$total_submitted/788256 + 0.5*.data$total_submitted/438840
+      total_submitted_capacity = 0.5 * .data$total_submitted / 788256 + 0.5 * .data$total_submitted / 438840
     ) %>%
     # NOTE: use bare names in select() to avoid tidyselect .data warning
     dplyr::select(date, total_capacity, prop_1ml, total_submitted_capacity) %>%
@@ -56,7 +54,7 @@ single_brms_growth <- function(
       t_raw = as.numeric(.data$date - t0)
     )
   center_t <- mean(hist_init$t_raw, na.rm = TRUE)
-  scale_t  <- stats::sd(hist_init$t_raw, na.rm = TRUE)
+  scale_t <- stats::sd(hist_init$t_raw, na.rm = TRUE)
   if (!is.finite(scale_t) || scale_t <= 0) scale_t <- 1
   hist_init <- hist_init %>%
     dplyr::mutate(t = (.data$t_raw - center_t) / scale_t)
@@ -66,17 +64,17 @@ single_brms_growth <- function(
 
   fit_prop <- brms::brm(
     formula = prop_1ml ~ s(t, k = 10),
-    data    = hist_init,
-    family  = stats::gaussian(),
-    chains  = chains, iter = iter, seed = seed,
+    data = hist_init,
+    family = stats::gaussian(),
+    chains = chains, iter = iter, seed = seed,
     refresh = 0
   )
 
   fit_sub <- brms::brm(
     formula = total_submitted_capacity ~ s(t, k = 10),
-    data    = hist_init,
-    family  = stats::gaussian(),
-    chains  = chains, iter = iter, seed = seed,
+    data = hist_init,
+    family = stats::gaussian(),
+    chains = chains, iter = iter, seed = seed,
     refresh = 0
   )
 
@@ -96,35 +94,35 @@ single_brms_growth <- function(
 
   # ---- 5) Posterior draws for the covariates on the future grid ----
   prop_draws <- brms::posterior_epred(fit_prop, newdata = future, re_formula = NA) # S1 x T
-  sub_draws  <- brms::posterior_epred(fit_sub,  newdata = future, re_formula = NA) # S2 x T
+  sub_draws <- brms::posterior_epred(fit_sub, newdata = future, re_formula = NA) # S2 x T
 
   # ---- 6) Nonlinear growth curve for total capacity (logistic) ----
   # total_capacity = Asym / (1 + exp((xmid - t)/scal))
   # xmid is shifted by the covariates.
   growth_bf <- brms::bf(
-    total_capacity ~ Asym/(1 + exp((xmid - t)/scal)),
+    total_capacity ~ Asym / (1 + exp((xmid - t) / scal)),
     Asym ~ 1,
     xmid ~ 1 + prop_1ml + total_submitted_capacity,
     scal ~ 1,
-    nl   = TRUE
+    nl = TRUE
   )
 
   # Priors with scaled time (t ~ roughly N(0,1))
   growth_priors <- c(
     brms::set_prior("normal(1, 0.05)", nlpar = "Asym", lb = 0.5),
-    brms::set_prior("normal(0, 1)",    nlpar = "xmid", coef = "Intercept"),
-    brms::set_prior("normal(0, 1)",    nlpar = "xmid", coef = "prop_1ml"),
-    brms::set_prior("normal(0, 1)",    nlpar = "xmid", coef = "total_submitted_capacity"),
-    brms::set_prior("normal(1, 0.5)",  nlpar = "scal", lb = 0.1)
+    brms::set_prior("normal(0, 1)", nlpar = "xmid", coef = "Intercept"),
+    brms::set_prior("normal(0, 1)", nlpar = "xmid", coef = "prop_1ml"),
+    brms::set_prior("normal(0, 1)", nlpar = "xmid", coef = "total_submitted_capacity"),
+    brms::set_prior("normal(1, 0.5)", nlpar = "scal", lb = 0.1)
   )
 
   fit_total <- brms::brm(
     formula = growth_bf,
-    data    = hist_init,
-    family  = stats::gaussian(),
-    prior   = growth_priors,
+    data = hist_init,
+    family = stats::gaussian(),
+    prior = growth_priors,
     control = list(adapt_delta = 0.995, max_treedepth = 12),
-    chains  = chains, iter = iter, seed = seed,
+    chains = chains, iter = iter, seed = seed,
     refresh = 0
   )
 
@@ -145,14 +143,14 @@ single_brms_growth <- function(
 
     pred_s <- brms::posterior_epred(
       fit_total,
-      newdata   = newdata_s,
-      draw_ids  = s,
+      newdata = newdata_s,
+      draw_ids = s,
       re_formula = NA
     )
     total_draws[s, ] <- as.numeric(pred_s)
   }
 
-  pred_mean  <- colMeans(total_draws)
+  pred_mean <- colMeans(total_draws)
   pred_lower <- apply(total_draws, 2, stats::quantile, 0.025)
   pred_upper <- apply(total_draws, 2, stats::quantile, 0.975)
 
@@ -162,9 +160,9 @@ single_brms_growth <- function(
   )
 
   # ---- 8) First dates where the mean and 95% upper intervals cross capacity = 1 ----
-  idx_mean  <- which(forecast_df$mean  >= 1)[1]
+  idx_mean <- which(forecast_df$mean >= 1)[1]
   idx_upper <- which(forecast_df$upper >= 1)[1]
-  mean_cross_date  <- if (!is.na(idx_mean))  forecast_df$date[idx_mean]  else as.Date(NA)
+  mean_cross_date <- if (!is.na(idx_mean)) forecast_df$date[idx_mean] else as.Date(NA)
   upper_cross_date <- if (!is.na(idx_upper)) forecast_df$date[idx_upper] else as.Date(NA)
 
   # ---- 9) Plot (observed + forecast with ribbon) and annotate crossings ----
@@ -202,10 +200,10 @@ single_brms_growth <- function(
   # ---- 10) Return compact outputs similar to the ARIMA function ----
   list(
     fit_total = fit_total,
-    fit_prop  = fit_prop,
-    fit_sub   = fit_sub,
-    forecast  = forecast_df,
-    mean_cross_date  = mean_cross_date,
+    fit_prop = fit_prop,
+    fit_sub = fit_sub,
+    forecast = forecast_df,
+    mean_cross_date = mean_cross_date,
     upper_cross_date = upper_cross_date,
     plot = p
   )

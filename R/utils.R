@@ -31,9 +31,13 @@ readKBExcel <- function(x = "calculator_for_Suman.xlsx") {
 #'
 #' @examples
 #' capacityNumbers()
-capacityNumbers <- function(x = readKBExcel()){
-  tubes_1.0ml <- x %>% filter(.data$x2d_tubes_ml == "fluid_x_1_0m_l_tube") %>% pull(.data$tube_capacity_one_bank)
-  tubes_1.9ml <- x %>% filter(.data$x2d_tubes_ml == "x1_9m_l_capped_vial") %>% pull(.data$tube_capacity_one_bank)
+capacityNumbers <- function(x = readKBExcel()) {
+  tubes_1.0ml <- x %>%
+    filter(.data$x2d_tubes_ml == "fluid_x_1_0m_l_tube") %>%
+    pull(.data$tube_capacity_one_bank)
+  tubes_1.9ml <- x %>%
+    filter(.data$x2d_tubes_ml == "x1_9m_l_capped_vial") %>%
+    pull(.data$tube_capacity_one_bank)
   return(list("tubes_1.0ml_max_capacity" = tubes_1.0ml, "tubes_1.9ml_max_capacity" = tubes_1.9ml))
 }
 #' Pending numbers
@@ -45,9 +49,13 @@ capacityNumbers <- function(x = readKBExcel()){
 #'
 #' @examples
 #' pendingNumbers()
-pendingNumbers <- function(x = readKBExcel()){
-  tubes_1.0ml <- x %>% filter(.data$x2d_tubes_ml == "fluid_x_1_0m_l_tube") %>% pull(.data$pending_per_suchi)
-  tubes_1.9ml <- x %>% filter(.data$x2d_tubes_ml == "x1_9m_l_capped_vial") %>% pull(.data$pending_per_suchi)
+pendingNumbers <- function(x = readKBExcel()) {
+  tubes_1.0ml <- x %>%
+    filter(.data$x2d_tubes_ml == "fluid_x_1_0m_l_tube") %>%
+    pull(.data$pending_per_suchi)
+  tubes_1.9ml <- x %>%
+    filter(.data$x2d_tubes_ml == "x1_9m_l_capped_vial") %>%
+    pull(.data$pending_per_suchi)
   return(list("tubes_1.0ml_pending" = tubes_1.0ml, "tubes_1.9ml_pending" = tubes_1.9ml))
 }
 #' Load in a file with current biospecimen collection protocol and timeline
@@ -89,18 +97,18 @@ readHistorical <- function(x = "suchi_bam_submissions.csv") {
   x$cumulative_1.0 <- cumsum(x$tubes_1.0_ml)
   x$cumulative_1.9 <- cumsum(x$tubes_1.9_ml)
   x$cumulative_total <- x$cumulative_1.0 + x$cumulative_1.9
-  x$proportion_1.0 <- x$cumulative_1.0/capacityNumbers()$tubes_1.0ml_max_capacity
-  x$proportion_1.9 <- x$cumulative_1.9/capacityNumbers()$tubes_1.9ml_max_capacity
+  x$proportion_1.0 <- x$cumulative_1.0 / capacityNumbers()$tubes_1.0ml_max_capacity
+  x$proportion_1.9 <- x$cumulative_1.9 / capacityNumbers()$tubes_1.9ml_max_capacity
   x$proportion_total <- x$proportion_1.0 + x$proportion_1.9
   x
 }
-addPending <- function(x = readHistorical(), y = pendingNumbers()){
-  x <- x %>% add_row(date = ymd("2025-09-11"), total_submitted = y$tubes_1.9ml_pending + y$tubes_1.0ml_pending,  tubes_1.9_ml = y$tubes_1.9ml_pending, tubes_1.0_ml = y$tubes_1.0ml_pending)
+addPending <- function(x = readHistorical(), y = pendingNumbers()) {
+  x <- x %>% add_row(date = ymd("2025-09-11"), total_submitted = y$tubes_1.9ml_pending + y$tubes_1.0ml_pending, tubes_1.9_ml = y$tubes_1.9ml_pending, tubes_1.0_ml = y$tubes_1.0ml_pending)
   x$cumulative_1.0 <- cumsum(x$tubes_1.0_ml)
   x$cumulative_1.9 <- cumsum(x$tubes_1.9_ml)
   x$cumulative_total <- x$cumulative_1.0 + x$cumulative_1.9
-  x$proportion_1.0 <- x$cumulative_1.0/capacityNumbers()$tubes_1.0ml_max_capacity
-  x$proportion_1.9 <- x$cumulative_1.9/capacityNumbers()$tubes_1.9ml_max_capacity
+  x$proportion_1.0 <- x$cumulative_1.0 / capacityNumbers()$tubes_1.0ml_max_capacity
+  x$proportion_1.9 <- x$cumulative_1.9 / capacityNumbers()$tubes_1.9ml_max_capacity
   x$proportion_total <- x$proportion_1.0 + x$proportion_1.9
   x
 }
@@ -117,25 +125,31 @@ addPending <- function(x = readHistorical(), y = pendingNumbers()){
 #' longifyReadHistorical() # cumulative totals as raw numbers
 #' longifyReadHistorical(total_or_prop = "prop") # cumulative total as a proportion of freezer capacity
 longifyReadHistorical <- function(x = readHistorical(), total_or_prop = "total", add_pending = FALSE) {
-  if(add_pending == TRUE){
+  if (add_pending == TRUE) {
     x <- addPending()
   }
 
-  if(total_or_prop == "total"){
-  x <- tidyr::pivot_longer(x, cols = c("cumulative_1.0", "cumulative_1.9", "cumulative_total"), names_to = "tube_type", values_to = "total")
-  x <- x %>% dplyr::mutate(tube_type = recode(.data$tube_type, "cumulative_1.0" = "size 1.0mL", "cumulative_1.9" = "size 1.9mL", "cumulative_total" = "all sizes"))
-  return(x)
+  if (total_or_prop == "total") {
+    x <- tidyr::pivot_longer(x, cols = c("cumulative_1.0", "cumulative_1.9", "cumulative_total"), names_to = "tube_type", values_to = "total")
+    x <- x %>% dplyr::mutate(tube_type = recode(.data$tube_type, "cumulative_1.0" = "size 1.0mL", "cumulative_1.9" = "size 1.9mL", "cumulative_total" = "all sizes"))
+    return(x)
   }
-  if(total_or_prop == "prop"){
+  if (total_or_prop == "prop") {
     x <- tidyr::pivot_longer(x, cols = c("proportion_1.0", "proportion_1.9", "proportion_total"), names_to = "tube_type", values_to = "total")
     x <- x %>% dplyr::mutate(tube_type = recode(.data$tube_type, "proportion_1.0" = "size 1.0mL", "proportion_1.9" = "size 1.9mL", "proportion_total" = "all sizes"))
     return(x)
   }
-  if(total_or_prop == "both"){
+  if (total_or_prop == "both") {
     a <- tidyr::pivot_longer(x, cols = c("cumulative_1.0", "cumulative_1.9", "cumulative_total"), names_to = "tube_type", values_to = "total")
-    a <- a %>% dplyr::mutate(tube_type = recode(.data$tube_type, "cumulative_1.0" = "Size 1.0mL", "cumulative_1.9" = "Size 1.9mL", "cumulative_total" = "All")) %>% dplyr::mutate("type" = "Count") %>% select(-c("proportion_1.0", "proportion_1.9", "proportion_total"))
+    a <- a %>%
+      dplyr::mutate(tube_type = recode(.data$tube_type, "cumulative_1.0" = "Size 1.0mL", "cumulative_1.9" = "Size 1.9mL", "cumulative_total" = "All")) %>%
+      dplyr::mutate("type" = "Count") %>%
+      select(-c("proportion_1.0", "proportion_1.9", "proportion_total"))
     b <- tidyr::pivot_longer(x, cols = c("proportion_1.0", "proportion_1.9", "proportion_total"), names_to = "tube_type", values_to = "total")
-    b <- b %>% dplyr::mutate(tube_type = recode(.data$tube_type, "proportion_1.0" = "Size 1.0mL", "proportion_1.9" = "Size 1.9mL", "proportion_total" = "All")) %>% dplyr::mutate("type" = "Proportion") %>% select(-c("cumulative_1.0", "cumulative_1.9", "cumulative_total"))
+    b <- b %>%
+      dplyr::mutate(tube_type = recode(.data$tube_type, "proportion_1.0" = "Size 1.0mL", "proportion_1.9" = "Size 1.9mL", "proportion_total" = "All")) %>%
+      dplyr::mutate("type" = "Proportion") %>%
+      select(-c("cumulative_1.0", "cumulative_1.9", "cumulative_total"))
     c <- dplyr::bind_rows(a, b)
     return(c)
   }
@@ -253,10 +267,10 @@ forecastBioStoreCapacity <- function() {
 #'
 #' @examples
 #' site_collections()
-site_collections <- function(x = "deidentified_specimen_collection.csv"){
+site_collections <- function(x = "deidentified_specimen_collection.csv") {
   path <- system.file("extdata", x, package = "biostoreCapacity", mustWork = TRUE)
   x <- utils::read.csv(file = path, header = TRUE)
   x <- tibble::as_tibble(x)
-  #x$date <- lubridate::ymd(x$date)
+  # x$date <- lubridate::ymd(x$date)
   x
 }

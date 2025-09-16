@@ -126,8 +126,6 @@ This includes “pending” tubes, which are tubes that are still at the
 sites but will be shipped here eventually and should be counted towards
 the BioStore’s total inventory.
 
-    #> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
-
 <figure>
 <img src="man/figures/my_plot.png" alt="My ggplot2 figure" />
 <figcaption aria-hidden="true">My ggplot2 figure</figcaption>
