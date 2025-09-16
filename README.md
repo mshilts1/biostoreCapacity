@@ -127,10 +127,6 @@ library(biostoreCapacity)
 
 #### Plot rate of accessioning over time:
 
-    #> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
-
-<img src="man/figures/README-plot_history-1.png" width="100%" />
-
 #### Plot overall proportion of BioStore filled over time:
 
 This includes “pending” tubes, which are tubes that are still at the

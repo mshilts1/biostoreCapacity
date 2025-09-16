@@ -117,7 +117,7 @@ historical_data_long_proportions <- longifyReadHistorical(total_or_prop = "prop"
 
 #### Plot rate of accessioning over time:
 
-```{r plot_history, echo = FALSE}
+```{r plot_history, echo = FALSE, eval = FALSE}
 library(ggplot2)
 library(magrittr)
 ggplot(longifyReadHistorical(), aes(x = date, y = total, colour = tube_type)) +
@@ -142,6 +142,7 @@ ggplot(longifyReadHistorical(total_or_prop = "both", add_pending = TRUE), aes(x 
   geom_point() +
   geom_smooth() +
   theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +
   ylab("Cumulative Proportion of BioStore Capacity Filled") +
   xlab("") +
   scale_x_date(date_breaks = "2 month", date_labels = "%b %y") + 
