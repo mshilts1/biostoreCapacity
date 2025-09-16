@@ -147,19 +147,23 @@ a <- ggplot(longifyReadHistorical(total_or_prop = "both", add_pending = TRUE), a
   geom_hline(data = longifyReadHistorical(total_or_prop = "both", add_pending = TRUE) %>% filter("type" == "Proportion"), aes(yintercept = 1)) + 
   scale_color_brewer(name = "Tube Size", palette = "Set2")
 
-ggsave("man/figures/my_plot.png", plot = a, dpi = 300, width = 7, height = 5)
+ggsave("man/figures/plot_history.png", plot = a, dpi = 300, width = 7, height = 5)
 
 ```
 
-![My ggplot2 figure](man/figures/my_plot.png)
+![My ggplot2 figure](man/figures/plot_history.png)
 
 ### Eric Koplin's ARIMA model
 
 Eric Koplin has built an ARIMA model using the forecast package to predict when the BioStore would be full based on the historical rate of filling:
 
-```{r arima}
-single_arima()
+```{r arima, echo = FALSE}
+a <- single_arima()
+ggsave("man/figures/single_arima.png", plot = a, dpi = 300, width = 7, height = 5)
+
 ```
+
+![My ggplot2 figure](man/figures/single_arima.png)
 
 ### Eric Koplin's BRMS model (Fit Bayesian Generalized (Non-)Linear Multivariate Multilevel Models)
 
