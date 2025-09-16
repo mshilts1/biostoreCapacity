@@ -115,7 +115,7 @@ anyone to use, but I will still keep the source code transparent on
 GitHub.
 
 ``` r
-library(biostoreCapacity)
+suppressWarnings(library(biostoreCapacity))
 #> Registered S3 method overwritten by 'quantmod':
 #>   method            from
 #>   as.zoo.data.frame zoo
@@ -129,7 +129,6 @@ This includes “pending” tubes, which are tubes that are still at the
 sites but will be shipped here eventually and should be counted towards
 the BioStore’s total inventory.
 
-    #> Saving 7 x 5 in image
     #> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 
 <figure>

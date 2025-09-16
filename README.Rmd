@@ -102,7 +102,7 @@ pak::pak("mshilts1/biostoreCapacity")
 Eventually, I'm going to *attempt* to put this on Shiny so it's easy for anyone to use, but I will still keep the source code transparent on GitHub. 
 
 ```{r example}
-library(biostoreCapacity)
+suppressWarnings(library(biostoreCapacity))
 ```
 
 ## Plot Historical Data
@@ -147,7 +147,7 @@ a <- ggplot(longifyReadHistorical(total_or_prop = "both", add_pending = TRUE), a
   geom_hline(data = longifyReadHistorical(total_or_prop = "both", add_pending = TRUE) %>% filter("type" == "Proportion"), aes(yintercept = 1)) + 
   scale_color_brewer(name = "Tube Size", palette = "Set2")
 
-ggsave("my_plot.png", plot = a, dpi = 300)
+ggsave("my_plot.png", plot = a, dpi = 300, width = 7, height = 5)
 
 ```
 
