@@ -41,8 +41,8 @@ where:
 | $x$ | number of 1.0 ml tubes still to be collected for ECHO |
 | $b$ | number of ECHO 1.9 ml tubes already collected (~210K as of September 2025) |
 | $y$ | number of 1.9 ml tubes still to be collected for ECHO |
-| 788,256 | absolute maximum number of 1.0 ml tubes that can be stored in the BioStore, if no 1.9 ml tubes |
-| 438,840 | absolute maximum number of 1.9 ml tubes that can be stored in the BioStore, if no 1.0 ml tubes |
+| 788,256 | maximum number of 1.0 ml tubes that can be stored in the BioStore, if no 1.9 ml tubes |
+| 438,840 | maximum number of 1.9 ml tubes that can be stored in the BioStore, if no 1.0 ml tubes |
 
 Both $x$ and $y$ will continue to increase, but as one increases, the
 capacity for the other decreases. The total capacity cannot exceed 1, or
@@ -121,13 +121,9 @@ library(biostoreCapacity)
 #>   as.zoo.data.frame zoo
 ```
 
-## Load in data above that we do have
-
-### Historical data
+## Plot Historical Data
 
 #### Plot rate of accessioning over time:
-
-#### Plot overall proportion of BioStore filled over time:
 
 This includes “pending” tubes, which are tubes that are still at the
 sites but will be shipped here eventually and should be counted towards
