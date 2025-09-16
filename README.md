@@ -126,21 +126,11 @@ This includes “pending” tubes, which are tubes that are still at the
 sites but will be shipped here eventually and should be counted towards
 the BioStore’s total inventory.
 
-<figure>
-<img src="man/figures/plot_history.png" alt="My ggplot2 figure" />
-<figcaption aria-hidden="true">My ggplot2 figure</figcaption>
-</figure>
-
 ### Eric Koplin’s ARIMA model
 
 Eric Koplin has built an ARIMA model using the forecast package to
 predict when the BioStore would be full based on the historical rate of
 filling:
-
-<figure>
-<img src="man/figures/single_arima.png" alt="My ggplot2 figure" />
-<figcaption aria-hidden="true">My ggplot2 figure</figcaption>
-</figure>
 
 ### Eric Koplin’s BRMS model (Fit Bayesian Generalized (Non-)Linear Multivariate Multilevel Models)
 
