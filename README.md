@@ -275,7 +275,33 @@ A more thorough description of every column in `readCollections()`:
 |---:|----|
 | collection_id | a unique ID. a concatenation of kit_type, tube_size, visit, and specimen_type |
 | kit_type | concatenation of biospecimen_type and participant |
-| 3 |  |
+| biospecimen_type | type of biospecimen being collected (e.g., urine or blood, etc…) |
+| participant | specimen to be collected from an ECHO child, child’s mother, or child’s mother’s current partner |
+| tube_size | whether tube is 1.0mL or 1.9mL (1.9mL tubes take up more space in the BioStore.) |
+| tubes_per_kit | number of tubes of specified size in that specific kit |
+| proportion_from_kit_collected | what proportion of tubes in that kit are we expecting to be returned to be stored in the BioStore? for example, newborn babies may not produce enough urine for all three 1.9mL tubes to be filled and returned. maybe only two will be returned |
+| visit | time point in child’s or child’s mother’s life when specimen is collected |
+| visit_logical_order | not really that useful here, but orders the visit column by the logical order of an ECHO child’s life (sort of; due to preconception protocol, that gets complicated) |
+| specimen_type | is specimen considered by ECHO a core, preconception, or specialized specimen? this is important because sites are expected to at least try to collect every core specimen, while sites are only allowed to collected specific specialized specimens. the preconception specimens are somewhere in the middle |
+| y_2025 | 1 (yes)/ 0 (no) column. is this specific specimen to be collected in calendar year 2025? |
+| y_2026 | same as for y_2025, but calendar year 2026 |
+| y_2027 | same as for y_2025, but calendar year 2027 |
+| y_2028 | same as for y_2025, but calendar year 2028 |
+| y_2029 | same as for y_2025, but calendar year 2029 |
+| y_2030 | same as for y_2025, but calendar year 2030 |
+| y_2025_proportion | this is set to 0.25 because there’s only about 25% of calendar year 2025 left |
+| y_2026_proportion | leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2026 |
+| y_2027_proportion | leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2027 |
+| y_2028_proportion | leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2028 |
+| y_2029_proportion | leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2029 |
+| y_2030_proportion | leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2030 |
+| specialized_obesity | is that biospecimen being collected by sites where the PI selected obesity as an outcome of interest? |
+| specialized_obesity_proportion | proportion of participants from sites where PI selected obesity as outcome of interest. |
+| specialized_chemphys | is that biospecimen being collected by sites where the PI selected Chemical/Phyical as an exposure of interest? |
+| specialized_chemphys_proportion | proportion of participants from sites where PI selected Chemical/Physical as exposure of interest |
+| specialized_lifestyle | is that biospecimen being collected by sites where the PI selected Lifestyle as an exposure of interest? |
+| specialized_lifestyle_proportion | proportion of participants from sites where PI selected Lifestyle as exposure of interest |
+| notes | general notes about the data for your reference |
 
 Green checkmark (✅ ) means we have that data, a yellow dot (🟡) means
 it’s speculative estimated data that we can kind of guess at, while a
