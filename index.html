@@ -270,8 +270,112 @@
 <td>concatenation of biospecimen_type and participant</td>
 </tr>
 <tr class="odd">
-<td align="right">3</td>
-<td></td>
+<td align="right">biospecimen_type</td>
+<td>type of biospecimen being collected (e.g., urine or blood, etc…)</td>
+</tr>
+<tr class="even">
+<td align="right">participant</td>
+<td>specimen to be collected from an ECHO child, child’s mother, or child’s mother’s current partner</td>
+</tr>
+<tr class="odd">
+<td align="right">tube_size</td>
+<td>whether tube is 1.0mL or 1.9mL (1.9mL tubes take up more space in the BioStore.)</td>
+</tr>
+<tr class="even">
+<td align="right">tubes_per_kit</td>
+<td>number of tubes of specified size in that specific kit</td>
+</tr>
+<tr class="odd">
+<td align="right">proportion_from_kit_collected</td>
+<td>what proportion of tubes in that kit are we expecting to be returned to be stored in the BioStore? for example, newborn babies may not produce enough urine for all three 1.9mL tubes to be filled and returned. maybe only two will be returned</td>
+</tr>
+<tr class="even">
+<td align="right">visit</td>
+<td>time point in child’s or child’s mother’s life when specimen is collected</td>
+</tr>
+<tr class="odd">
+<td align="right">visit_logical_order</td>
+<td>not really that useful here, but orders the visit column by the logical order of an ECHO child’s life (sort of; due to preconception protocol, that gets complicated)</td>
+</tr>
+<tr class="even">
+<td align="right">specimen_type</td>
+<td>is specimen considered by ECHO a core, preconception, or specialized specimen? this is important because sites are expected to at least try to collect every core specimen, while sites are only allowed to collected specific specialized specimens. the preconception specimens are somewhere in the middle</td>
+</tr>
+<tr class="odd">
+<td align="right">y_2025</td>
+<td>1 (yes)/ 0 (no) column. is this specific specimen to be collected in calendar year 2025?</td>
+</tr>
+<tr class="even">
+<td align="right">y_2026</td>
+<td>same as for y_2025, but calendar year 2026</td>
+</tr>
+<tr class="odd">
+<td align="right">y_2027</td>
+<td>same as for y_2025, but calendar year 2027</td>
+</tr>
+<tr class="even">
+<td align="right">y_2028</td>
+<td>same as for y_2025, but calendar year 2028</td>
+</tr>
+<tr class="odd">
+<td align="right">y_2029</td>
+<td>same as for y_2025, but calendar year 2029</td>
+</tr>
+<tr class="even">
+<td align="right">y_2030</td>
+<td>same as for y_2025, but calendar year 2030</td>
+</tr>
+<tr class="odd">
+<td align="right">y_2025_proportion</td>
+<td>this is set to 0.25 because there’s only about 25% of calendar year 2025 left</td>
+</tr>
+<tr class="even">
+<td align="right">y_2026_proportion</td>
+<td>leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2026</td>
+</tr>
+<tr class="odd">
+<td align="right">y_2027_proportion</td>
+<td>leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2027</td>
+</tr>
+<tr class="even">
+<td align="right">y_2028_proportion</td>
+<td>leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2028</td>
+</tr>
+<tr class="odd">
+<td align="right">y_2029_proportion</td>
+<td>leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2029</td>
+</tr>
+<tr class="even">
+<td align="right">y_2030_proportion</td>
+<td>leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2030</td>
+</tr>
+<tr class="odd">
+<td align="right">specialized_obesity</td>
+<td>is that biospecimen being collected by sites where the PI selected obesity as an outcome of interest?</td>
+</tr>
+<tr class="even">
+<td align="right">specialized_obesity_proportion</td>
+<td>proportion of participants from sites where PI selected obesity as outcome of interest.</td>
+</tr>
+<tr class="odd">
+<td align="right">specialized_chemphys</td>
+<td>is that biospecimen being collected by sites where the PI selected Chemical/Phyical as an exposure of interest?</td>
+</tr>
+<tr class="even">
+<td align="right">specialized_chemphys_proportion</td>
+<td>proportion of participants from sites where PI selected Chemical/Physical as exposure of interest</td>
+</tr>
+<tr class="odd">
+<td align="right">specialized_lifestyle</td>
+<td>is that biospecimen being collected by sites where the PI selected Lifestyle as an exposure of interest?</td>
+</tr>
+<tr class="even">
+<td align="right">specialized_lifestyle_proportion</td>
+<td>proportion of participants from sites where PI selected Lifestyle as exposure of interest</td>
+</tr>
+<tr class="odd">
+<td align="right">notes</td>
+<td>general notes about the data for your reference</td>
 </tr>
 </tbody>
 </table>
