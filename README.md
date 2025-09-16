@@ -190,14 +190,14 @@ biospecimen_collections
 #>    <chr>           <chr>    <chr>            <chr>       <chr>             <dbl>
 #>  1 breastmilk_1.9… breastm… breastmilk       maternal    1.9ml                 8
 #>  2 breastmilk_1ml… breastm… breastmilk       maternal    1ml                  10
-#>  3 cord_blood_1.9… cord_bl… cord_blood       child       1.9ml                 6
-#>  4 cord_blood_1ml… cord_bl… cord_blood       child       1ml                  10
-#>  5 placenta_1.9ml… placenta placenta         maternal    1.9ml                16
-#>  6 urine_cup_mate… urine_c… urine            maternal    1.9ml                 3
-#>  7 urine_cup_mate… urine_c… urine            maternal    1.9ml                 3
+#>  3 urine_diaper_1… urine_d… urine            child       1.9ml                 3
+#>  4 whole_blood_ch… whole_b… whole_blood      child       1.9ml                 6
+#>  5 whole_blood_ch… whole_b… whole_blood      child       1ml                  10
+#>  6 whole_blood_ch… whole_b… whole_blood      child       1.9ml                 6
+#>  7 whole_blood_ch… whole_b… whole_blood      child       1ml                  10
 #>  8 urine_diaper_1… urine_d… urine            child       1.9ml                 3
-#>  9 urine_cup_curr… urine_c… urine            partner     1.9ml                 3
-#> 10 urine_cup_mate… urine_c… urine            maternal    1.9ml                 3
+#>  9 urine_cup_chil… urine_c… urine            child       1.9ml                 3
+#> 10 whole_blood_ch… whole_b… whole_blood      child       1.9ml                 6
 #> # ℹ 17 more rows
 #> # ℹ 23 more variables: proportion_from_kit_collected <dbl>, visit <chr>,
 #> #   visit_logical_order <dbl>, specimen_type <chr>, y_2025 <dbl>, y_2026 <dbl>,
