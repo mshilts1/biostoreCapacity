@@ -195,7 +195,7 @@ ___
 
 A more thorough description of every column in `readCollections()`:
 
-```{r readcollection, echo = FALSE}
+```{r readcollection}
 readcollectionsdescriptions() 
 ```
 
