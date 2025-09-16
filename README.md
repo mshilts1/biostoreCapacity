@@ -128,23 +128,13 @@ the BioStore’s total inventory.
 
 ![](man/figures/plot_history.png)
 
-### Eric Koplin’s ARIMA model
-
-Eric Koplin has built an ARIMA model using the forecast package to
-predict when the BioStore would be full based on the historical rate of
-filling:
-
-![](man/figures/single_arima.png)
-
 ### Eric Koplin’s BRMS model (Fit Bayesian Generalized (Non-)Linear Multivariate Multilevel Models)
 
-Eric Koplin has built an ARIMA model using the forecast package to
-predict when the BioStore would be full based on the historical rate of
-filling:
+Eric Koplin has built a BRMS model using the forecast package to predict
+when the BioStore would be full based on the historical rate of filling
+and added some covariates:
 
-``` r
-#single_brms_growth()
-```
+![](man/figures/single_brms_growth.png)
 
 ### Site collection information for model priors and adjustments
 

@@ -153,25 +153,33 @@ ggsave("man/figures/plot_history.png", plot = a, dpi = 300, width = 7, height = 
 
 ![](man/figures/plot_history.png)
 
+
+
+```{r arima, echo = FALSE, eval = FALSE}
+
 ### Eric Koplin's ARIMA model
 
-Eric Koplin has built an ARIMA model using the forecast package to predict when the BioStore would be full based on the historical rate of filling:
-
-```{r arima, echo = FALSE}
+#Eric Koplin has built an ARIMA model using the forecast package to predict when the BioStore would be full based on the historical rate of filling:
+  
 a <- single_arima()
 ggsave("man/figures/single_arima.png", plot = a, dpi = 300, width = 7, height = 5)
 
+# ![](man/figures/single_arima.png) # not plotting for now
+
 ```
 
-![](man/figures/single_arima.png)
 
 ### Eric Koplin's BRMS model (Fit Bayesian Generalized (Non-)Linear Multivariate Multilevel Models)
 
-Eric Koplin has built an ARIMA model using the forecast package to predict when the BioStore would be full based on the historical rate of filling:
+Eric Koplin has built a BRMS model using the forecast package to predict when the BioStore would be full based on the historical rate of filling and added some covariates:
 
-```{r brms}
-#single_brms_growth()
+```{r brms, echo = FALSE, eval = FALSE}
+library(brms)
+a <- single_brms_growth()
+ggsave("man/figures/single_brms_growth.png", plot = a$plot, dpi = 300, width = 7, height = 5)
 ```
+
+![](man/figures/single_brms_growth.png)
 
 ### Site collection information for model priors and adjustments
 
