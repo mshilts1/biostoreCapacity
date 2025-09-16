@@ -94,11 +94,11 @@
 </tr>
 <tr class="odd">
 <td align="right">788,256</td>
-<td>absolute maximum number of 1.0 ml tubes that can be stored in the BioStore, if no 1.9 ml tubes</td>
+<td>maximum number of 1.0 ml tubes that can be stored in the BioStore, if no 1.9 ml tubes</td>
 </tr>
 <tr class="even">
 <td align="right">438,840</td>
-<td>absolute maximum number of 1.9 ml tubes that can be stored in the BioStore, if no 1.0 ml tubes</td>
+<td>maximum number of 1.9 ml tubes that can be stored in the BioStore, if no 1.0 ml tubes</td>
 </tr>
 </tbody>
 </table>
@@ -151,22 +151,14 @@
 <span><span class="co">#&gt;   as.zoo.data.frame zoo</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="load-in-data-above-that-we-do-have">Load in data above that we do have<a class="anchor" aria-label="anchor" href="#load-in-data-above-that-we-do-have"></a>
+<h2 id="plot-historical-data">Plot Historical Data<a class="anchor" aria-label="anchor" href="#plot-historical-data"></a>
 </h2>
-<div class="section level3">
-<h3 id="historical-data">Historical data<a class="anchor" aria-label="anchor" href="#historical-data"></a>
-</h3>
 <div class="section level4">
 <h4 id="plot-rate-of-accessioning-over-time">Plot rate of accessioning over time:<a class="anchor" aria-label="anchor" href="#plot-rate-of-accessioning-over-time"></a>
-</h4>
-</div>
-<div class="section level4">
-<h4 id="plot-overall-proportion-of-biostore-filled-over-time">Plot overall proportion of BioStore filled over time:<a class="anchor" aria-label="anchor" href="#plot-overall-proportion-of-biostore-filled-over-time"></a>
 </h4>
 <p>This includes “pending” tubes, which are tubes that are still at the sites but will be shipped here eventually and should be counted towards the BioStore’s total inventory.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co">#&gt; `geom_smooth()` using method = 'loess' and formula = 'y ~ x'</span></span></code></pre></div>
 <p><img src="reference/figures/README-plot_history_prop-1.png" width="100%"></p>
-</div>
 </div>
 <div class="section level3">
 <h3 id="eric-koplins-arima-model">Eric Koplin’s ARIMA model<a class="anchor" aria-label="anchor" href="#eric-koplins-arima-model"></a>
