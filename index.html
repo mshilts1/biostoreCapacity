@@ -198,26 +198,26 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">biospecimen_collections</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/readCollections.html">readCollections</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">biospecimen_collections</span></span>
-<span><span class="co">#&gt; # A tibble: 27 × 29</span></span>
-<span><span class="co">#&gt;    collection_id   kit_type biospecimen_type participant tube_size tubes_per_kit</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;    &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt;             &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1 breastmilk_1.9… breastm… breastmilk       maternal    1.9ml                 8</span></span>
-<span><span class="co">#&gt;  2 breastmilk_1ml… breastm… breastmilk       maternal    1ml                  10</span></span>
-<span><span class="co">#&gt;  3 urine_diaper_1… urine_d… urine            child       1.9ml                 3</span></span>
-<span><span class="co">#&gt;  4 whole_blood_ch… whole_b… whole_blood      child       1.9ml                 6</span></span>
-<span><span class="co">#&gt;  5 whole_blood_ch… whole_b… whole_blood      child       1ml                  10</span></span>
-<span><span class="co">#&gt;  6 whole_blood_ch… whole_b… whole_blood      child       1.9ml                 6</span></span>
-<span><span class="co">#&gt;  7 whole_blood_ch… whole_b… whole_blood      child       1ml                  10</span></span>
-<span><span class="co">#&gt;  8 urine_diaper_1… urine_d… urine            child       1.9ml                 3</span></span>
-<span><span class="co">#&gt;  9 urine_cup_chil… urine_c… urine            child       1.9ml                 3</span></span>
-<span><span class="co">#&gt; 10 whole_blood_ch… whole_b… whole_blood      child       1.9ml                 6</span></span>
+<span><span class="co">#&gt; # A tibble: 27 × 30</span></span>
+<span><span class="co">#&gt;    collection_id         visit_participant kit_type biospecimen_type participant</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;                 &lt;chr&gt;             &lt;chr&gt;    &lt;chr&gt;            &lt;chr&gt;      </span></span>
+<span><span class="co">#&gt;  1 breastmilk_1.9ml_0_5… 0_5_months_mater… breastm… breastmilk       maternal   </span></span>
+<span><span class="co">#&gt;  2 breastmilk_1ml_0_5_m… 0_5_months_mater… breastm… breastmilk       maternal   </span></span>
+<span><span class="co">#&gt;  3 urine_diaper_1.9ml_1… 12_23_months_chi… urine_d… urine            child      </span></span>
+<span><span class="co">#&gt;  4 whole_blood_child_1.… 11_17_years_child whole_b… whole_blood      child      </span></span>
+<span><span class="co">#&gt;  5 whole_blood_child_1m… 11_17_years_child whole_b… whole_blood      child      </span></span>
+<span><span class="co">#&gt;  6 whole_blood_child_1.… 6_10_years_child  whole_b… whole_blood      child      </span></span>
+<span><span class="co">#&gt;  7 whole_blood_child_1m… 6_10_years_child  whole_b… whole_blood      child      </span></span>
+<span><span class="co">#&gt;  8 urine_diaper_1.9ml_0… 0_5_months_child  urine_d… urine            child      </span></span>
+<span><span class="co">#&gt;  9 urine_cup_child_1.9m… 11_17_years_child urine_c… urine            child      </span></span>
+<span><span class="co">#&gt; 10 whole_blood_child_1.… 11_17_years_child whole_b… whole_blood      child      </span></span>
 <span><span class="co">#&gt; # ℹ 17 more rows</span></span>
-<span><span class="co">#&gt; # ℹ 23 more variables: proportion_from_kit_collected &lt;dbl&gt;, visit &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   visit_logical_order &lt;dbl&gt;, specimen_type &lt;chr&gt;, y_2025 &lt;dbl&gt;, y_2026 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   y_2027 &lt;dbl&gt;, y_2028 &lt;dbl&gt;, y_2029 &lt;dbl&gt;, y_2030 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   y_2025_proportion &lt;dbl&gt;, y_2026_proportion &lt;dbl&gt;, y_2027_proportion &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   y_2028_proportion &lt;dbl&gt;, y_2029_proportion &lt;dbl&gt;, y_2030_proportion &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   specialized_obesity &lt;chr&gt;, specialized_obesity_proportion &lt;chr&gt;, …</span></span></code></pre></div>
+<span><span class="co">#&gt; # ℹ 25 more variables: tube_size &lt;chr&gt;, tubes_per_kit &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   proportion_from_kit_collected &lt;dbl&gt;, visit &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   visit_logical_order &lt;dbl&gt;, specimen_type &lt;chr&gt;, coll_y_2025 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   coll_y_2026 &lt;dbl&gt;, coll_y_2027 &lt;dbl&gt;, coll_y_2028 &lt;dbl&gt;, coll_y_2029 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   coll_y_2030 &lt;dbl&gt;, coll_y_2025_proportion &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   coll_y_2026_proportion &lt;dbl&gt;, coll_y_2027_proportion &lt;dbl&gt;, …</span></span></code></pre></div>
 <p><strong>Information in <code><a href="reference/readCollections.html">readCollections()</a></code> that can be assumed to be “true” for the sake of building the model:</strong></p>
 <ul>
 <li>All columns with information about the kit builds:
@@ -230,12 +230,12 @@
 <li>All columns about the biospecimen collection timeline:
 <ul>
 <li>
-<code>visit</code>, <code>specimen_type</code>, <code>y_2025</code>, <code>y_2026</code>, <code>y_2027</code>, <code>y_2028</code>, <code>y_2029</code>, <code>y_2030</code>, <code>specialized_obesity</code>, <code>specialized_chemphys</code>, <code>specialized_lifestyle</code>.</li>
+<code>visit</code>, <code>specimen_type</code>, <code>coll_y_2025</code>, <code>coll_y_2026</code>, <code>coll_y_2027</code>, <code>coll_y_2028</code>, <code>coll_y_2029</code>, <code>coll_y_2030</code>, <code>specialized_obesity</code>, <code>specialized_chemphys</code>, <code>specialized_lifestyle</code>.</li>
 </ul>
 </li>
 </ul>
 <p><strong>Speculative columns all contain the word “proportion” in the name:</strong></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="sc">*</span> <span class="st">`</span><span class="at">proportion_from_kit_collected</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2025_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2026_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2027_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2028_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2029_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">y_2030_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_obesity_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_chemphys_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_lifestyle_proportion</span><span class="st">`</span>.   </span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="sc">*</span> <span class="st">`</span><span class="at">proportion_from_kit_collected</span><span class="st">`</span>, <span class="st">`</span><span class="at">coll_y_2025_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">coll_y_2026_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">coll_y_2027_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">coll_y_2028_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">coll_y_2029_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">coll_y_2030_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_obesity_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_chemphys_proportion</span><span class="st">`</span>, <span class="st">`</span><span class="at">specialized_lifestyle_proportion</span><span class="st">`</span>.   </span></code></pre></div>
 <hr>
 </div>
 </div>
@@ -294,51 +294,51 @@
 <td>is specimen considered by ECHO a core, preconception, or specialized specimen? this is important because sites are expected to at least try to collect every core specimen, while sites are only allowed to collected specific specialized specimens. the preconception specimens are somewhere in the middle</td>
 </tr>
 <tr class="odd">
-<td align="right">y_2025</td>
+<td align="right">coll_y_2025</td>
 <td>1 (yes)/ 0 (no) column. is this specific specimen to be collected in calendar year 2025?</td>
 </tr>
 <tr class="even">
-<td align="right">y_2026</td>
-<td>same as for y_2025, but calendar year 2026</td>
+<td align="right">coll_y_2026</td>
+<td>same as for coll_y_2025, but calendar year 2026</td>
 </tr>
 <tr class="odd">
-<td align="right">y_2027</td>
-<td>same as for y_2025, but calendar year 2027</td>
+<td align="right">coll_y_2027</td>
+<td>same as for coll_y_2025, but calendar year 2027</td>
 </tr>
 <tr class="even">
-<td align="right">y_2028</td>
-<td>same as for y_2025, but calendar year 2028</td>
+<td align="right">coll_y_2028</td>
+<td>same as for coll_y_2025, but calendar year 2028</td>
 </tr>
 <tr class="odd">
-<td align="right">y_2029</td>
-<td>same as for y_2025, but calendar year 2029</td>
+<td align="right">coll_y_2029</td>
+<td>same as for coll_y_2025, but calendar year 2029</td>
 </tr>
 <tr class="even">
-<td align="right">y_2030</td>
-<td>same as for y_2025, but calendar year 2030</td>
+<td align="right">coll_y_2030</td>
+<td>same as for coll_y_2025, but calendar year 2030</td>
 </tr>
 <tr class="odd">
-<td align="right">y_2025_proportion</td>
+<td align="right">coll_y_2025_proportion</td>
 <td>this is set to 0.25 because there’s only about 25% of calendar year 2025 left</td>
 </tr>
 <tr class="even">
-<td align="right">y_2026_proportion</td>
+<td align="right">coll_y_2026_proportion</td>
 <td>leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2026</td>
 </tr>
 <tr class="odd">
-<td align="right">y_2027_proportion</td>
+<td align="right">coll_y_2027_proportion</td>
 <td>leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2027</td>
 </tr>
 <tr class="even">
-<td align="right">y_2028_proportion</td>
+<td align="right">coll_y_2028_proportion</td>
 <td>leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2028</td>
 </tr>
 <tr class="odd">
-<td align="right">y_2029_proportion</td>
+<td align="right">coll_y_2029_proportion</td>
 <td>leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2029</td>
 </tr>
 <tr class="even">
-<td align="right">y_2030_proportion</td>
+<td align="right">coll_y_2030_proportion</td>
 <td>leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2030</td>
 </tr>
 <tr class="odd">

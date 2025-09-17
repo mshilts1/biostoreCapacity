@@ -56,23 +56,28 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">participants_proj</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 12</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    pt_group  maternal_specimen child_specimen partner_specimen visit y2024 y2025</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 0-5M                      1              1                0 0_5_…  <span style="text-decoration: underline;">2</span>442  <span style="text-decoration: underline;">4</span>306</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 24-35M                    1              1                0 24_3…  <span style="text-decoration: underline;">1</span>290  <span style="text-decoration: underline;">1</span>132</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 6-11M                     1              1                0 6_11…   460  <span style="text-decoration: underline;">4</span>306</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Delivery                  1              1                0 peri…  <span style="text-decoration: underline;">2</span>442  <span style="text-decoration: underline;">4</span>306</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> P-Early                   1              0                0 preg…  <span style="text-decoration: underline;">6</span>200  <span style="text-decoration: underline;">6</span>200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> P-Late                    1              0                0 preg…  <span style="text-decoration: underline;">4</span>306  <span style="text-decoration: underline;">6</span>200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 11-17Y                    0              1                0 11_1…  <span style="text-decoration: underline;">5</span>155  <span style="text-decoration: underline;">6</span>183</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 12-23M                    0              1                0 12_2…  <span style="text-decoration: underline;">1</span>638  <span style="text-decoration: underline;">2</span>902</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 18-20Y                    0              1                0 18_2…   884   662</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 3-5Y                      0              1                0 3_5_…  <span style="text-decoration: underline;">3</span>274  <span style="text-decoration: underline;">3</span>328</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 6-10Y                     0              1                0 6_10…  <span style="text-decoration: underline;">5</span>489  <span style="text-decoration: underline;">5</span>480</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 6-11M (P…                 0              0                1 6_11…     1  <span style="text-decoration: underline;">2</span>368</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5 more variables: y2026 &lt;int&gt;, y2027 &lt;int&gt;, y2028 &lt;int&gt;, y2029 &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   y2030 &lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 16 × 13</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    pt_group        maternal_specimen child_specimen partner_specimen visit      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 0-5M                            0              1                0 0_5_months </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 0-5M                            1              0                0 0_5_months </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 11-17Y                          0              1                0 11_17_years</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 12-23M                          0              1                0 12_23_mont…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 18-20Y                          0              1                0 18_20_years</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 24-35M                          0              1                0 24_35_mont…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 24-35M                          1              0                0 24_35_mont…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 3-5Y                            0              1                0 3_5_years  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 6-10Y                           0              1                0 6_10_years </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 6-11M                           0              1                0 6_11_months</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 6-11M                           1              0                0 6_11_months</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 6-11M (Partner)                 0              0                1 6_11_months</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> Delivery                        0              1                0 perinatal  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> Delivery                        1              0                0 perinatal  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> P-Early                         1              0                0 preg_early </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> P-Late                          1              0                0 preg_third…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8 more variables: visit_participant &lt;chr&gt;, pt_num_y2024 &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   pt_num_y2025 &lt;int&gt;, pt_num_y2026 &lt;int&gt;, pt_num_y2027 &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   pt_num_y2028 &lt;int&gt;, pt_num_y2029 &lt;int&gt;, pt_num_y2030 &lt;int&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
