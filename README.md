@@ -179,13 +179,13 @@ site_collections()
 
 ## Future kit builds and biospecimen collection protocol
 
-We can’t really use this information yet, because we do not have a clear
-estimate of the number of participants.
+Since the Lab Core wasn’t permitted to receive the UH3 MAP, we are
+instead using here data from the Measurement Core and the April 2025 F2F
+meeting of the Protocol Task Force.
 
 ``` r
-biospecimen_collections <- readCollections()
-biospecimen_collections
-#> # A tibble: 27 × 30
+future_projections()
+#> # A tibble: 27 × 38
 #>    collection_id         visit_participant kit_type biospecimen_type participant
 #>    <chr>                 <chr>             <chr>    <chr>            <chr>      
 #>  1 breastmilk_1.9ml_0_5… 0_5_months_mater… breastm… breastmilk       maternal   
@@ -199,7 +199,7 @@ biospecimen_collections
 #>  9 urine_cup_child_1.9m… 11_17_years_child urine_c… urine            child      
 #> 10 whole_blood_child_1.… 11_17_years_child whole_b… whole_blood      child      
 #> # ℹ 17 more rows
-#> # ℹ 25 more variables: tube_size <chr>, tubes_per_kit <dbl>,
+#> # ℹ 33 more variables: tube_size <chr>, tubes_per_kit <dbl>,
 #> #   proportion_from_kit_collected <dbl>, visit <chr>,
 #> #   visit_logical_order <dbl>, specimen_type <chr>, coll_y_2025 <dbl>,
 #> #   coll_y_2026 <dbl>, coll_y_2027 <dbl>, coll_y_2028 <dbl>, coll_y_2029 <dbl>,
@@ -207,7 +207,18 @@ biospecimen_collections
 #> #   coll_y_2026_proportion <dbl>, coll_y_2027_proportion <dbl>, …
 ```
 
-**Information in `readCollections()` that can be assumed to be “true”
+For “core” and “preconception” specimens, the simplest estimates could
+be done for each calendar year.
+
+For example, equation for specimen
+whole_blood_maternal_1ml_preg_early_core (blood collection from pregnant
+mom early in her pregnancy stored in 1.0 ml tubes):
+
+tubes_per_kit \* proportion_from_kit_collected \* coll_y_2025 \*
+coll_y_2025_proportion \* pt_num_y2025 = 13,950 1.0mL tubes collected in
+2025 for this one collection
+
+**Information in `future_projections()` that can be assumed to be “true”
 for the sake of building the model:**
 
 - All columns with information about the kit builds:
