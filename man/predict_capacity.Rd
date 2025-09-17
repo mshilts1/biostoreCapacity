@@ -4,7 +4,12 @@
 \alias{predict_capacity}
 \title{Code is all Eric Koplin!}
 \usage{
-predict_capacity()
+predict_capacity(hist_init = NULL, horizon = 6)
+}
+\arguments{
+\item{hist_init}{hist_init}
+
+\item{horizon}{horizon}
 }
 \value{
 arima

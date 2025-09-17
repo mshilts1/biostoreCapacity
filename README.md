@@ -71,7 +71,7 @@ will be full:**
 ### General proposed model structure
 
 Here’s an idea of the kind of formula I’m thinking of, where $FF$ is
-“Freezer Filling”:
+“**F**reezer **F**illing”:
 
 First, we can attempt to make a model using the historical data of ECHO
 submissions to the BioStore:

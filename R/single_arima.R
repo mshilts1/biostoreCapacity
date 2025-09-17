@@ -1,5 +1,8 @@
 #' Code is all Eric Koplin!
 #'
+#' @param hist_init hist_init
+#' @param horizon horizon
+#'
 #' @returns arima
 #' @export
 #' @importFrom stats time
@@ -7,9 +10,9 @@
 #'
 #' @examples
 #' predict_capacity()
-predict_capacity <- function() {
+predict_capacity <- function(hist_init = NULL, horizon = 6) {
   hist_init <- hist_init()
-  horizon <- 6
+  #horizon <- 6
   # 2. Aggregate to monthly using zoo::as.yearmon
   zoo_total <- zoo::zoo(hist_init$total_capacity, order.by = hist_init$date)
   # zoo_cov <- zoo::zoo(hist_init[, c("prop_1ml", "total_submitted_capacity")], order.by = hist_init$date)
@@ -193,14 +196,14 @@ single_arima <- function() {
   hist_extended <- dplyr::bind_rows(hist, new_row) %>%
     dplyr::arrange(date) %>%
     dplyr::mutate(
-      capacity_1.0_ml = cumulative_1.0 / 788256,
-      capacity_1.9_ml = cumulative_1.9 / 438840,
-      total_capacity = capacity_1.0_ml + capacity_1.9_ml,
-      prop_1ml = tubes_1.0_ml / (tubes_1.0_ml + tubes_1.9_ml),
-      prop_1ml = ifelse(is.na(prop_1ml), 0, prop_1ml),
-      total_submitted_capacity = 0.5 * total_submitted / 788256 + 0.5 * total_submitted / 438840
+      capacity_1.0_ml = .data$cumulative_1.0 / 788256,
+      capacity_1.9_ml = .data$cumulative_1.9 / 438840,
+      total_capacity = .data$capacity_1.0_ml + .data$capacity_1.9_ml,
+      prop_1ml = .data$tubes_1.0_ml / (.data$tubes_1.0_ml + .data$tubes_1.9_ml),
+      prop_1ml = ifelse(is.na(.data$prop_1ml), 0, .data$prop_1ml),
+      total_submitted_capacity = 0.5 * .data$total_submitted / 788256 + 0.5 * .data$total_submitted / 438840
     ) %>%
-    dplyr::select(date, total_capacity, prop_1ml, total_submitted_capacity)
+    dplyr::select(.data$date, .data$total_capacity, .data$prop_1ml, .data$total_submitted_capacity)
 
   # Call the new function to get forecast data
   forecast_results <- predict_capacity(hist_init, horizon)
@@ -208,7 +211,7 @@ single_arima <- function() {
 
   # Compute pessimistic crossing date by reproducing mean-crossing logic for forecast_final$df_fc
   # Extract mean forecast values and dates
-  fc_final_mean_vals <- forecast_final$df_fc %>% dplyr::filter(interval == "Mean") %>% dplyr::pull(total_capacity)
+  fc_final_mean_vals <- forecast_final$df_fc %>% dplyr::filter(interval == "Mean") %>% dplyr::pull(.data$total_capacity)
   fc_final_dates <- forecast_final$df_fc %>% dplyr::filter(interval == "Mean") %>% dplyr::pull(date)
 
   # Create zoo series
@@ -246,9 +249,9 @@ single_arima <- function() {
                 aes(x = .data$date, ymin = .data$Lower, ymax = .data$Upper, fill = "Forecast Init"),
                 alpha = 0.2) +
     geom_line(data = forecast_final$df_fc %>% dplyr::filter(interval == "Mean"),
-              aes(x = date, y = total_capacity, color = "Forecast Final")) +
+              aes(x = date, y = .data$total_capacity, color = "Forecast Final")) +
     geom_ribbon(data = forecast_final$df_ribbon,
-                aes(x = date, ymin = Lower, ymax = Upper, fill = "Forecast Final"),
+                aes(x = date, ymin = .data$Lower, ymax = .data$Upper, fill = "Forecast Final"),
                 alpha = 0.2) +
     geom_hline(yintercept = 1, linetype = "dashed", color = "red") +
     annotate("text", x = max(forecast_results$fc_dates), y = 1.05, label = combined_annot_lbl,
