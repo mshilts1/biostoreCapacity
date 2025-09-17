@@ -6,7 +6,7 @@
 #' @importFrom stats start
 #'
 #' @examples
-#' single_arima()
+#' predict_capacity()
 predict_capacity <- function(hist_init, horizon = 6) {
   # 2. Aggregate to monthly using zoo::as.yearmon
   zoo_total <- zoo::zoo(hist_init$total_capacity, order.by = hist_init$date)
