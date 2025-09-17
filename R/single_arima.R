@@ -7,7 +7,9 @@
 #'
 #' @examples
 #' predict_capacity()
-predict_capacity <- function(hist_init = NULL, horizon = 6) {
+predict_capacity <- function() {
+  hist_init <- hist_init()
+  horizon <- 6
   # 2. Aggregate to monthly using zoo::as.yearmon
   zoo_total <- zoo::zoo(hist_init$total_capacity, order.by = hist_init$date)
   # zoo_cov <- zoo::zoo(hist_init[, c("prop_1ml", "total_submitted_capacity")], order.by = hist_init$date)
@@ -138,6 +140,24 @@ predict_capacity <- function(hist_init = NULL, horizon = 6) {
   )
 }
 
+hist_init <- function(){
+hist <- readHistorical()
+init_1ml  <- 196412 - hist$cumulative_1.0[nrow(hist)]
+init_1.9ml <- 212692 - hist$cumulative_1.9[nrow(hist)]
+
+hist_init <- hist %>%
+  dplyr::mutate(
+    "cumulative_1.0" = .data$cumulative_1.0 + init_1ml,
+    "cumulative_1.9" = .data$cumulative_1.9 + init_1.9ml,
+    "capacity_1.0_ml" = .data$cumulative_1.0 / 788256,
+    "capacity_1.9_ml" = .data$cumulative_1.9 / 438840,
+    "total_capacity"  = .data$capacity_1.0_ml + .data$capacity_1.9_ml,
+    "prop_1ml" = .data$tubes_1.0_ml / (.data$tubes_1.0_ml + .data$tubes_1.9_ml),
+    "prop_1ml" = ifelse(is.na(.data$prop_1ml), 0, .data$prop_1ml),
+    "total_submitted_capacity" = .5*.data$total_submitted/788256 +  .5*.data$total_submitted/438840 # this is our prior on how many will return from each site
+  ) %>%
+  dplyr::select(.data$date, .data$total_capacity, .data$prop_1ml, .data$total_submitted_capacity)
+}
 single_arima <- function() {
   horizon <- 6  # months
   covariates_interval <- "mean" # "upper" for a worst case scenario on the covariates
