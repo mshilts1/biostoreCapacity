@@ -185,26 +185,26 @@ estimate of the number of participants.
 ``` r
 biospecimen_collections <- readCollections()
 biospecimen_collections
-#> # A tibble: 27 × 29
-#>    collection_id   kit_type biospecimen_type participant tube_size tubes_per_kit
-#>    <chr>           <chr>    <chr>            <chr>       <chr>             <dbl>
-#>  1 breastmilk_1.9… breastm… breastmilk       maternal    1.9ml                 8
-#>  2 breastmilk_1ml… breastm… breastmilk       maternal    1ml                  10
-#>  3 urine_diaper_1… urine_d… urine            child       1.9ml                 3
-#>  4 whole_blood_ch… whole_b… whole_blood      child       1.9ml                 6
-#>  5 whole_blood_ch… whole_b… whole_blood      child       1ml                  10
-#>  6 whole_blood_ch… whole_b… whole_blood      child       1.9ml                 6
-#>  7 whole_blood_ch… whole_b… whole_blood      child       1ml                  10
-#>  8 urine_diaper_1… urine_d… urine            child       1.9ml                 3
-#>  9 urine_cup_chil… urine_c… urine            child       1.9ml                 3
-#> 10 whole_blood_ch… whole_b… whole_blood      child       1.9ml                 6
+#> # A tibble: 27 × 30
+#>    collection_id         visit_participant kit_type biospecimen_type participant
+#>    <chr>                 <chr>             <chr>    <chr>            <chr>      
+#>  1 breastmilk_1.9ml_0_5… 0_5_months_mater… breastm… breastmilk       maternal   
+#>  2 breastmilk_1ml_0_5_m… 0_5_months_mater… breastm… breastmilk       maternal   
+#>  3 urine_diaper_1.9ml_1… 12_23_months_chi… urine_d… urine            child      
+#>  4 whole_blood_child_1.… 11_17_years_child whole_b… whole_blood      child      
+#>  5 whole_blood_child_1m… 11_17_years_child whole_b… whole_blood      child      
+#>  6 whole_blood_child_1.… 6_10_years_child  whole_b… whole_blood      child      
+#>  7 whole_blood_child_1m… 6_10_years_child  whole_b… whole_blood      child      
+#>  8 urine_diaper_1.9ml_0… 0_5_months_child  urine_d… urine            child      
+#>  9 urine_cup_child_1.9m… 11_17_years_child urine_c… urine            child      
+#> 10 whole_blood_child_1.… 11_17_years_child whole_b… whole_blood      child      
 #> # ℹ 17 more rows
-#> # ℹ 23 more variables: proportion_from_kit_collected <dbl>, visit <chr>,
-#> #   visit_logical_order <dbl>, specimen_type <chr>, y_2025 <dbl>, y_2026 <dbl>,
-#> #   y_2027 <dbl>, y_2028 <dbl>, y_2029 <dbl>, y_2030 <dbl>,
-#> #   y_2025_proportion <dbl>, y_2026_proportion <dbl>, y_2027_proportion <dbl>,
-#> #   y_2028_proportion <dbl>, y_2029_proportion <dbl>, y_2030_proportion <dbl>,
-#> #   specialized_obesity <chr>, specialized_obesity_proportion <chr>, …
+#> # ℹ 25 more variables: tube_size <chr>, tubes_per_kit <dbl>,
+#> #   proportion_from_kit_collected <dbl>, visit <chr>,
+#> #   visit_logical_order <dbl>, specimen_type <chr>, coll_y_2025 <dbl>,
+#> #   coll_y_2026 <dbl>, coll_y_2027 <dbl>, coll_y_2028 <dbl>, coll_y_2029 <dbl>,
+#> #   coll_y_2030 <dbl>, coll_y_2025_proportion <dbl>,
+#> #   coll_y_2026_proportion <dbl>, coll_y_2027_proportion <dbl>, …
 ```
 
 **Information in `readCollections()` that can be assumed to be “true”
@@ -214,13 +214,14 @@ for the sake of building the model:**
   - `collection_id`, `kit_type`, `biospecimen_type`, `participant`,
     `tube_size`, `tubes_per_kit`.  
 - All columns about the biospecimen collection timeline:
-  - `visit`, `specimen_type`, `y_2025`, `y_2026`, `y_2027`, `y_2028`,
-    `y_2029`, `y_2030`, `specialized_obesity`, `specialized_chemphys`,
+  - `visit`, `specimen_type`, `coll_y_2025`, `coll_y_2026`,
+    `coll_y_2027`, `coll_y_2028`, `coll_y_2029`, `coll_y_2030`,
+    `specialized_obesity`, `specialized_chemphys`,
     `specialized_lifestyle`.
 
 **Speculative columns all contain the word “proportion” in the name:**
 
-    * `proportion_from_kit_collected`, `y_2025_proportion`, `y_2026_proportion`, `y_2027_proportion`, `y_2028_proportion`, `y_2029_proportion`, `y_2030_proportion`, `specialized_obesity_proportion`, `specialized_chemphys_proportion`, `specialized_lifestyle_proportion`.   
+    * `proportion_from_kit_collected`, `coll_y_2025_proportion`, `coll_y_2026_proportion`, `coll_y_2027_proportion`, `coll_y_2028_proportion`, `coll_y_2029_proportion`, `coll_y_2030_proportion`, `specialized_obesity_proportion`, `specialized_chemphys_proportion`, `specialized_lifestyle_proportion`.   
 
 ------------------------------------------------------------------------
 
@@ -240,18 +241,18 @@ A more thorough description of every column in `readCollections()`:
 | visit | time point in child’s or child’s mother’s life when specimen is collected |
 | visit_logical_order | not really that useful here, but orders the visit column by the logical order of an ECHO child’s life (sort of; due to preconception protocol, that gets complicated) |
 | specimen_type | is specimen considered by ECHO a core, preconception, or specialized specimen? this is important because sites are expected to at least try to collect every core specimen, while sites are only allowed to collected specific specialized specimens. the preconception specimens are somewhere in the middle |
-| y_2025 | 1 (yes)/ 0 (no) column. is this specific specimen to be collected in calendar year 2025? |
-| y_2026 | same as for y_2025, but calendar year 2026 |
-| y_2027 | same as for y_2025, but calendar year 2027 |
-| y_2028 | same as for y_2025, but calendar year 2028 |
-| y_2029 | same as for y_2025, but calendar year 2029 |
-| y_2030 | same as for y_2025, but calendar year 2030 |
-| y_2025_proportion | this is set to 0.25 because there’s only about 25% of calendar year 2025 left |
-| y_2026_proportion | leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2026 |
-| y_2027_proportion | leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2027 |
-| y_2028_proportion | leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2028 |
-| y_2029_proportion | leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2029 |
-| y_2030_proportion | leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2030 |
+| coll_y_2025 | 1 (yes)/ 0 (no) column. is this specific specimen to be collected in calendar year 2025? |
+| coll_y_2026 | same as for coll_y_2025, but calendar year 2026 |
+| coll_y_2027 | same as for coll_y_2025, but calendar year 2027 |
+| coll_y_2028 | same as for coll_y_2025, but calendar year 2028 |
+| coll_y_2029 | same as for coll_y_2025, but calendar year 2029 |
+| coll_y_2030 | same as for coll_y_2025, but calendar year 2030 |
+| coll_y_2025_proportion | this is set to 0.25 because there’s only about 25% of calendar year 2025 left |
+| coll_y_2026_proportion | leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2026 |
+| coll_y_2027_proportion | leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2027 |
+| coll_y_2028_proportion | leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2028 |
+| coll_y_2029_proportion | leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2029 |
+| coll_y_2030_proportion | leave at 1 unless there’s some reason to think specimens won’t be collected for all of 2030 |
 | specialized_obesity | is that biospecimen being collected by sites where the PI selected obesity as an outcome of interest? |
 | specialized_obesity_proportion | proportion of participants from sites where PI selected obesity as outcome of interest. |
 | specialized_chemphys | is that biospecimen being collected by sites where the PI selected Chemical/Phyical as an exposure of interest? |

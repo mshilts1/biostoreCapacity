@@ -69,7 +69,7 @@ pendingNumbers <- function(x = readKBExcel()) {
 #' readCollections()
 readCollections <- function(x = "biospecimen_collection_for_biostore_calculations.xlsx") {
   path <- system.file("extdata", x, package = "biostoreCapacity", mustWork = TRUE)
-  x <- readxl::read_xlsx(path = path, .name_repair = janitor::make_clean_names)
+  x <- readxl::read_xlsx(path = path, .name_repair = janitor::make_clean_names, na = "NA")
   x
 }
 #' Read in file from Suchi with historical data on ECHO submissions to the BioStore
