@@ -4,7 +4,7 @@
 \alias{predict_capacity}
 \title{Code is all Eric Koplin!}
 \usage{
-predict_capacity(hist_init, horizon = 6)
+predict_capacity(hist_init = NULL, horizon = 6)
 }
 \value{
 arima

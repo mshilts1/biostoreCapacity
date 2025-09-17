@@ -7,7 +7,7 @@
 #'
 #' @examples
 #' predict_capacity()
-predict_capacity <- function(hist_init, horizon = 6) {
+predict_capacity <- function(hist_init = NULL, horizon = 6) {
   # 2. Aggregate to monthly using zoo::as.yearmon
   zoo_total <- zoo::zoo(hist_init$total_capacity, order.by = hist_init$date)
   # zoo_cov <- zoo::zoo(hist_init[, c("prop_1ml", "total_submitted_capacity")], order.by = hist_init$date)
