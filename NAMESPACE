@@ -2,6 +2,7 @@
 
 export(capacityNumbers)
 export(longifyReadHistorical)
+export(participants_proj)
 export(pendingNumbers)
 export(readCollections)
 export(readHistorical)

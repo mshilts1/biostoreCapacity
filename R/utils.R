@@ -274,3 +274,22 @@ site_collections <- function(x = "deidentified_specimen_collection.csv") {
   # x$date <- lubridate::ymd(x$date)
   x
 }
+#' Load in predicted participant numbers from Measurement Core May 2025
+#'
+#' @param x file name
+#'
+#' @returns a tibble with this information
+#' @export
+#'
+#' @examples
+#' participants_proj()
+participants_proj <- function(x = "MC_projections_May2025.csv") {
+  path <- system.file("extdata", x, package = "biostoreCapacity", mustWork = TRUE)
+  x <- utils::read.csv(file = path, header = TRUE)
+  x <- tibble::as_tibble(x)
+  # x$date <- lubridate::ymd(x$date)
+  x
+}
+future_projections <- function(protocol = readCollections(), pts = participants_proj()){
+x <- dplyr::full_join(protocol, pts, by = "visit")
+}
