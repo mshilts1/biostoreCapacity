@@ -267,18 +267,40 @@ forecastBioStoreCapacity <- function() {
 #'
 #' @examples
 #' site_collections()
-site_collections <- function(x = "deidentified_specimen_collection.csv") {
+site_collections <- function(x = NULL, biostore_only = TRUE) {
+  if(biostore_only == TRUE){
+    x <- "deidentified_specimen_collection_biostore_only.csv"
+  }
+
+  if(biostore_only == FALSE){
+    x <- "deidentified_specimen_collection_ALL.csv"
+  }
+
   path <- system.file("extdata", x, package = "biostoreCapacity", mustWork = TRUE)
   x <- utils::read.csv(file = path, header = TRUE)
   x <- tibble::as_tibble(x)
   # x$date <- lubridate::ymd(x$date)
   x
 }
-specialized_collections_estimates <- function(x = site_collections()){
+specialized_collections_estimates <- function(x = site_collections(biostore_only = FALSE)){
 # breast milk collected from moms when child is 0-5 months
   # hair from moms at this age to approximate expected numbers?
   # collected by chem/phys, obesity, and lifestyle groups
-  #
+
+# child urine 12-23 months
+  # hair from child at this age to approximate expected numbers?
+  # collected by chem/phys
+
+# child whole blood collected from 6-10 year olds
+  # whole blood from 2025 from this age group probably best to approximate
+  # collected by obesity
+
+# child whole blood collected from 11-17 year olds
+  # urine from 2025 from this age group probably best to approximate
+  # collected by obesity
+
+  #nevermind i don't even have this information. why am i bothering with this again????
+
 }
 #' Load in predicted participant numbers from Measurement Core May 2025
 #'
