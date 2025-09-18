@@ -37,7 +37,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">predict_capacity</span><span class="op">(</span>hist_init <span class="op">=</span> <span class="cn">NULL</span>, horizon <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">predict_capacity</span><span class="op">(</span><span class="va">hist_init</span>, horizon <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -60,78 +60,7 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">predict_capacity</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $df_obs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          date total_capacity     type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  2024-10-01      0.3059747 Observed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2024-11-01      0.3346318 Observed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  2024-12-01      0.3774070 Observed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  2025-01-01      0.4092389 Observed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  2025-02-01      0.4797247 Observed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  2025-03-01      0.5716102 Observed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  2025-04-01      0.6305158 Observed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  2025-05-01      0.6824560 Observed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  2025-06-01      0.7209410 Observed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 2025-07-01      0.7338415 Observed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $df_fc</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          date total_capacity interval     type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  2025-08-01      0.7813823     Mean Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2025-09-01      0.8289230     Mean Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  2025-10-01      0.8764638     Mean Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  2025-11-01      0.9240046     Mean Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  2025-12-01      0.9715453     Mean Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  2026-01-01      1.0190861     Mean Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  2025-08-01      0.7346425    Lower Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  2025-09-01      0.7628230    Lower Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  2025-10-01      0.7955081    Lower Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 2025-11-01      0.8305250    Lower Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11 2025-12-01      0.8670320    Lower Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12 2026-01-01      0.9045975    Lower Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13 2025-08-01      0.8281221    Upper Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14 2025-09-01      0.8950231    Upper Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15 2025-10-01      0.9574195    Upper Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16 2025-11-01      1.0174841    Upper Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17 2025-12-01      1.0760587    Upper Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18 2026-01-01      1.1335747    Upper Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $df_line</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           date total_capacity     type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   2024-10-01      0.3059747 Observed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   2024-11-01      0.3346318 Observed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   2024-12-01      0.3774070 Observed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   2025-01-01      0.4092389 Observed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   2025-02-01      0.4797247 Observed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   2025-03-01      0.5716102 Observed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   2025-04-01      0.6305158 Observed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   2025-05-01      0.6824560 Observed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   2025-06-01      0.7209410 Observed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10  2025-07-01      0.7338415 Observed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11  2025-08-01      0.7813823 Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12  2025-09-01      0.8289230 Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13  2025-10-01      0.8764638 Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14  2025-11-01      0.9240046 Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15  2025-12-01      0.9715453 Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16  2026-01-01      1.0190861 Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 101 2025-07-01      0.7338415 Forecast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $df_ribbon</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   date       type     Lower Upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2025-08-01 Forecast 0.735 0.828</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2025-09-01 Forecast 0.763 0.895</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 2025-10-01 Forecast 0.796 0.957</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 2025-11-01 Forecast 0.831 1.02 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 2025-12-01 Forecast 0.867 1.08 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 2026-01-01 Forecast 0.905 1.13 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $fc_dates</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2025-08-01" "2025-09-01" "2025-10-01" "2025-11-01" "2025-12-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [6] "2026-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $annot_lbl</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Mean crosses: 2025-12-20\n95% upper crosses: 2025-10-23"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in predict_capacity():</span> argument "hist_init" is missing, with no default</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
