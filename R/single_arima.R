@@ -10,8 +10,8 @@
 #'
 #' @examples
 #' predict_capacity()
-predict_capacity <- function(hist_init = NULL, horizon = 6) {
-  hist_init <- hist_init()
+predict_capacity <- function(hist_init, horizon = 6) {
+  # hist_init <- hist_init()
   #horizon <- 6
   # 2. Aggregate to monthly using zoo::as.yearmon
   zoo_total <- zoo::zoo(hist_init$total_capacity, order.by = hist_init$date)
@@ -143,24 +143,28 @@ predict_capacity <- function(hist_init = NULL, horizon = 6) {
   )
 }
 
-hist_init <- function(){
-hist <- readHistorical()
-init_1ml  <- 196412 - hist$cumulative_1.0[nrow(hist)]
-init_1.9ml <- 212692 - hist$cumulative_1.9[nrow(hist)]
+# hist_init <- function(){
+# hist <- readHistorical()
+# init_1ml  <- 196412 - hist$cumulative_1.0[nrow(hist)]
+# init_1.9ml <- 212692 - hist$cumulative_1.9[nrow(hist)]
+#
+# hist_init <- hist %>%
+#   dplyr::mutate(
+#     "cumulative_1.0" = .data$cumulative_1.0 + init_1ml,
+#     "cumulative_1.9" = .data$cumulative_1.9 + init_1.9ml,
+#     "capacity_1.0_ml" = .data$cumulative_1.0 / 788256,
+#     "capacity_1.9_ml" = .data$cumulative_1.9 / 438840,
+#     "total_capacity"  = .data$capacity_1.0_ml + .data$capacity_1.9_ml,
+#     "prop_1ml" = .data$tubes_1.0_ml / (.data$tubes_1.0_ml + .data$tubes_1.9_ml),
+#     "prop_1ml" = ifelse(is.na(.data$prop_1ml), 0, .data$prop_1ml),
+#     "total_submitted_capacity" = .5*.data$total_submitted/788256 +  .5*.data$total_submitted/438840 # this is our prior on how many will return from each site
+#   ) %>%
+#   dplyr::select(.data$date, .data$total_capacity, .data$prop_1ml, .data$total_submitted_capacity)
+# }
 
-hist_init <- hist %>%
-  dplyr::mutate(
-    "cumulative_1.0" = .data$cumulative_1.0 + init_1ml,
-    "cumulative_1.9" = .data$cumulative_1.9 + init_1.9ml,
-    "capacity_1.0_ml" = .data$cumulative_1.0 / 788256,
-    "capacity_1.9_ml" = .data$cumulative_1.9 / 438840,
-    "total_capacity"  = .data$capacity_1.0_ml + .data$capacity_1.9_ml,
-    "prop_1ml" = .data$tubes_1.0_ml / (.data$tubes_1.0_ml + .data$tubes_1.9_ml),
-    "prop_1ml" = ifelse(is.na(.data$prop_1ml), 0, .data$prop_1ml),
-    "total_submitted_capacity" = .5*.data$total_submitted/788256 +  .5*.data$total_submitted/438840 # this is our prior on how many will return from each site
-  ) %>%
-  dplyr::select(.data$date, .data$total_capacity, .data$prop_1ml, .data$total_submitted_capacity)
-}
+
+#' Single ARIMA model with covariates and two scenarios (initial stock and final jump)
+#' @export
 single_arima <- function() {
   horizon <- 6  # months
   covariates_interval <- "mean" # "upper" for a worst case scenario on the covariates
@@ -182,6 +186,9 @@ single_arima <- function() {
       "total_submitted_capacity" = .5*.data$total_submitted/788256 +  .5*.data$total_submitted/438840 # this is our prior on how many will return from each site
     ) %>%
     dplyr::select(.data$date, .data$total_capacity, .data$prop_1ml, .data$total_submitted_capacity)
+
+  hist_init_aligned <- hist_init %>%
+    mutate(date = date + as.difftime(55, units = "days"))
 
   # Create hist_final by appending a new row with date "2025-09-02" and fixed cumulative values
   new_row <- tibble::tibble(
@@ -206,7 +213,7 @@ single_arima <- function() {
     dplyr::select(.data$date, .data$total_capacity, .data$prop_1ml, .data$total_submitted_capacity)
 
   # Call the new function to get forecast data
-  forecast_results <- predict_capacity(hist_init, horizon)
+  forecast_results <- predict_capacity(hist_init_aligned, horizon)
   forecast_final <- predict_capacity(hist_extended, horizon)
 
   # Compute pessimistic crossing date by reproducing mean-crossing logic for forecast_final$df_fc
