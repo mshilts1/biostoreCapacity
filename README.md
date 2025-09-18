@@ -179,9 +179,9 @@ site_collections()
 
 ## Future kit builds and biospecimen collection protocol
 
-Since the Lab Core wasn’t permitted to receive the UH3 MAP, we are
-instead using here data from the Measurement Core and the April 2025 F2F
-meeting of the Protocol Task Force.
+As the Lab Core does not have access to the UH3 MAP, we are instead
+using here data from the Measurement Core and the April 2025 F2F meeting
+of the Protocol Task Force.
 
 ``` r
 future_projections()

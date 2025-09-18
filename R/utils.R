@@ -274,6 +274,12 @@ site_collections <- function(x = "deidentified_specimen_collection.csv") {
   # x$date <- lubridate::ymd(x$date)
   x
 }
+specialized_collections_estimates <- function(x = site_collections()){
+# breast milk collected from moms when child is 0-5 months
+  # hair from moms at this age to approximate expected numbers?
+  # collected by chem/phys, obesity, and lifestyle groups
+  #
+}
 #' Load in predicted participant numbers from Measurement Core May 2025
 #'
 #' @param x file name

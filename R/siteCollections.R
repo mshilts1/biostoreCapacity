@@ -1,13 +1,14 @@
 #' Parse file of site collections from Bio-Track
 #'
 #' @param x JSON file from Bio-Track
+#' @param biostore_only Pull only BioStore compatible cryovials, or everything. Default is TRUE
 #'
 #' @returns tibble with collections from sites that will go into biostore
 #' @importFrom jsonlite fromJSON
 #' @import stringr
 #' @importFrom ids random_id
 #'
-siteCollectionsPre <- function(x = "site_report_2025_09_12_07_43_04.json") { # json file must be pulled from elvislims with your credentials
+siteCollectionsPre <- function(x = "site_report_2025_09_12_07_43_04.json", biostore_only = TRUE) { # json file must be pulled from elvislims with your credentials
   x <- normalizePath(file.path("/Users/meghanshilts/Downloads", x), mustWork = TRUE)
   collections <- jsonlite::fromJSON(txt = x, flatten = TRUE, simplifyDataFrame = TRUE)
   collections <- collections %>%
@@ -16,6 +17,11 @@ siteCollectionsPre <- function(x = "site_report_2025_09_12_07_43_04.json") { # j
     janitor::clean_names() %>%
     dplyr::mutate("storage_date" = as.Date(ymd_hms(.data$storage_date, quiet = TRUE)))
 
+  if(biostore_only == FALSE){
+    return(collections)
+  }
+
+  if(biostore_only == TRUE){
   biostoreCompatible <- collections %>%
     dplyr::filter(stringr::str_detect(.data$sample_type, stringr::regex("cryovial", ignore_case = TRUE)) | stringr::str_detect(.data$sample_type, stringr::regex("barcoded", ignore_case = TRUE))) %>%
     dplyr::filter(.data$sample_type != "7.0 mL Urine aliquots in 7.6 mL cryovial (orange capped)") %>%
@@ -26,17 +32,25 @@ siteCollectionsPre <- function(x = "site_report_2025_09_12_07_43_04.json") { # j
       stringr::str_detect(.data$sample_type, "1.9 mL empty Barcoded") ~ "size 1.9mL",
       TRUE ~ "Other" # Default case for no match
     ))
+  return(biostoreCompatible)
+  }
 }
+
 specializedBySite <- function(x = "ECHOCycle2ELVISLabor-SpecializedCollectio_DATA_2025-09-12_1255.csv") { # can only be pulled from REDCap with correct permissions and credentials
   spec_by_site <- tibble::as_tibble(utils::read.csv(file = normalizePath(file.path("/Users/meghanshilts/Downloads", x), mustWork = TRUE), header = TRUE))
 
   spec_by_site <- spec_by_site %>% dplyr::rename("cohort_study_site_id" = "record_id")
 }
-merged <- function(x = siteCollectionsPre(), y = specializedBySite()) {
+
+merged <- function(x = NULL, y = specializedBySite(), ...) {
+  x <- siteCollectionsPre(...)
+
   mergeit <- merge(x, y, by = "cohort_study_site_id")
   tibble::as_tibble(mergeit)
 }
-deidentified <- function(x = merged()) {
+
+deidentified <- function(x = NULL, ...) {
+  x <- merged(...)
   random_ids <- ids::random_id(length(unique(x$cohort_study_site_id)))
   lookup_table <- data.frame(
     cohort_study_site_id = unique(x$cohort_study_site_id),
@@ -50,7 +64,14 @@ deidentified <- function(x = merged()) {
     dplyr::relocate("site_id_randomized")
   tibble::as_tibble(deident)
 }
-write_deidentified <- function(x = deidentified()) {
+
+write_deidentified <- function(x = NULL, ...) {
+  x <- deidentified(...)
   file_path <- "inst/extdata/deidentified_specimen_collection.csv"
   utils::write.csv(x, file_path, row.names = FALSE)
 }
+
+test <- function(x = NULL, ...){
+  x <- deidentified(...)
+  print(match.call())
+  }
