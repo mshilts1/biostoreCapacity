@@ -261,6 +261,7 @@ forecastBioStoreCapacity <- function() {
 #' Load in de-identified information about site biospecimen collections
 #'
 #' @param x file name of deidentified biospecimen collections file
+#' @param biostore_only Pull only specimens collected that can go in the BioStore or not.
 #'
 #' @returns a tibble with this information
 #' @export
@@ -301,17 +302,27 @@ participants_proj <- function(x = "MC_projections_May2025.csv") {
 #' Load in projected kit count numbers from PTF August 2025
 #'
 #' @param x file name
+#' @param make_long make returned tibble long instead of wide
 #'
 #' @returns a tibble with this information
 #' @export
 #'
 #' @examples
-#' participants_proj()
-kits_proj <- function(x = "PTF_projections_Aug2025.csv") {
+#' kits_proj()
+kits_proj <- function(x = "PTF_projections_Aug2025.csv", make_long = FALSE) {
+
   path <- system.file("extdata", x, package = "biostoreCapacity", mustWork = TRUE)
   x <- utils::read.csv(file = path, header = TRUE)
   x <- tibble::as_tibble(x)
   x[is.na(x)] <- 0
-  # x$date <- lubridate::ymd(x$date)
-  x
+
+  if(make_long == FALSE){
+    return(x)
+  }
+
+  if(make_long == TRUE){
+  x <- x %>% tidyr::pivot_longer(!.data$Specimen, names_to = "temp", values_to = "kit_count") %>% tidyr::separate_wider_delim(cols = .data$temp, delim = "_", names = c(NA, NA, "year", "pricing_option"))
+  return(x)
+  }
+
 }

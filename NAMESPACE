@@ -2,6 +2,7 @@
 
 export(capacityNumbers)
 export(future_projections)
+export(kits_proj)
 export(longifyReadHistorical)
 export(participants_proj)
 export(pendingNumbers)

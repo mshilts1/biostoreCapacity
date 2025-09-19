@@ -4,10 +4,12 @@
 \alias{site_collections}
 \title{Load in de-identified information about site biospecimen collections}
 \usage{
-site_collections(x = "deidentified_specimen_collection.csv")
+site_collections(x = NULL, biostore_only = TRUE)
 }
 \arguments{
 \item{x}{file name of deidentified biospecimen collections file}
+
+\item{biostore_only}{Pull only specimens collected that can go in the BioStore or not.}
 }
 \value{
 a tibble with this information
