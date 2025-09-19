@@ -58,7 +58,7 @@ deidentified <- function(x = NULL, ...) {
   deident <- merge(lookup_table, x, by = "cohort_study_site_id")
   deident <- deident %>%
     dplyr::mutate("shipped" = ifelse(is.na(.data$shipment_id), 0, 1)) %>%
-    dplyr::select(-c("cohort_study_site_id", "container_id", "storage_location", "specimen_id", "kit_number", "shipment_id")) %>%
+    dplyr::select(-c("cohort_study_site_id", "container_id", "storage_location", "specimen_id", "shipment_id")) %>%
     dplyr::relocate("site_id_randomized")
   tibble::as_tibble(deident)
 }

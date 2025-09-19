@@ -326,13 +326,40 @@ kits_proj <- function(x = "PTF_projections_Aug2025.csv", make_long = FALSE) {
   }
 
 }
+#' Merge PTF kit projection counts with number of tubes in each kit
+#'
+#' @param x PTF projected kit counts
+#' @param y Number of tubes in each kit
+#'
+#' @returns tibble merged of both above
+#' @export
+#'
+#' @examples
+#' merge_ptf_tube_counts()
 merge_ptf_tube_counts <- function(x = NULL, y = NULL){
   x <- kits_proj(make_long = TRUE)
   y <- readCollections()
 
-  y <- y %>% dplyr::select(c("specimen_clean", "tube_size", "tubes_per_kit")) %>% dplyr::distinct() %>% droplevels()
+  y <- y %>% dplyr::select(c("specimen_clean", "specimen_type", "tube_size", "tubes_per_kit")) %>% dplyr::distinct() %>% droplevels()
 
   mergeit <- merge(x, y, by = "specimen_clean")
   return(tibble::as_tibble(mergeit))
 
+}
+#merge_ptf_tube_counts_hist_coll <- function(x = NULL, y = NULL){
+#  x <- merge_ptf_tube_counts()
+#  y <- site_collections()
+
+#  mergeit <- merge(x, y, by = "specimen_type")
+#}
+
+valid_kit_ids <- function(x = NULL) {
+
+  x <- "ECHOKitDatabase-ForBioStoreCapacityR_DATA_2025-09-19_1758.csv"
+
+  path <- system.file("extdata", x, package = "biostoreCapacity", mustWork = TRUE)
+  x <- utils::read.csv(file = path, header = TRUE)
+  x <- tibble::as_tibble(x)
+  # x$date <- lubridate::ymd(x$date)
+  x
 }
