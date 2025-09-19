@@ -56,25 +56,25 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">readCollections</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 27 × 31</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    collection_id      visit_participant kit_type specimen_clean biospecimen_type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> breastmilk_1.9ml_… 0_5_months_mater… breastm… maternal_brea… breastmilk      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> breastmilk_1ml_0_… 0_5_months_mater… breastm… maternal_brea… breastmilk      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> urine_diaper_1.9m… 12_23_months_chi… urine_d… child_urine_d… urine           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> whole_blood_child… 11_17_years_child whole_b… child_whole_b… whole_blood     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> whole_blood_child… 11_17_years_child whole_b… child_whole_b… whole_blood     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> whole_blood_child… 6_10_years_child  whole_b… child_whole_b… whole_blood     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> whole_blood_child… 6_10_years_child  whole_b… child_whole_b… whole_blood     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> urine_diaper_1.9m… 0_5_months_child  urine_d… child_urine_d… urine           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> urine_cup_child_1… 11_17_years_child urine_c… child_urine_c… urine           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> whole_blood_child… 11_17_years_child whole_b… child_whole_b… whole_blood     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 27 × 32</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    collection_id         visit_participant kit_type specimen_clean specimen_type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> breastmilk_1.9ml_0_5… 0_5_months_mater… breastm… maternal_brea… Breast Milk  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> breastmilk_1ml_0_5_m… 0_5_months_mater… breastm… maternal_brea… Breast Milk  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> cord_blood_1.9ml_per… perinatal_child   cord_bl… child_cord_bl… Cord Blood   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> cord_blood_1ml_perin… perinatal_child   cord_bl… child_cord_bl… Cord Blood   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> placenta_1.9ml_perin… perinatal_matern… placenta maternal_plac… Placenta     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> urine_diaper_1.9ml_1… 12_23_months_chi… urine_d… child_urine_d… Urine (Diape…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> urine_diaper_1.9ml_0… 0_5_months_child  urine_d… child_urine_d… Urine (Diape…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> urine_cup_child_1.9m… 11_17_years_child urine_c… child_urine_c… Urine (Self …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> urine_cup_maternal_1… 24_35_months_mat… urine_c… maternal_urin… Urine (Self …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> urine_hat_1.9ml_3_5_… 3_5_years_child   urine_h… child_urine_h… Urine (Self …</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 17 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 26 more variables: participant &lt;chr&gt;, tube_size &lt;chr&gt;, tubes_per_kit &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   proportion_from_kit_collected &lt;dbl&gt;, visit &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   visit_logical_order &lt;dbl&gt;, specimen_type &lt;chr&gt;, coll_y_2025 &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   coll_y_2026 &lt;dbl&gt;, coll_y_2027 &lt;dbl&gt;, coll_y_2028 &lt;dbl&gt;, coll_y_2029 &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   coll_y_2030 &lt;dbl&gt;, coll_y_2025_proportion &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 27 more variables: biospecimen_type &lt;chr&gt;, participant &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tube_size &lt;chr&gt;, tubes_per_kit &lt;dbl&gt;, proportion_from_kit_collected &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   visit &lt;chr&gt;, visit_logical_order &lt;dbl&gt;, specimen_type_2 &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   coll_y_2025 &lt;dbl&gt;, coll_y_2026 &lt;dbl&gt;, coll_y_2027 &lt;dbl&gt;, coll_y_2028 &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   coll_y_2029 &lt;dbl&gt;, coll_y_2030 &lt;dbl&gt;, coll_y_2025_proportion &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   coll_y_2026_proportion &lt;dbl&gt;, coll_y_2027_proportion &lt;dbl&gt;, …</span></span>
 </code></pre></div>
     </div>
