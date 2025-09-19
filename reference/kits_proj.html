@@ -60,26 +60,26 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">kits_proj</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 30 × 15</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Specimen          Kits_Needed_2024_p1 Kits_Needed_2024_p2 Kits_Needed_2025_p1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Child Saliva                        0                   0                <span style="text-decoration: underline;">3</span>861</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Child Hair                       <span style="text-decoration: underline;">1</span>720                <span style="text-decoration: underline;">1</span>772                <span style="text-decoration: underline;">3</span>367</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Child Urine (dia…                <span style="text-decoration: underline;">2</span>565                <span style="text-decoration: underline;">2</span>642                <span style="text-decoration: underline;">4</span>995</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Child Urine (dia…                <span style="text-decoration: underline;">1</span>187                <span style="text-decoration: underline;">1</span>223                <span style="text-decoration: underline;">2</span>323</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Child Urine (hat)                   0                   0                <span style="text-decoration: underline;">3</span>861</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Child Urine (cup)                   0                   0               <span style="text-decoration: underline;">13</span>530</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Child Urine Card                    0                   0                   0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Child Blood Spot…                <span style="text-decoration: underline;">4</span>284                <span style="text-decoration: underline;">4</span>413                <span style="text-decoration: underline;">8</span>362</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Child Blood Spot…                   0                   0                <span style="text-decoration: underline;">4</span>629</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Child Whole Blood                   0                   0               <span style="text-decoration: underline;">13</span>530</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 30 × 16</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Specimen               specimen_clean Kits_Needed_2024_p1 Kits_Needed_2024_p2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Child Saliva           child_saliva_…                   0                   0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Child Hair             child_hair_co…                <span style="text-decoration: underline;">1</span>720                <span style="text-decoration: underline;">1</span>772</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Child Urine (diaper)   child_urine_d…                <span style="text-decoration: underline;">2</span>565                <span style="text-decoration: underline;">2</span>642</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Child Urine (diaper) … child_urine_d…                <span style="text-decoration: underline;">1</span>187                <span style="text-decoration: underline;">1</span>223</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Child Urine (hat)      child_urine_h…                   0                   0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Child Urine (cup)      child_urine_c…                   0                   0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Child Urine Card       child_urine_c…                   0                   0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Child Blood Spot (New… child_blood_s…                <span style="text-decoration: underline;">4</span>284                <span style="text-decoration: underline;">4</span>413</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Child Blood Spot (2+)  child_blood_s…                   0                   0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Child Whole Blood      child_whole_b…                   0                   0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 20 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 11 more variables: Kits_Needed_2025_p2 &lt;int&gt;, Kits_Needed_2026_p1 &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Kits_Needed_2026_p2 &lt;int&gt;, Kits_Needed_2027_p1 &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Kits_Needed_2027_p2 &lt;int&gt;, Kits_Needed_2028_p1 &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Kits_Needed_2028_p2 &lt;int&gt;, Kits_Needed_2029_p1 &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Kits_Needed_2029_p2 &lt;int&gt;, Kits_Needed_2030_p1 &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Kits_Needed_2030_p2 &lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 12 more variables: Kits_Needed_2025_p1 &lt;int&gt;, Kits_Needed_2025_p2 &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Kits_Needed_2026_p1 &lt;int&gt;, Kits_Needed_2026_p2 &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Kits_Needed_2027_p1 &lt;int&gt;, Kits_Needed_2027_p2 &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Kits_Needed_2028_p1 &lt;int&gt;, Kits_Needed_2028_p2 &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Kits_Needed_2029_p1 &lt;int&gt;, Kits_Needed_2029_p2 &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Kits_Needed_2030_p1 &lt;int&gt;, Kits_Needed_2030_p2 &lt;int&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
