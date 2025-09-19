@@ -282,26 +282,6 @@ site_collections <- function(x = NULL, biostore_only = TRUE) {
   # x$date <- lubridate::ymd(x$date)
   x
 }
-specialized_collections_estimates <- function(x = site_collections(biostore_only = FALSE)){
-# breast milk collected from moms when child is 0-5 months
-  # hair from moms at this age to approximate expected numbers?
-  # collected by chem/phys, obesity, and lifestyle groups
-
-# child urine 12-23 months
-  # hair from child at this age to approximate expected numbers?
-  # collected by chem/phys
-
-# child whole blood collected from 6-10 year olds
-  # whole blood from 2025 from this age group probably best to approximate
-  # collected by obesity
-
-# child whole blood collected from 11-17 year olds
-  # urine from 2025 from this age group probably best to approximate
-  # collected by obesity
-
-  #nevermind i don't even have this information. why am i bothering with this again????
-
-}
 #' Load in predicted participant numbers from Measurement Core May 2025
 #'
 #' @param x file name
@@ -315,6 +295,23 @@ participants_proj <- function(x = "MC_projections_May2025.csv") {
   path <- system.file("extdata", x, package = "biostoreCapacity", mustWork = TRUE)
   x <- utils::read.csv(file = path, header = TRUE)
   x <- tibble::as_tibble(x)
+  # x$date <- lubridate::ymd(x$date)
+  x
+}
+#' Load in projected kit count numbers from PTF August 2025
+#'
+#' @param x file name
+#'
+#' @returns a tibble with this information
+#' @export
+#'
+#' @examples
+#' participants_proj()
+kits_proj <- function(x = "PTF_projections_Aug2025.csv") {
+  path <- system.file("extdata", x, package = "biostoreCapacity", mustWork = TRUE)
+  x <- utils::read.csv(file = path, header = TRUE)
+  x <- tibble::as_tibble(x)
+  x[is.na(x)] <- 0
   # x$date <- lubridate::ymd(x$date)
   x
 }
