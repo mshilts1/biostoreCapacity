@@ -321,8 +321,18 @@ kits_proj <- function(x = "PTF_projections_Aug2025.csv", make_long = FALSE) {
   }
 
   if(make_long == TRUE){
-  x <- x %>% tidyr::pivot_longer(!.data$Specimen, names_to = "temp", values_to = "kit_count") %>% tidyr::separate_wider_delim(cols = .data$temp, delim = "_", names = c(NA, NA, "year", "pricing_option"))
+  x <- x %>% tidyr::pivot_longer(!c(.data$Specimen, .data$specimen_clean), names_to = "temp", values_to = "kit_count") %>% tidyr::separate_wider_delim(cols = .data$temp, delim = "_", names = c(NA, NA, "year", "pricing_option"))
   return(x)
   }
+
+}
+merge_ptf_tube_counts <- function(x = NULL, y = NULL){
+  x <- kits_proj(make_long = TRUE)
+  y <- readCollections()
+
+  y <- y %>% dplyr::select(c("specimen_clean", "tube_size", "tubes_per_kit")) %>% dplyr::distinct() %>% droplevels()
+
+  mergeit <- merge(x, y, by = "specimen_clean")
+  return(tibble::as_tibble(mergeit))
 
 }
