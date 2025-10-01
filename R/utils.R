@@ -258,7 +258,7 @@ freezer_fullness_graph <- function(used = NULL) {
 forecastBioStoreCapacity <- function() {
   forecast::forecast()
 }
-#' Load in de-identified information about site biospecimen collections
+#' Load in de-identified information about site biospecimen collections. Only captures specimens NOT yet shipped to biorepository.
 #'
 #' @param x file name of deidentified biospecimen collections file
 #' @param biostore_only Pull only specimens collected that can go in the BioStore or not.
