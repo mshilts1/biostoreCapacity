@@ -26,5 +26,6 @@ Imports:
     stringr,
     tibble,
     tidyr,
-    zoo
+    zoo,
+    CVXR
 URL: https://mshilts1.github.io/biostoreCapacity/
