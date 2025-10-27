@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{site_collections}
 \alias{site_collections}
-\title{Load in de-identified information about site biospecimen collections}
+\title{Load in de-identified information about site biospecimen collections. Only captures specimens NOT yet shipped to biorepository.}
 \usage{
 site_collections(x = NULL, biostore_only = TRUE)
 }
@@ -15,7 +15,7 @@ site_collections(x = NULL, biostore_only = TRUE)
 a tibble with this information
 }
 \description{
-Load in de-identified information about site biospecimen collections
+Load in de-identified information about site biospecimen collections. Only captures specimens NOT yet shipped to biorepository.
 }
 \examples{
 site_collections()
