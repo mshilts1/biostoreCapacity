@@ -25,7 +25,7 @@ Pregnant Individual Hair,maternal_hair_core,2565,2642,4995,4995,7192,6083,7195,6
 Pregnant Individual/Maternal Urine,maternal_urine_cup_core,12869,13255,20693,19379,21576,23438,21576,24968,28768,20274,19163,11248,10678,3276
 Maternal Stool - Specialized,maternal_stool_specialized,1899,6613,3021,3021,3021,2839,3021,2839,3021,2839,1465,1376,0,0
 Breastmilk - Specialized,maternal_breastmilk_specialized,2257,4966,4396,4396,6329,2974,6332,2975,6329,2974,6329,5948,3068,2883
-Household Water Sample - Specialized,maternal_water_specialzied,4492,11332,4963,12155,4963,4664,4963,4664,4963,4664,892,838,0,0
+Household Water Sample - Specialized,maternal_water_specialized,4492,11332,4963,12155,4963,4664,4963,4664,4963,4664,892,838,0,0
 Partner Saliva (for epigenetics and DNA),partner_saliva_core,2,2,2747,1374,3956,1487,3956,1487,3956,1487,3956,1487,1918,721
 Partner Urine,partner_urine_cup_core,2,2,2747,0,3956,1487,3956,1487,3956,1487,3956,1487,1918,721
 Partner Semen,partner_semen_specialized,2,2,2747,0,3956,1487,3956,1487,3956,1487,3956,1487,1918,721
