@@ -400,7 +400,7 @@ predict_capacity_multiple_today <- function(){
     capacity_vec <- case_when(
       format(periods, "%Y") <  "2026" ~ 40000,
       format(periods, "%Y") == "2026" ~ 50000,
-      format(periods, "%Y") >= "2027" ~ 55000
+      format(periods, "%Y") >= "2027" ~ 60000
     )
   }
 
