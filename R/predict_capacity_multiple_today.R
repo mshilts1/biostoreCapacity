@@ -75,7 +75,14 @@ samples_at_the_repository <-dac%>%select(labware_type,`Received at Repository`) 
 ptf<-kits_proj(make_long = TRUE) %>%
   filter(year >= 2025) %>%
   filter(pricing_option == price_option) %>% # p1 price option has more tubes
-  select(-pricing_option)
+  select(-pricing_option)%>%
+  mutate(
+    specimen_clean = case_when(
+      specimen_clean == "maternal_water_specialzied" ~ "maternal_water_specialized",
+      specimen_clean == "maternal_placenta_tier1_core" ~ "maternal_placenta_core",
+      TRUE ~ specimen_clean
+    )
+  )
 
 ptf_scaled <- ptf %>%
   mutate(across(
@@ -92,7 +99,9 @@ map_kit_to_labware <- read_excel("inst/extdata/Table 1. ECHO Kits and Aliquots.x
   # filter(!is.na(containers_per_rack) & containers_per_rack!="unknown")# # exlude ambient + partner semen + water bag
 
 ptf_map <- ptf_scaled %>%
-  left_join(map_kit_to_labware, by = c("specimen_clean" = "kits_proj_function_kit_type"))
+  left_join(map_kit_to_labware,
+            by = c("specimen_clean" = "kits_proj_function_kit_type"),
+            relationship = "many-to-many")
 
 ptf_labware <- ptf_map %>%
   filter(labware_count != "unknown") %>% # remove partner_semen_specialized
@@ -547,12 +556,25 @@ ggplot(cum_by_location_long, aes(x = period, y = value, color = location)) +
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
 
+# cum_by_location_long_scaled <- cum_by_location_long %>%
+#   mutate(
+#     value_scaled = if_else(location == "-80C freezer", value / 10, value),
+#     location_label = if_else(location == "-80C freezer",
+#                              "-80C freezer (x10)",
+#                              location)
+#   )
 cum_by_location_long_scaled <- cum_by_location_long %>%
   mutate(
-    value_scaled = if_else(location == "-80C freezer", value / 10, value),
-    location_label = if_else(location == "-80C freezer",
-                             "-80C freezer (x10)",
-                             location)
+    value_scaled = case_when(
+      location == "-80C freezer" ~ value / 10,
+      location == "-20C freezer" ~ value / 2,
+      TRUE ~ value
+    ),
+    location_label = case_when(
+      location == "-80C freezer" ~ "-80C freezer (x10)",
+      location == "-20C freezer" ~ "-20C freezer (x2)",
+      TRUE ~ location
+    )
   )
 
 # ggplot(cum_by_location_long_scaled,
