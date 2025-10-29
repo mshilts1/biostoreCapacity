@@ -54,11 +54,11 @@ library(janitor)
 #' }
 #'
 #' @export
-predict_capacity_multiple_november1 <- function(){
+predict_capacity_multiple_today <- function(){
 
 ### options
 price_option <- "p2" # p1 or p2
-taday <- as.Date("2025-11-01")#Sys.Date()
+taday <- Sys.Date()
 
 
 ## 1 - get the data
@@ -101,34 +101,99 @@ ptf_labware <- ptf_map %>%
   summarise(total_labware_count = sum(labware_count *kit_count , na.rm = TRUE)) %>%
   ungroup()
 
+# expand_year_to_months <- function(df, start_2025, finish_2030) {
+#   df %>%
+#     mutate(
+#       year = as.integer(year),
+#       start_date = if_else(year == 2025L, start_2025, as.Date(paste0(year, "-01-01"))),
+#       end_date   = if_else(year == 2030L, finish_2030, as.Date(paste0(year, "-12-31")))
+#     ) %>%
+#     rowwise() %>%
+#     mutate(
+#       months_seq = list(seq.Date(start_date, end_date, by = "month")),
+#       n_months   = length(months_seq),
+#       monthly_labware = total_labware_count / n_months
+#     ) %>%
+#     ungroup() %>%
+#     select(year, labware_type, location, months_seq, monthly_labware) %>%
+#     unnest(months_seq) %>%
+#     mutate(date = ceiling_date(months_seq, "month") - days(1)) %>%
+#     select(date, labware_type, location, year,
+#            total_labware_count = monthly_labware) %>%
+#
+#     # ---- Add post-2030 months as zeros ----
+#   bind_rows({
+#     df %>%
+#       filter(year == 2030L) %>%
+#       distinct(labware_type, location) %>%
+#       ungroup() %>%  # <-- Important: ungroup before mutate
+#       mutate(months_post = list(seq.Date(
+#         ceiling_date(finish_2030, "month"),
+#         as.Date("2030-12-31"), by = "month"
+#       ))) %>%
+#       unnest(months_post) %>%
+#       mutate(
+#         date = ceiling_date(months_post, "month") - days(1),
+#         year = 2030L,
+#         total_labware_count = 0
+#       ) %>%
+#       select(date, labware_type, location, year, total_labware_count)
+#   }) %>%
+#     arrange(labware_type, location, date)
+# }
 expand_year_to_months <- function(df, start_2025, finish_2030) {
   df %>%
     mutate(
       year = as.integer(year),
-      start_date = if_else(year == 2025L, start_2025, as.Date(paste0(year, "-01-01"))),
-      end_date   = if_else(year == 2030L, finish_2030, as.Date(paste0(year, "-12-31")))
+      start_date = if_else(year == 2025L, .env$start_2025, as.Date(paste0(year, "-01-01"))),
+      end_date   = if_else(year == 2030L, .env$finish_2030, as.Date(paste0(year, "-12-31")))
     ) %>%
     rowwise() %>%
     mutate(
+      # Generate all month-end dates within the range
       months_seq = list(seq.Date(start_date, end_date, by = "month")),
-      n_months   = length(months_seq),
+
+      # Calculate effective number of months with fractional correction for first month
+      n_months_full = length(months_seq),
+      first_month_days_total = days_in_month(start_date),
+      first_month_days_used = first_month_days_total - day(start_date) + 1,
+      first_month_fraction = first_month_days_used / first_month_days_total,
+
+      # Adjusted total months accounting for partial first month
+      n_months = (n_months_full - 1) + first_month_fraction,
       monthly_labware = total_labware_count / n_months
     ) %>%
     ungroup() %>%
-    select(year, labware_type, location, months_seq, monthly_labware) %>%
+    select(year, labware_type, location, months_seq, monthly_labware,
+           start_date, first_month_fraction) %>%
     unnest(months_seq) %>%
-    mutate(date = ceiling_date(months_seq, "month") - days(1)) %>%
-    select(date, labware_type, location, year,
-           total_labware_count = monthly_labware) %>%
+    # mutate(
+    #   date = ceiling_date(months_seq, "month") - days(1),
+    #   # Apply the fractional adjustment to the first partial month
+    #   total_labware_count = if_else(
+    #     months_seq == floor_date(start_date, "month"),
+    #     monthly_labware * first_month_fraction,
+    #     monthly_labware
+    #   )
+    # )
+    mutate(
+      date = ceiling_date(months_seq, "month") - days(1),
+      total_labware_count = if_else(
+        year(months_seq) == year(start_date) & month(months_seq) == month(start_date),
+        monthly_labware * first_month_fraction,
+        monthly_labware
+      )
+    )%>%
+    select(date, labware_type, location, year, total_labware_count) %>%
 
     # ---- Add post-2030 months as zeros ----
   bind_rows({
     df %>%
       filter(year == 2030L) %>%
       distinct(labware_type, location) %>%
-      ungroup() %>%  # <-- Important: ungroup before mutate
+      ungroup() %>%
       mutate(months_post = list(seq.Date(
-        ceiling_date(finish_2030, "month"),
+        ceiling_date(.env$finish_2030, "month"),
         as.Date("2030-12-31"), by = "month"
       ))) %>%
       unnest(months_post) %>%
@@ -297,6 +362,12 @@ capacity_vec <- case_when(
   format(periods, "%Y") >= "2027" ~ 55000
 )
 }
+
+# scale init capacity to remaining days
+first_month_days_total = days_in_month(taday)
+first_month_days_used  = first_month_days_total - day(taday) + 1
+first_month_fraction   = first_month_days_used / first_month_days_total
+capacity_vec[1] <- capacity_vec[1] * first_month_fraction
 
 
 w_vec = rep(1,nrow(A_mat))
