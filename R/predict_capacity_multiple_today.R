@@ -79,7 +79,6 @@ ptf<-kits_proj(make_long = TRUE) %>%
   mutate(
     specimen_clean = case_when(
       specimen_clean == "maternal_water_specialzied" ~ "maternal_water_specialized",
-      specimen_clean == "maternal_placenta_tier1_core" ~ "maternal_placenta_core",
       TRUE ~ specimen_clean
     )
   )
