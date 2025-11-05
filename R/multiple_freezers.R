@@ -15,10 +15,6 @@ library(stringr)
 #' @param capacity_vec Vector of total monthly processing capacity.
 #' @param stored_vec Vector of initial stored tube counts per tube type.
 #' @param w_vec Vector of tube-specific weights.
-#' @param w_stored Numeric scalar controlling penalty for leftover stored tubes
-#'   (default = 1000).
-#' @param w_stored_increase Numeric scalar for gradual penalty increase over time
-#'   (default = 0.01).
 #'
 #' @return
 #' A list containing optimization results (backlog, processed counts, etc.),
@@ -26,69 +22,154 @@ library(stringr)
 #'
 #' @keywords internal
 #' @noRd
-optimize_backlog_and_processed <- function(
-    A_mat,        # arrivals matrix (n_tube x n_time)
-    capacity_vec,        # capacity vector (length n_time)
-    stored_vec,   # initial stock (length n_tube)
-    w_vec,        # weight vector (length n_tube)
-    w_stored = 1000,
-    w_stored_increase = 0.01
-) {
-  # --- basic validations ---
-  if (!is.matrix(A_mat)) stop("A_mat must be a matrix (n_tube x n_time).")
-  if (!is.numeric(capacity_vec)) stop("capacity_vec must be a numeric vector.")
-  if (!is.numeric(stored_vec)) stop("stored_vec must be numeric.")
-  if (!is.numeric(w_vec)) stop("w_vec must be numeric.")
+library(CVXR)
 
+optimize_backlog_and_processed <- function(
+    A_mat, capacity_vec, stored_vec, w_vec,
+    lambda = 0.1
+) {
   n_tube <- nrow(A_mat)
   n_time <- ncol(A_mat)
 
-  if (length(capacity_vec) != n_time)
-    stop("Length of capacity_vec must match number of columns in A_mat.")
-  if (length(stored_vec) != n_tube)
-    stop("Length of stored_vec must match number of rows in A_mat.")
-  if (length(w_vec) != n_tube)
-    stop("Length of w_vec must match number of rows in A_mat.")
-
-  # --- define variables ---
   X <- Variable(n_tube, n_time, nonneg = TRUE)
   Q <- Variable(n_tube, n_time, nonneg = TRUE)
+  D <- Variable(n_tube, n_time, nonneg = TRUE)
 
-  # --- constraints ---
   constraints <- list()
   for (t in 1:n_time) {
     if (t == 1) {
       constraints <- c(constraints, Q[, t] == stored_vec + A_mat[, t] - X[, t])
     } else {
       constraints <- c(constraints, Q[, t] == Q[, t - 1] + A_mat[, t] - X[, t])
+      constraints <- c(constraints, D[, t] >= Q[, t] - Q[, t - 1])
     }
     constraints <- c(constraints, sum_entries(X[, t]) <= capacity_vec[t])
   }
 
-  # --- g weights (large start, small slope) ---
-  # g <- matrix(w_stored + w_stored_increase * (1:n_time), nrow = 1)
-  g  <- matrix(w_stored * exp(-w_stored_increase * (0:(n_time-1))), nrow = 1)
-  # --- objective ---
-  objective <- sum_entries(t(w_vec) %*% (Q %*% diag(as.numeric(g))))
+  # make weights the same dimension as Q
+  W <- matrix(w_vec, n_tube, n_time)
+  objective <- sum_entries(Q * W) + lambda * sum_entries(D)
 
-  # --- solve ---
   prob <- Problem(Minimize(objective), constraints)
   result <- solve(prob, solver = "ECOS")
 
-  # --- extract results ---
-  X_opt <- result$getValue(X)
-  Q_opt <- result$getValue(Q)
-
-  # --- sanity check ---
-  if (any(is.na(X_opt)) || any(is.na(Q_opt))) warning("Optimization returned NA values.")
-
   list(
     status = result$status,
-    g = g,
-    X_opt = X_opt,
-    Q_opt = Q_opt
+    X_opt = result$getValue(X),
+    Q_opt = result$getValue(Q),
+    D_opt = result$getValue(D)
   )
 }
+
+
+
+# optimize_backlog_and_processed <- function(
+#     A_mat,
+#     capacity_vec,
+#     stored_vec,
+#     w_vec
+# ) {
+#   n_tube <- nrow(A_mat)
+#   n_time <- ncol(A_mat)
+#
+#   X <- Variable(n_tube, n_time, nonneg = TRUE)
+#   Q <- Variable(n_tube, n_time, nonneg = TRUE)
+#
+#   constraints <- list()
+#   for (t in 1:n_time) {
+#     if (t == 1) {
+#       # backlog after first period >= stock + arrivals - processed
+#       constraints <- c(constraints,
+#                        Q[, t] >= stored_vec + A_mat[, t] - X[, t])
+#     } else {
+#       # backlog carries over; inequality avoids precision infeasibility
+#       constraints <- c(constraints,
+#                        Q[, t] >= Q[, t - 1] + A_mat[, t] - X[, t])
+#     }
+#     constraints <- c(constraints, sum_entries(X[, t]) <= capacity_vec[t])
+#   }
+#
+#   # Quadratic backlog penalty
+#   objective <- 0
+#   for (i in 1:n_tube) {
+#     objective <- objective + w_vec[i] * sum_squares(Q[i, ])
+#   }
+#
+#   prob <- Problem(Minimize(objective), constraints)
+#   result <- solve(prob, solver = "OSQP")  # OSQP handles QPs robustly
+#
+#   list(
+#     status = result$status,
+#     X_opt = result$getValue(X),
+#     Q_opt = result$getValue(Q)
+#   )
+# }
+
+
+
+# optimize_backlog_and_processed <- function(
+#     A_mat,        # arrivals matrix (n_tube x n_time)
+#     capacity_vec,        # capacity vector (length n_time)
+#     stored_vec,   # initial stock (length n_tube)
+#     w_vec,        # weight vector (length n_tube)
+#     w_stored = 1000,
+#     w_stored_increase = 0.01
+# ) {
+#   # --- basic validations ---
+#   if (!is.matrix(A_mat)) stop("A_mat must be a matrix (n_tube x n_time).")
+#   if (!is.numeric(capacity_vec)) stop("capacity_vec must be a numeric vector.")
+#   if (!is.numeric(stored_vec)) stop("stored_vec must be numeric.")
+#   if (!is.numeric(w_vec)) stop("w_vec must be numeric.")
+#
+#   n_tube <- nrow(A_mat)
+#   n_time <- ncol(A_mat)
+#
+#   if (length(capacity_vec) != n_time)
+#     stop("Length of capacity_vec must match number of columns in A_mat.")
+#   if (length(stored_vec) != n_tube)
+#     stop("Length of stored_vec must match number of rows in A_mat.")
+#   if (length(w_vec) != n_tube)
+#     stop("Length of w_vec must match number of rows in A_mat.")
+#
+#   # --- define variables ---
+#   X <- Variable(n_tube, n_time, nonneg = TRUE)
+#   Q <- Variable(n_tube, n_time, nonneg = TRUE)
+#
+#   # --- constraints ---
+#   constraints <- list()
+#   for (t in 1:n_time) {
+#     if (t == 1) {
+#       constraints <- c(constraints, Q[, t] == stored_vec + A_mat[, t] - X[, t])
+#     } else {
+#       constraints <- c(constraints, Q[, t] == Q[, t - 1] + A_mat[, t] - X[, t])
+#     }
+#     constraints <- c(constraints, sum_entries(X[, t]) <= capacity_vec[t])
+#   }
+#
+#   # --- g weights (large start, small slope) ---
+#   # g <- matrix(w_stored + w_stored_increase * (1:n_time), nrow = 1)
+#   g  <- matrix(w_stored * exp(-w_stored_increase * (0:(n_time-1))), nrow = 1)
+#   # --- objective ---
+#   objective <- sum_entries(t(w_vec) %*% (Q %*% diag(as.numeric(g))))
+#
+#   # --- solve ---
+#   prob <- Problem(Minimize(objective), constraints)
+#   result <- solve(prob, solver = "ECOS")
+#
+#   # --- extract results ---
+#   X_opt <- result$getValue(X)
+#   Q_opt <- result$getValue(Q)
+#
+#   # --- sanity check ---
+#   if (any(is.na(X_opt)) || any(is.na(Q_opt))) warning("Optimization returned NA values.")
+#
+#   list(
+#     status = result$status,
+#     g = g,
+#     X_opt = X_opt,
+#     Q_opt = Q_opt
+#   )
+# }
 
 
 
