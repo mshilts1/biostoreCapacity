@@ -56,16 +56,15 @@ library(janitor)
 #' @export
 predict_capacity_multiple_today <- function(){
 
-### options
+  ### options
   price_option <- "p2" # p1 or p2
-  taday <- Sys.Date()
-
+  taday <- as.Date("2025-11-01")#Sys.Date()
 
   ## 1 - get the data
-  # excel_sheets("inst/extdata/Table 1. ECHO Kits and Aliquots.xlsx")
+  # excel_sheets("inst/extdata/Table 1. ECHO Kits and Aliquots corrected.xlsx")
 
   # CURRENT and PENDING:
-  dac <- read_excel("inst/extdata/Table 1. ECHO Kits and Aliquots.xlsx", sheet = "Table C1 simplified") # use labwear type not kit type.
+  dac <- read_excel("inst/extdata/Table 1. ECHO Kits and Aliquots corrected.xlsx", sheet = "Table C1 simplified") # use labwear type not kit type.
   samples_at_the_sites <- dac%>%select(labware_type,`Collected - Received`) %>%
     rename(number=`Collected - Received`)
   samples_at_the_repository <-dac%>%select(labware_type,`Received at Repository`) %>%
@@ -94,7 +93,7 @@ predict_capacity_multiple_today <- function(){
     ))#  proportion of 2025 left
 
 
-  map_kit_to_labware <- read_excel("inst/extdata/Table 1. ECHO Kits and Aliquots.xlsx", sheet = "Table 1. MEGHAN COPY VERSION") # kits_proj_function_kit_type ~ specimen_clean
+  map_kit_to_labware <- read_excel("inst/extdata/Table 1. ECHO Kits and Aliquots corrected.xlsx", sheet = "Table 1. MEGHAN COPY VERSION") # kits_proj_function_kit_type ~ specimen_clean
   # filter(!is.na(containers_per_rack) & containers_per_rack!="unknown")# # exlude ambient + partner semen + water bag
   # add maternal_placenta_tier1_core
   map_kit_to_labware <- map_kit_to_labware %>%
@@ -412,6 +411,12 @@ predict_capacity_multiple_today <- function(){
 
 
   w_vec = rep(1,nrow(A_mat))
+  # tube_scale <- rowSums(A_mat) + sites_vec
+  # w_vec_raw <- 1 / pmax(1, tube_scale^2)
+  # w_vec <- w_vec_raw / mean(w_vec_raw)
+  # w_vec <- pmin(w_vec, 10)
+  # w_vec <- pmax(w_vec, 0.1)
+
   # prioritize ambient
   # w_vec[grep("@ambient", rownames(A_mat), ignore.case = TRUE)]=1.1
   res<-optimize_backlog_and_processed(
@@ -419,10 +424,8 @@ predict_capacity_multiple_today <- function(){
     capacity_vec = capacity_vec,
     stored_vec = sites_vec,
     w_vec = w_vec,
-    w_stored = 1e6,
-    w_stored_increase = 1e-6
+    lambda=1.
   )
-
 
 
 
@@ -517,7 +520,7 @@ predict_capacity_multiple_today <- function(){
     summarise(specimens_per_rack = first(specimens_per_rack), .groups = "drop")
 
   # to number of freezers
-  rack_to_freezer <- read_excel("inst/extdata/Table 1. ECHO Kits and Aliquots.xlsx", sheet = "Table 2. ECHO Freezer Capacity")
+  rack_to_freezer <- read_excel("inst/extdata/Table 1. ECHO Kits and Aliquots corrected.xlsx", sheet = "Table 2. ECHO Freezer Capacity")
   rack_to_freezer_clean <- rack_to_freezer %>%
     filter(!if_all(everything(), is.na))  # remove rows that are all NA
 
@@ -559,6 +562,12 @@ predict_capacity_multiple_today <- function(){
     pull(freezer_per_specimen)
   # freezer_per_specimen[is.infinite(freezer_per_specimen)] <- 0 # do not count 125 mL PFAS-free Bottle
 
+
+  # correct space for 7.6 ml
+  # freezer_per_specimen[row_index$labware_type== "7.6mL Barcoded Cryovial"]=freezer_per_specimen[row_index$labware_type== "7.6mL Barcoded Cryovial"]*2
+
+
+
   # 4- scale cumulative into freezer
   cum_scaled <- cumulative * freezer_per_specimen
   cum_by_location <- rowsum(cum_scaled, group = row_index$location)
@@ -591,13 +600,13 @@ predict_capacity_multiple_today <- function(){
   cum_by_location_long_scaled <- cum_by_location_long %>%
     mutate(
       value_scaled = case_when(
-        location == "-80C freezer" ~ value / 10,
-        location == "-20C freezer" ~ value / 2,
+        location == "-80C freezer" ~ value / 20,
+        location == "-20C freezer" ~ value / 5,
         TRUE ~ value
       ),
       location_label = case_when(
-        location == "-80C freezer" ~ "-80C freezer (x10)",
-        location == "-20C freezer" ~ "-20C freezer (x2)",
+        location == "-80C freezer" ~ "-80C freezer (x20)",
+        location == "-20C freezer" ~ "-20C freezer (x5)",
         TRUE ~ location
       )
     )
